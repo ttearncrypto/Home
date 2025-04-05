@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F9XR's TTEarnCrypto Web Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+        theme: {
+        extend: {
+        colors: {
+        primary: '#4F46E5',
+        secondary: '#10B981'
+        },
+        borderRadius: {
+        'none': '0px',
+        'sm': '4px',
+        DEFAULT: '8px',
+        'md': '12px',
+        'lg': '16px',
+        'xl': '20px',
+        '2xl': '24px',
+        '3xl': '32px',
+        'full': '9999px',
+        'button': '8px'
+        }
+        }
+        }
+        }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+    
+    <style>
+        :where([class^="ri-"])::before { content: "\f3c2"; }
+        .chart-container { min-height: 300px; }
+        .metric-card:hover { transform: translateY(-4px); }
+        .gradient-text {
+        background: linear-gradient(135deg, #4F46E5 0%, #10B981 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+        }
+        .gradient-border {
+        position: relative;
+        background: linear-gradient(white, white) padding-box,
+        linear-gradient(135deg, #4F46E5 0%, #10B981 100%) border-box;
+        border: 2px solid transparent;
+        }
+        .gradient-bg {
+        background: linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(16, 185, 129, 0.1) 100%);
+        }
+        .custom-icon {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 3rem;
+        height: 3rem;
+        border-radius: 1rem;
+        background: linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(16, 185, 129, 0.1) 100%);
+        }
+        .custom-icon::after {
+        content: '';
+        position: absolute;
+        inset: -2px;
+        border-radius: inherit;
+        padding: 2px;
+        background: linear-gradient(135deg, #4F46E5 0%, #10B981 100%);
+        -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        }
+        .notification-dot {
+        position: absolute;
+        top: -2px;
+        right: -2px;
+        width: 8px;
+        height: 8px;
+        background: #EF4444;
+        border-radius: 50%;
+        }
+        .dropdown-content {
+        display: none;
+        position: absolute;
+        right: 0;
+        top: 100%;
+        min-width: 220px;
+        z-index: 50;
+        transform: translateY(10px);
+        opacity: 0;
+        transition: all 0.2s ease-in-out;
+        }
+        .dropdown:hover .dropdown-content {
+        display: block;
+        transform: translateY(0);
+        opacity: 1;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        AOS.init({
+        duration: 1000,
+        once: true,
+        offset: 100,
+        easing: 'ease-out'
+        });
+        });
+    </script>
+    <nav class="fixed top-0 w-full bg-white shadow-md z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-2xl font-['Pacifico'] text-primary">F9XR</span>
+                    <div class="hidden md:flex space-x-1 ml-10">
+                        <a href="#" class="text-gray-900 hover:text-primary px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 border-b-2 border-primary">HOME</a>
+                        <a href="#" class="text-gray-500 hover:text-primary px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 hover:bg-gray-50">Analytics</a>
+                        <a href="#" class="text-gray-500 hover:text-primary px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 hover:bg-gray-50">Reports</a>
+                        <a href="#" class="text-gray-500 hover:text-primary px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 hover:bg-gray-50">Settings</a>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-6">
+                    <div class="relative">
+                        <div class="flex items-center bg-gray-100 rounded-full px-4 py-2 border border-transparent hover:border-gray-200 transition-colors duration-200">
+                            <i class="ri-search-line text-gray-400"></i>
+                            <input type="text" placeholder="Search here..." class="bg-transparent border-none focus:outline-none ml-2 text-sm w-40">
+                        </div>
+                    </div>
+                    <div class="relative cursor-pointer w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full hover:bg-gray-200 transition-colors duration-200">
+                        <i class="ri-notification-3-line text-xl text-gray-600"></i>
+                        <span class="notification-dot"></span>
+                    </div>
+                    <div class="dropdown relative">
+                        <button class="flex items-center space-x-3 bg-gray-100 rounded-full px-3 py-2 hover:bg-gray-200 transition-colors duration-200">
+                            <img src="https://public.readdy.ai/ai/img_res/d6da6afb598bbb76af7176d982442ede.jpg" class="w-8 h-8 rounded-full object-cover border-2 border-white shadow-sm">
+                            <span class="text-sm font-medium text-gray-700">F9XR Team</span>
+                            <i class="ri-arrow-down-s-line text-gray-500"></i>
+                        </button>
+                        <div class="dropdown-content bg-white rounded-lg shadow-lg py-2 mt-2 border border-gray-100">
+                            <a href="#" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
+                                <i class="ri-user-line mr-2 text-gray-500"></i> Profile
+                            </a>
+                            <a href="#" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
+                                <i class="ri-settings-line mr-2 text-gray-500"></i> Settings
+                            </a>
+                            <div class="border-t border-gray-100 my-1"></div>
+                            <a href="#" class="flex items-center px-4 py-2 text-sm text-red-600 hover:bg-red-50">
+                                <i class="ri-logout-box-line mr-2 text-red-500"></i> Sign out
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <main class="pt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <header class="relative py-24 mb-8 overflow-hidden bg-gradient-to-br from-primary/10 to-secondary/10">
+                <div class="absolute inset-0">
+                    <img src="https://public.readdy.ai/ai/img_res/3f9ab5c04a3cbe6806a3340a501e57a3.jpg" class="w-full h-full object-cover opacity-30" alt="Background">
+                </div>
+                <div class="absolute top-0 right-0 w-full h-full bg-gradient-to-r from-white/80 via-white/60 to-transparent"></div>
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+                    <div class="grid lg:grid-cols-2 gap-16 items-center" data-aos="fade-up">
+                        <div class="text-center lg:text-left z-10">
+                            <span class="inline-block px-4 py-1 bg-primary/10 text-primary font-medium rounded-full text-sm mb-6">Explore, Earn, & Grow!</span>
+                            <h1 class="text-5xl md:text-6xl font-bold text-gray-900 leading-tight">Discover & Earn Free Crypto <span class="gradient-text"> with TTEarnCrypto </span></h1>
+                            <p class="mt-6 text-xl text-gray-600 leading-relaxed">Discover & Earn Free Crypto – Your Gateway to the Latest Blockchain Opportunities.</p>
+                            <div class="mt-10 flex flex-col sm:flex-row gap-5 justify-center lg:justify-start">
+                                <button class="bg-primary text-white px-8 py-4 !rounded-button flex items-center justify-center text-lg font-medium hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-1">
+                                    <i class="ri-rocket-line mr-2"></i> Get Started
+                                </button>
+                                <button class="bg-white text-gray-700 px-8 py-4 !rounded-button flex items-center justify-center text-lg font-medium border-2 border-gray-200 hover:border-primary/30 hover:bg-primary/5 transition-all hover:-translate-y-1">
+                                    <i class="ri-play-circle-line mr-2"></i> Watch Demo
+                                </button>
+                            </div>
+                            <div class="mt-12 flex items-center gap-6 justify-center lg:justify-start">
+                                <div class="flex -space-x-3">
+                                    <img src="https://public.readdy.ai/ai/img_res/933c27941aadf5250c77f711defd4bf9.jpg" class="w-12 h-12 rounded-full border-2 border-white shadow-md" alt="User">
+                                    <img src="https://public.readdy.ai/ai/img_res/fd2cc9dfe746e550b824a4f73ee410a5.jpg" class="w-12 h-12 rounded-full border-2 border-white shadow-md" alt="User">
+                                    <img src="https://public.readdy.ai/ai/img_res/ee7887d5ba0a9c40ee0841a8a4e0ed43.jpg" class="w-12 h-12 rounded-full border-2 border-white shadow-md" alt="User">
+                                </div>
+                                <div class="text-sm">
+                                    <span class="text-primary font-semibold text-lg">2,000+</span>
+                                    <span class="text-gray-600"> users trust us</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative hidden lg:block z-10">
+                            <div class="absolute -top-12 -right-12 w-96 h-96 bg-primary/10 rounded-full filter blur-3xl"></div>
+                            <div class="absolute -bottom-12 -left-12 w-96 h-96 bg-secondary/10 rounded-full filter blur-3xl"></div>
+                            <div class="relative">
+                                <div class="absolute -top-6 -left-6 w-full h-full bg-gradient-to-br from-primary/20 to-secondary/20 rounded-2xl transform rotate-3"></div>
+                                <div class="absolute -bottom-6 -right-6 w-full h-full border-2 border-primary/20 rounded-2xl transform -rotate-3"></div>
+                                <img src="https://public.readdy.ai/ai/img_res/fc0c55f686d4d9e8b9ca0e339f9802a4.jpg" class="relative w-full rounded-xl shadow-2xl transform hover:-translate-y-2 transition-transform duration-500" alt="Dashboard Preview">
+                                <div class="absolute -right-8 -bottom-8 bg-white rounded-lg shadow-xl p-4 transform rotate-3">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                                            <i class="ri-line-chart-line text-xl text-green-600"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-sm font-semibold text-gray-900">Revenue Growth</p>
+                                            <p class="text-xs text-green-600">+24.5% this month</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <div class="mb-8">
+                <h2 class="text-xl font-semibold text-gray-900">Overview</h2>
+                <p class="mt-1 text-sm text-gray-500">Track your key metrics and performance indicators</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8" data-aos="fade-up" data-aos-delay="100">
+                <div class="bg-white rounded-lg p-6 shadow-sm metric-card transition-all duration-300">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">Total Revenue</p>
+                            <p class="mt-2 text-3xl font-semibold text-gray-900">$84,686</p>
+                        </div>
+                        <div class="w-10 h-10 flex items-center justify-center bg-primary bg-opacity-10 rounded-full">
+                            <i class="ri-money-dollar-circle-line text-xl text-primary"></i>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex items-center">
+                        <span class="text-sm font-medium text-green-600">+12.5%</span>
+                        <span class="ml-2 text-sm text-gray-500">from last month</span>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg p-6 shadow-sm metric-card transition-all duration-300">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">Active Users</p>
+                            <p class="mt-2 text-3xl font-semibold text-gray-900">2,420</p>
+                        </div>
+                        <div class="w-10 h-10 flex items-center justify-center bg-secondary bg-opacity-10 rounded-full">
+                            <i class="ri-user-line text-xl text-secondary"></i>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex items-center">
+                        <span class="text-sm font-medium text-green-600">+8.2%</span>
+                        <span class="ml-2 text-sm text-gray-500">from last week</span>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg p-6 shadow-sm metric-card transition-all duration-300">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">Tasks Completed</p>
+                            <p class="mt-2 text-3xl font-semibold text-gray-900">1,856</p>
+                        </div>
+                        <div class="w-10 h-10 flex items-center justify-center bg-blue-100 rounded-full">
+                            <i class="ri-task-line text-xl text-blue-600"></i>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex items-center">
+                        <span class="text-sm font-medium text-green-600">+4.9%</span>
+                        <span class="ml-2 text-sm text-gray-500">from yesterday</span>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg p-6 shadow-sm metric-card transition-all duration-300">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">Projects</p>
+                            <p class="mt-2 text-3xl font-semibold text-gray-900">32</p>
+                        </div>
+                        <div class="w-10 h-10 flex items-center justify-center bg-purple-100 rounded-full">
+                            <i class="ri-folder-line text-xl text-purple-600"></i>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex items-center">
+                        <span class="text-sm font-medium text-red-600">-2.3%</span>
+                        <span class="ml-2 text-sm text-gray-500">from last month</span>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <div class="bg-white rounded-lg p-6 shadow-sm">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-lg font-semibold text-gray-900">Revenue Overview</h2>
+                        <div class="flex items-center space-x-2">
+                            <button class="px-3 py-1 text-sm font-medium text-gray-600 hover:text-gray-900">Week</button>
+                            <button class="px-3 py-1 text-sm font-medium text-white bg-primary !rounded-button">Month</button>
+                            <button class="px-3 py-1 text-sm font-medium text-gray-600 hover:text-gray-900">Year</button>
+                        </div>
+                    </div>
+                    <div id="revenueChart" class="chart-container"></div>
+                </div>
+                <div class="bg-white rounded-lg p-6 shadow-sm">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-lg font-semibold text-gray-900">Sales Distribution</h2>
+                        <button class="text-sm text-gray-500 hover:text-gray-700">
+                            <i class="ri-more-2-fill"></i>
+                        </button>
+                    </div>
+                    <div id="salesChart" class="chart-container"></div>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg p-6 shadow-sm col-span-2">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-lg font-semibold text-gray-900">Recent Transactions</h2>
+                        <button class="text-sm font-medium text-primary hover:text-primary-dark">View All</button>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="text-left text-sm font-medium text-gray-500">
+                                    <th class="pb-4">Transaction</th>
+                                    <th class="pb-4">Date</th>
+                                    <th class="pb-4">Amount</th>
+                                    <th class="pb-4">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-sm">
+                                <tr class="border-t border-gray-100">
+                                    <td class="py-4">
+                                        <div class="flex items-center">
+                                            <div class="w-8 h-8 flex items-center justify-center bg-blue-100 rounded-full">
+                                                <i class="ri-shopping-bag-line text-blue-600"></i>
+                                            </div>
+                                            <div class="ml-3">
+                                                <p class="font-medium text-gray-900">E-commerce Platform</p>
+                                                <p class="text-gray-500">Subscription</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="py-4 text-gray-500">Mar 24, 2025</td>
+                                    <td class="py-4 font-medium text-gray-900">$299.00</td>
+                                    <td class="py-4">
+                                        <span class="px-2 py-1 text-xs font-medium text-green-700 bg-green-100 rounded-full">Completed</span>
+                                    </td>
+                                </tr>
+                                <tr class="border-t border-gray-100">
+                                    <td class="py-4">
+                                        <div class="flex items-center">
+                                            <div class="w-8 h-8 flex items-center justify-center bg-purple-100 rounded-full">
+                                                <i class="ri-database-2-line text-purple-600"></i>
+                                            </div>
+                                            <div class="ml-3">
+                                                <p class="font-medium text-gray-900">Cloud Storage</p>
+                                                <p class="text-gray-500">Annual Plan</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="py-4 text-gray-500">Mar 23, 2025</td>
+                                    <td class="py-4 font-medium text-gray-900">$599.00</td>
+                                    <td class="py-4">
+                                        <span class="px-2 py-1 text-xs font-medium text-green-700 bg-green-100 rounded-full">Completed</span>
+                                    </td>
+                                </tr>
+                                <tr class="border-t border-gray-100">
+                                    <td class="py-4">
+                                        <div class="flex items-center">
+                                            <div class="w-8 h-8 flex items-center justify-center bg-orange-100 rounded-full">
+                                                <i class="ri-advertisement-line text-orange-600"></i>
+                                            </div>
+                                            <div class="ml-3">
+                                                <p class="font-medium text-gray-900">Marketing Campaign</p>
+                                                <p class="text-gray-500">Advertisement</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="py-4 text-gray-500">Mar 22, 2025</td>
+                                    <td class="py-4 font-medium text-gray-900">$899.00</td>
+                                    <td class="py-4">
+                                        <span class="px-2 py-1 text-xs font-medium text-yellow-700 bg-yellow-100 rounded-full">Pending</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg p-6 shadow-sm">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-lg font-semibold text-gray-900">Team Members</h2>
+                        <button class="text-sm font-medium text-primary hover:text-primary-dark">View All</button>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <img src="https://public.readdy.ai/ai/img_res/5261f8d0c6f0e32ec8488aa78f5db09d.jpg" class="w-10 h-10 rounded-full object-cover">
+                                <div class="ml-3">
+                                    <p class="font-medium text-gray-900">Sarah Thompson</p>
+                                    <p class="text-sm text-gray-500">Product Manager</p>
+                                </div>
+                            </div>
+                            <button class="text-sm text-gray-500 hover:text-gray-700">
+                                <i class="ri-more-2-fill"></i>
+                            </button>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <img src="https://public.readdy.ai/ai/img_res/bc8c6ffc2c651148a61163dc60a6ac7b.jpg" class="w-10 h-10 rounded-full object-cover">
+                                <div class="ml-3">
+                                    <p class="font-medium text-gray-900">Michael Chen</p>
+                                    <p class="text-sm text-gray-500">Lead Developer</p>
+                                </div>
+                            </div>
+                            <button class="text-sm text-gray-500 hover:text-gray-700">
+                                <i class="ri-more-2-fill"></i>
+                            </button>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <img src="https://public.readdy.ai/ai/img_res/f8eb3775a6b23db3bff57006293eaa0c.jpg" class="w-10 h-10 rounded-full object-cover">
+                                <div class="ml-3">
+                                    <p class="font-medium text-gray-900">Emily Rodriguez</p>
+                                    <p class="text-sm text-gray-500">Marketing Lead</p>
+                                </div>
+                            </div>
+                            <button class="text-sm text-gray-500 hover:text-gray-700">
+                                <i class="ri-more-2-fill"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Features Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl font-bold gradient-text">Powerful Features for Your Business</h2>
+                <p class="mt-4 text-xl text-gray-600">Everything you need to analyze, track, and grow your business in one place.</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-lg shadow-sm">
+                    <div class="custom-icon mb-6">
+                        <i class="ri-line-chart-line text-2xl text-primary"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Advanced Analytics</h3>
+                    <p class="text-gray-600">Get deep insights into your business performance with our powerful analytics tools.</p>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-sm">
+                    <div class="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center mb-6">
+                        <i class="ri-shield-check-line text-2xl text-secondary"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Enterprise Security</h3>
+                    <p class="text-gray-600">Keep your data safe with enterprise-grade security and compliance features.</p>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-sm">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-6">
+                        <i class="ri-customer-service-2-line text-2xl text-blue-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">24/7 Support</h3>
+                    <p class="text-gray-600">Get help when you need it with our round-the-clock customer support team.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- About Us Section -->
+    <section class="py-20 gradient-bg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center" data-aos="fade-up">
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">About Our Company</h2>
+                    <p class="text-lg text-gray-600 mb-6">TTEarnCrypto by F9XR is a pioneering platform dedicated to unlocking the world of free crypto earning opportunities. Our mission is to empower users by curating a trusted hub that simplifies the discovery of innovative crypto projects—from airdrops and play-to-earn games to mining and staking initiatives.</p>
+                    <p class="text-lg text-gray-600 mb-8">Founded by a team of blockchain experts and crypto enthusiasts, we are committed to transparency, reliability, and continuous innovation. Every project on our directory is rigorously verified to ensure that you have access to only the most credible and rewarding opportunities.</p>
+                    <div class="grid grid-cols-3 gap-6">
+                        <div>
+                            <h4 class="text-2xl font-bold text-primary">2+ Years</h4>
+                            <p class="text-gray-600">Experience</p>
+                        </div>
+                        <div>
+                            <h4 class="text-2xl font-bold text-primary">2,000+</h4>
+                            <p class="text-gray-600">Users</p>
+                        </div>
+                        <div>
+                            <h4 class="text-2xl font-bold text-primary">98%</h4>
+                            <p class="text-gray-600">Satisfaction</p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <img src="https://public.readdy.ai/ai/img_res/aa869ac7d37d3fe9ed3cac31c8ad423d.jpg" class="rounded-lg shadow-lg" alt="About Us">
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Our Team Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl font-bold text-gray-900">Meet Our Friendly Team</h2>
+                <p class="mt-4 text-xl text-gray-600">The talented people behind managing our services.</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <img src="https://public.readdy.ai/ai/img_res/37cce848ac7b62311441d4f9949b998d.jpg" class="w-48 h-48 rounded-full mx-auto mb-6" alt="Team member">
+                    <h3 class="text-xl font-semibold text-gray-900">Robert Wilson</h3>
+                    <p class="text-gray-600">CEO & Founder</p>
+                </div>
+                <div class="text-center">
+                    <img src="https://public.readdy.ai/ai/img_res/0c7dd23f07539088cad60d77758da406.jpg" class="w-48 h-48 rounded-full mx-auto mb-6" alt="Team member">
+                    <h3 class="text-xl font-semibold text-gray-900">Jennifer Lee</h3>
+                    <p class="text-gray-600">CTO</p>
+                </div>
+                <div class="text-center">
+                    <img src="https://public.readdy.ai/ai/img_res/929afb22cc9fee502e789e97b62cdc54.jpg" class="w-48 h-48 rounded-full mx-auto mb-6" alt="Team member">
+                    <h3 class="text-xl font-semibold text-gray-900">David Martinez</h3>
+                    <p class="text-gray-600">COO</p>
+                </div>
+                <div class="text-center">
+                    <img src="https://public.readdy.ai/ai/img_res/8d2d1b73de21fd555ba55010b87fec9c.jpg" class="w-48 h-48 rounded-full mx-auto mb-6" alt="Team member">
+                    <h3 class="text-xl font-semibold text-gray-900">Sarah Johnson</h3>
+                    <p class="text-gray-600">CMO</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Our Stats Section -->
+    <section class="py-20 gradient-bg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-3xl font-bold text-gray-900">Our Impact in Numbers</h2>
+                <p class="mt-4 text-xl text-gray-600">Measurable results that speak for themselves</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8" data-aos="fade-up" data-aos-delay="100">
+                <div class="bg-white rounded-lg p-8 shadow-sm hover:shadow-md transition-all duration-300 border-t-4 border-primary">
+                    <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="ri-emotion-happy-line text-2xl text-primary"></i>
+                    </div>
+                    <div class="text-5xl font-bold text-gray-900 mb-3 text-center">98%</div>
+                    <p class="text-gray-600 text-center font-medium">User Satisfaction</p>
+                    <div class="w-16 h-1 bg-primary/20 mx-auto mt-4"></div>
+                </div>
+                <div class="bg-white rounded-lg p-8 shadow-sm hover:shadow-md transition-all duration-300 border-t-4 border-secondary">
+                    <div class="w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="ri-database-2-line text-2xl text-secondary"></i>
+                    </div>
+                    <div class="text-5xl font-bold text-gray-900 mb-3 text-center">10k+</div>
+                    <p class="text-gray-600 text-center font-medium">Projects Listed</p>
+                    <div class="w-16 h-1 bg-secondary/20 mx-auto mt-4"></div>
+                </div>
+                <div class="bg-white rounded-lg p-8 shadow-sm hover:shadow-md transition-all duration-300 border-t-4 border-blue-500">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="ri-global-line text-2xl text-blue-600"></i>
+                    </div>
+                    <div class="text-5xl font-bold text-gray-900 mb-3 text-center">10+</div>
+                    <p class="text-gray-600 text-center font-medium">Services Available</p>
+                    <div class="w-16 h-1 bg-blue-200 mx-auto mt-4"></div>
+                </div>
+                <div class="bg-white rounded-lg p-8 shadow-sm hover:shadow-md transition-all duration-300 border-t-4 border-purple-500">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="ri-customer-service-2-line text-2xl text-purple-600"></i>
+                    </div>
+                    <div class="text-5xl font-bold text-gray-900 mb-3 text-center">24/7</div>
+                    <p class="text-gray-600 text-center font-medium">Customer Support</p>
+                    <div class="w-16 h-1 bg-purple-200 mx-auto mt-4"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Portfolio Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl font-bold text-gray-900">Our Success Stories</h2>
+                <p class="mt-4 text-xl text-gray-600">See how we've helped businesses achieve their goals.</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white rounded-lg overflow-hidden shadow-sm gradient-border" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://public.readdy.ai/ai/img_res/a576770c7964bf4222401e119401771b.jpg" class="w-full h-48 object-cover" alt="Portfolio">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Enterprise Analytics Platform</h3>
+                        <p class="text-gray-600 mb-4">Helped a Fortune 500 company increase efficiency by 40%</p>
+                        <a href="#" class="text-primary font-medium hover:text-primary/80">Learn More →</a>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg overflow-hidden shadow-sm">
+                    <img src="https://public.readdy.ai/ai/img_res/702e53dad8604984fd3b4d8b3d539093.jpg" class="w-full h-48 object-cover" alt="Portfolio">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Data Visualization Suite</h3>
+                        <p class="text-gray-600 mb-4">Revolutionized data presentation for tech startups</p>
+                        <a href="#" class="text-primary font-medium hover:text-primary/80">Learn More →</a>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg overflow-hidden shadow-sm">
+                    <img src="https://public.readdy.ai/ai/img_res/436a278e4aa9919481c1dcc51dacf7da.jpg" class="w-full h-48 object-cover" alt="Portfolio">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Business Intelligence Tools</h3>
+                        <p class="text-gray-600 mb-4">Streamlined operations for global retail chain</p>
+                        <a href="#" class="text-primary font-medium hover:text-primary/80">Learn More →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Testimonials Section -->
+    <section class="py-20 gradient-bg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl font-bold text-gray-900">What Our Clients Say</h2>
+                <p class="mt-4 text-xl text-gray-600">Don't just take our word for it - hear from some of our satisfied clients.</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-gray-50 p-8 rounded-lg">
+                    <div class="flex items-center mb-6">
+                        <img src="https://public.readdy.ai/ai/img_res/726018580d05a5683ed60aa8ac4cc32f.jpg" class="w-12 h-12 rounded-full" alt="Testimonial">
+                        <div class="ml-4">
+                            <h4 class="text-lg font-semibold text-gray-900">Alex M.</h4>
+                            <p class="text-gray-600">Crypto Trader</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"TTEarnCrypto made it so easy to discover reliable crypto projects. My earnings have jumped by 30% since I started using it!"</p>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-lg">
+                    <div class="flex items-center mb-6">
+                        <img src="https://public.readdy.ai/ai/img_res/7fc22132e4b8d7201a2c1c339a331dc5.jpg" class="w-12 h-12 rounded-full" alt="Testimonial">
+                        <div class="ml-4">
+                            <h4 class="text-lg font-semibold text-gray-900">Emma Davis</h4>
+                            <p class="text-gray-600">Blockchain Enthusiast</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"The real-time updates and expert guides give me the confidence to dive into new earning opportunities every day. Highly recommended!"</p>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-lg">
+                    <div class="flex items-center mb-6">
+                        <img src="https://public.readdy.ai/ai/img_res/35a0ac6daa14045dbf311aa81df22c03.jpg" class="w-12 h-12 rounded-full" alt="Testimonial">
+                        <div class="ml-4">
+                            <h4 class="text-lg font-semibold text-gray-900">James Wilson</h4>
+                            <p class="text-gray-600">Digital Investor</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"I trust TTEarnCrypto for its transparent, community-driven approach. It's my go-to resource for verified crypto projects & news."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Our Partners Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl font-bold text-gray-900">Trusted by Industry Leaders</h2>
+                <p class="mt-4 text-xl text-gray-600">We work with some of the world's leading companies.</p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 items-center">
+                <div class="flex items-center justify-center">
+                    <i class="ri-microsoft-fill text-5xl text-gray-400"></i>
+                </div>
+                <div class="flex items-center justify-center">
+                    <i class="ri-apple-fill text-5xl text-gray-400"></i>
+                </div>
+                <div class="flex items-center justify-center">
+                    <i class="ri-google-fill text-5xl text-gray-400"></i>
+                </div>
+                <div class="flex items-center justify-center">
+                    <i class="ri-amazon-fill text-5xl text-gray-400"></i>
+                </div>
+                <div class="flex items-center justify-center">
+                    <i class="ri-netflix-fill text-5xl text-gray-400"></i>
+                </div>
+                <div class="flex items-center justify-center">
+                    <i class="ri-facebook-fill text-5xl text-gray-400"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Our Projects Section -->
+    <section class="py-20 bg-gradient-to-b from-white to-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+                <span class="inline-block px-4 py-1 bg-primary/10 text-primary font-medium rounded-full text-sm mb-4">Case Studies</span>
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Our Projects</h2>
+                <p class="mt-4 text-xl text-gray-600">Innovative solutions we've delivered for our clients</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl shadow-lg p-8 border-t-4 border-primary transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl" data-aos="fade-up" data-aos-delay="100">
+                    <div class="custom-icon mb-6">
+                        <i class="ri-dashboard-3-line text-3xl text-primary"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Financial Analytics Platform</h3>
+                    <p class="text-gray-600 mb-6">Custom analytics solution for a Fortune 500 financial services company.</p>
+                    <div class="bg-gray-50 rounded-lg p-4 mb-8">
+                        <ul class="space-y-3">
+                            <li class="flex items-center text-gray-700">
+                                <i class="ri-checkbox-circle-fill text-primary mr-2"></i> 40% increase in efficiency
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <i class="ri-checkbox-circle-fill text-primary mr-2"></i> Real-time risk assessment
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <i class="ri-checkbox-circle-fill text-primary mr-2"></i> Regulatory compliance
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-lg font-bold text-primary">2023<span class="text-sm font-normal text-gray-500"> Completed</span></span>
+                        <button class="bg-primary text-white py-2 px-6 !rounded-button hover:bg-primary/90 transition-colors whitespace-nowrap shadow-md shadow-primary/20 hover:shadow-lg hover:shadow-primary/30">View Case Study</button>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-8 border-t-4 border-secondary transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl" data-aos="fade-up" data-aos-delay="200">
+                    <div class="custom-icon mb-6">
+                        <i class="ri-customer-service-2-line text-3xl text-secondary"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Healthcare CRM Implementation</h3>
+                    <p class="text-gray-600 mb-6">Patient management system for a network of regional hospitals.</p>
+                    <div class="bg-gray-50 rounded-lg p-4 mb-8">
+                        <ul class="space-y-3">
+                            <li class="flex items-center text-gray-700">
+                                <i class="ri-checkbox-circle-fill text-secondary mr-2"></i> Improved patient satisfaction
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <i class="ri-checkbox-circle-fill text-secondary mr-2"></i> Streamlined appointments
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <i class="ri-checkbox-circle-fill text-secondary mr-2"></i> HIPAA compliant
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-lg font-bold text-secondary">2024<span class="text-sm font-normal text-gray-500"> Completed</span></span>
+                        <button class="bg-secondary text-white py-2 px-6 !rounded-button hover:bg-secondary/90 transition-colors whitespace-nowrap shadow-md shadow-secondary/20 hover:shadow-lg hover:shadow-secondary/30">View Case Study</button>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-8 border-t-4 border-blue-500 transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl" data-aos="fade-up" data-aos-delay="300">
+                    <div class="custom-icon mb-6">
+                        <i class="ri-cloud-line text-3xl text-blue-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Cloud Migration Project</h3>
+                    <p class="text-gray-600 mb-6">Migrated legacy systems to cloud infrastructure for a global retailer.</p>
+                    <div class="bg-gray-50 rounded-lg p-4 mb-8">
+                        <ul class="space-y-3">
+                            <li class="flex items-center text-gray-700">
+                                <i class="ri-checkbox-circle-fill text-blue-500 mr-2"></i> 30% cost reduction
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <i class="ri-checkbox-circle-fill text-blue-500 mr-2"></i> 99.9% uptime achieved
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <i class="ri-checkbox-circle-fill text-blue-500 mr-2"></i> Improved scalability
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-lg font-bold text-blue-600">2023<span class="text-sm font-normal text-gray-500"> Completed</span></span>
+                        <button class="bg-blue-600 text-white py-2 px-6 !rounded-button hover:bg-blue-700 transition-colors whitespace-nowrap shadow-md shadow-blue-500/20 hover:shadow-lg hover:shadow-blue-500/30">View Case Study</button>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-8 border-t-4 border-purple-500 transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl" data-aos="fade-up" data-aos-delay="400">
+                    <div class="custom-icon mb-6">
+                        <i class="ri-database-2-line text-3xl text-purple-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Data Warehouse Optimization</h3>
+                    <p class="text-gray-600 mb-6">Redesigned data architecture for a multinational manufacturing company.</p>
+                    <div class="bg-gray-50 rounded-lg p-4 mb-8">
+                        <ul class="space-y-3">
+                            <li class="flex items-center text-gray-700">
+                                <i class="ri-checkbox-circle-fill text-purple-500 mr-2"></i> 60% faster reporting
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <i class="ri-checkbox-circle-fill text-purple-500 mr-2"></i> Consolidated data sources
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <i class="ri-checkbox-circle-fill text-purple-500 mr-2"></i> Enhanced data security
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-lg font-bold text-purple-600">2024<span class="text-sm font-normal text-gray-500"> Completed</span></span>
+                        <button class="bg-purple-600 text-white py-2 px-6 !rounded-button hover:bg-purple-700 transition-colors whitespace-nowrap shadow-md shadow-purple-500/20 hover:shadow-lg hover:shadow-purple-500/30">View Case Study</button>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-8 border-t-4 border-orange-500 transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl" data-aos="fade-up" data-aos-delay="500">
+                    <div class="custom-icon mb-6">
+                        <i class="ri-ai-generate text-3xl text-orange-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">AI-Powered Recommendation Engine</h3>
+                    <p class="text-gray-600 mb-6">Custom AI solution for an e-commerce platform to enhance user experience.</p>
+                    <div class="bg-gray-50 rounded-lg p-4 mb-8">
+                        <ul class="space-y-3">
+                            <li class="flex items-center text-gray-700">
+                                <i class="ri-checkbox-circle-fill text-orange-500 mr-2"></i> 35% increase in sales
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <i class="ri-checkbox-circle-fill text-orange-500 mr-2"></i> Personalized user experience
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <i class="ri-checkbox-circle-fill text-orange-500 mr-2"></i> Reduced cart abandonment
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-lg font-bold text-orange-600">2023<span class="text-sm font-normal text-gray-500"> Completed</span></span>
+                        <button class="bg-orange-600 text-white py-2 px-6 !rounded-button hover:bg-orange-700 transition-colors whitespace-nowrap shadow-md shadow-orange-500/20 hover:shadow-lg hover:shadow-orange-500/30">View Case Study</button>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-8 border-t-4 border-green-500 transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl" data-aos="fade-up" data-aos-delay="600">
+                    <div class="custom-icon mb-6">
+                        <i class="ri-secure-payment-line text-3xl text-green-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Secure Payment Gateway</h3>
+                    <p class="text-gray-600 mb-6">Implemented a secure payment system for an international financial services provider.</p>
+                    <div class="bg-gray-50 rounded-lg p-4 mb-8">
+                        <ul class="space-y-3">
+                            <li class="flex items-center text-gray-700">
+                                <i class="ri-checkbox-circle-fill text-green-500 mr-2"></i> PCI DSS compliant
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <i class="ri-checkbox-circle-fill text-green-500 mr-2"></i> Fraud detection system
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <i class="ri-checkbox-circle-fill text-green-500 mr-2"></i> Multi-currency support
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-lg font-bold text-green-600">2024<span class="text-sm font-normal text-gray-500"> Completed</span></span>
+                        <button class="bg-green-600 text-white py-2 px-6 !rounded-button hover:bg-green-700 transition-colors whitespace-nowrap shadow-md shadow-green-500/20 hover:shadow-lg hover:shadow-green-500/30">View Case Study</button>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-12">
+                <button class="bg-white text-primary border-2 border-primary px-8 py-3 !rounded-button font-medium hover:bg-primary/5 transition-colors inline-flex items-center">
+                    <i class="ri-download-line mr-2"></i> Download our Project Portfolio
+                </button>
+            </div>
+        </div>
+    </section>
+    <!-- Our Benefits Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl font-bold text-gray-900">Why Choose Us</h2>
+                <p class="mt-4 text-xl text-gray-600">Benefits that set us apart from the competition</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+                        <i class="ri-shield-check-line text-2xl text-primary"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2"> Curated & Verified </h3>
+                    <p class="text-gray-600">Only reliable crypto earning projects are listed.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <div class="w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center mb-4">
+                        <i class="ri-customer-service-2-line text-2xl text-secondary"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Expert Insights</h3>
+                    <p class="text-gray-600">In-depth guides and market updates.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="ri-rocket-line text-2xl text-blue-600"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Community-Driven</h3>
+                    <p class="text-gray-600">Honest reviews and shared experiences.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="ri-line-chart-line text-2xl text-purple-600"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">User-Friendly</h3>
+                    <p class="text-gray-600">Simple, intuitive navigation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Blog Section -->
+    <section class="py-20 gradient-bg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl font-bold text-gray-900">Latest Insights</h2>
+                <p class="mt-4 text-xl text-gray-600">Stay updated with our latest news and articles</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white rounded-lg overflow-hidden shadow-sm gradient-border" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://public.readdy.ai/ai/img_res/c217600f55d1b7b22f50c8e5c8664a57.jpg" class="w-full h-48 object-cover" alt="Blog">
+                    <div class="p-6">
+                        <div class="text-sm text-gray-500 mb-2">March 24, 2025</div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">The Future of Data Analytics</h3>
+                        <p class="text-gray-600 mb-4">Explore the latest trends and innovations shaping the future of data analytics.</p>
+                        <a href="#" class="text-primary font-medium hover:text-primary/80">Read More →</a>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg overflow-hidden shadow-sm">
+                    <img src="https://public.readdy.ai/ai/img_res/8e923d62115833565b6f0ac4d386ba2a.jpg" class="w-full h-48 object-cover" alt="Blog">
+                    <div class="p-6">
+                        <div class="text-sm text-gray-500 mb-2">March 22, 2025</div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Maximizing Business Intelligence</h3>
+                        <p class="text-gray-600 mb-4">Learn how to leverage business intelligence tools for better decision making.</p>
+                        <a href="#" class="text-primary font-medium hover:text-primary/80">Read More →</a>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg overflow-hidden shadow-sm">
+                    <img src="https://public.readdy.ai/ai/img_res/74fc5774089b29bf144004a509564a70.jpg" class="w-full h-48 object-cover" alt="Blog">
+                    <div class="p-6">
+                        <div class="text-sm text-gray-500 mb-2">March 20, 2025</div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Security in Data Analytics</h3>
+                        <p class="text-gray-600 mb-4">Best practices for maintaining data security in your analytics infrastructure.</p>
+                        <a href="#" class="text-primary font-medium hover:text-primary/80">Read More →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- CTA Section -->
+    <section class="py-20 bg-primary relative overflow-hidden">
+        <div class="absolute inset-0">
+            <img src="https://public.readdy.ai/ai/img_res/9d99c31cceea22614281605c1d5dd059.jpg" class="w-full h-full object-cover opacity-10" alt="Background">
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="text-center max-w-3xl mx-auto">
+                <h2 class="text-3xl font-bold text-white mb-6">Ready to Unlock Your Crypto Potential?</h2>
+                <p class="text-xl text-white/80 mb-8">Join TTEarnCrypto now and explore our curated directory of verified crypto earning projects. Get exclusive insights, detailed guides, and real-time updates that empower you to discover and earn free crypto.</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button class="bg-white text-primary px-8 py-3 !rounded-button font-medium hover:bg-gray-100 transition-colors">
+                        Open Webapp
+                    </button>
+                    <button class="border-2 border-white text-white px-8 py-3 !rounded-button font-medium hover:bg-white/10 transition-colors">
+                        Explore Our Services
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- FAQ Section -->
+    <section class="py-20 gradient-bg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl font-bold text-gray-900">Frequently Asked Questions</h2>
+                <p class="mt-4 text-xl text-gray-600">Find answers to common questions about our services.</p>
+            </div>
+            <div class="max-w-4xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="space-y-6">
+                        <div class="bg-gray-50 p-6 rounded-lg hover:shadow-md transition-shadow">
+                            <div class="flex justify-between items-start">
+                                <h3 class="text-lg font-semibold text-gray-900">What is TTEarnCrypto?</h3>
+                                <i class="ri-shield-check-line text-xl text-primary"></i>
+                            </div>
+                            <p class="mt-2 text-gray-600">TTEarnCrypto is a comprehensive directory dedicated to the latest crypto earning projects. We help users discover free crypto opportunities—ranging from airdrops and play-to-earn games to mining and staking projects—all in one centralized hub.</p>
+                        </div>
+                        <div class="bg-gray-50 p-6 rounded-lg hover:shadow-md transition-shadow">
+                            <div class="flex justify-between items-start">
+                                <h3 class="text-lg font-semibold text-gray-900">How does TTEarnCrypto work?</h3>
+                                <i class="ri-customer-service-2-line text-xl text-primary"></i>
+                            </div>
+                            <p class="mt-2 text-gray-600">Our platform curates a list of verified crypto projects where users can earn free tokens and rewards. Each project is evaluated based on its reliability, community feedback, and earning potential. We also provide guides, tutorials, and real-time updates to help you make informed decisions.</p>
+                        </div>
+                        <div class="bg-gray-50 p-6 rounded-lg hover:shadow-md transition-shadow">
+                            <div class="flex justify-between items-start">
+                                <h3 class="text-lg font-semibold text-gray-900">Is TTEarnCrypto free to use?</h3>
+                                <i class="ri-gift-line text-xl text-primary"></i>
+                            </div>
+                            <p class="mt-2 text-gray-600">Yes, accessing our directory and basic resources is completely free. We aim to empower every crypto enthusiast with the tools and information needed to explore and earn in the digital asset space.</p>
+                        </div>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="bg-gray-50 p-6 rounded-lg hover:shadow-md transition-shadow">
+                            <div class="flex justify-between items-start">
+                                <h3 class="text-lg font-semibold text-gray-900">How often is the directory updated?</h3>
+                                <i class="ri-money-dollar-circle-line text-xl text-primary"></i>
+                            </div>
+                            <p class="mt-2 text-gray-600">We update our listings regularly to ensure you have the most current information. Our team monitors the crypto space daily for new opportunities, changes in project status, and community insights to keep the directory fresh and reliable.</p>
+                        </div>
+                        <div class="bg-gray-50 p-6 rounded-lg hover:shadow-md transition-shadow">
+                            <div class="flex justify-between items-start">
+                                <h3 class="text-lg font-semibold text-gray-900">How are Projects & Infomations are verified on TTEarnCrypto?</h3>
+                                <i class="ri-plug-line text-xl text-primary"></i>
+                            </div>
+                            <p class="mt-2 text-gray-600">Each project listed on TTEarnCrypto undergoes a rigorous verification process. We assess factors such as project legitimacy, team transparency, tokenomics, and community feedback to ensure that only trustworthy and valuable earning opportunities are showcased..</p>
+                        </div>
+                        <div class="bg-gray-50 p-6 rounded-lg hover:shadow-md transition-shadow">
+                            <div class="flex justify-between items-start">
+                                <h3 class="text-lg font-semibold text-gray-900">What should I do if I encounter an issue or have a question?</h3>
+                                <i class="ri-database-2-line text-xl text-primary"></i>
+                            </div>
+                            <p class="mt-2 text-gray-600">We’re here to help! If you run into any issues or have further questions, please use our support form or join our community on Telegram. Our dedicated support team is available to assist you.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Contact Us Section -->
+    <section class="py-20 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-1/3 h-full bg-primary/5 rounded-l-[100px] transform -skew-x-12"></div>
+        <div class="absolute bottom-0 left-0 w-1/4 h-1/2 bg-secondary/5 rounded-tr-[100px]"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+                <span class="inline-block px-4 py-1 bg-primary/10 text-primary font-medium rounded-full text-sm mb-4">Contact Us</span>
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Get in Touch</h2>
+                <p class="mt-4 text-xl text-gray-600">Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+            </div>
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="bg-white rounded-2xl shadow-xl p-8 border border-gray-100 transform transition-all duration-300 hover:shadow-2xl" data-aos="fade-right">
+                    <div class="mb-8">
+                        <img src="https://public.readdy.ai/ai/img_res/24442f38f105033035305338068ed467.jpg" class="w-full h-48 object-cover rounded-xl mb-6" alt="Office">
+                        <div class="flex flex-wrap gap-4">
+                            <div class="flex items-center bg-primary/5 rounded-full px-4 py-2">
+                                <i class="ri-time-line text-primary mr-2"></i>
+                                <span class="text-gray-700 text-sm">Mon-Fri: 9AM-6PM</span>
+                            </div>
+                            <div class="flex items-center bg-primary/5 rounded-full px-4 py-2">
+                                <i class="ri-customer-service-2-line text-primary mr-2"></i>
+                                <span class="text-gray-700 text-sm">24/7 Support</span>
+                            </div>
+                            <div class="flex items-center bg-primary/5 rounded-full px-4 py-2">
+                                <i class="ri-global-line text-primary mr-2"></i>
+                                <span class="text-gray-700 text-sm">Global Offices</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="flex items-center p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
+                            <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md">
+                                <i class="ri-map-pin-line text-xl text-primary"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-lg font-semibold text-gray-900">Address</h4>
+                                <p class="text-gray-600"> SOON </p>
+                            </div>
+                        </div>
+                        <div class="flex items-center p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
+                            <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md">
+                                <i class="ri-phone-line text-xl text-primary"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-lg font-semibold text-gray-900">Phone</h4>
+                                <p class="text-gray-600">  SOON </p>
+                            </div>
+                        </div>
+                        <div class="flex items-center p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
+                            <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md">
+                                <i class="ri-mail-line text-xl text-primary"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-lg font-semibold text-gray-900">Email</h4>
+                                <p class="text-gray-600">contact@f9xr.com</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-8 flex justify-center space-x-4">
+                        <a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-100 hover:bg-primary/10 text-gray-600 hover:text-primary rounded-full transition-colors">
+                            <i class="ri-facebook-fill"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-100 hover:bg-primary/10 text-gray-600 hover:text-primary rounded-full transition-colors">
+                            <i class="ri-twitter-fill"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-100 hover:bg-primary/10 text-gray-600 hover:text-primary rounded-full transition-colors">
+                            <i class="ri-linkedin-fill"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-100 hover:bg-primary/10 text-gray-600 hover:text-primary rounded-full transition-colors">
+                            <i class="ri-instagram-fill"></i>
+                        </a>
+                    </div>
+                </div>
+                <div data-aos="fade-left">
+                    <form id="contactForm" class="bg-white p-8 rounded-2xl shadow-xl border border-gray-100 gradient-border">
+                        <h3 class="text-2xl font-semibold text-gray-900 mb-6">Send Us a Message</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label class="block text-gray-700 text-sm font-medium mb-2">First Name</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="ri-user-line text-gray-400"></i>
+                                    </div>
+                                    <input type="text" class="w-full pl-10 pr-4 py-3 bg-gray-50 border-none rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm" placeholder="AKM">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 text-sm font-medium mb-2">Last Name</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="ri-user-line text-gray-400"></i>
+                                    </div>
+                                    <input type="text" class="w-full pl-10 pr-4 py-3 bg-gray-50 border-none rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm" placeholder="King">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-gray-700 text-sm font-medium mb-2">Email</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="ri-mail-line text-gray-400"></i>
+                                </div>
+                                <input type="email" class="w-full pl-10 pr-4 py-3 bg-gray-50 border-none rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm" placeholder="king.akm@example.com">
+                            </div>
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-gray-700 text-sm font-medium mb-2">Subject</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="ri-chat-1-line text-gray-400"></i>
+                                </div>
+                                <select class="w-full pl-10 pr-10 py-3 bg-gray-50 border-none rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm appearance-none">
+                                    <option value="" disabled selected>Select a subject</option>
+                                    <option value="general">General Inquiry</option>
+                                    <option value="support">Technical Support</option>
+                                    <option value="sales">Sales Question</option>
+                                    <option value="partnership">Partnership Opportunity</option>
+                                </select>
+                                <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                    <i class="ri-arrow-down-s-line text-gray-400"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-gray-700 text-sm font-medium mb-2">Your Message</label>
+                            <div class="relative">
+                                <div class="absolute top-3 left-3 flex items-start pointer-events-none">
+                                    <i class="ri-message-3-line text-gray-400"></i>
+                                </div>
+                                <textarea class="w-full pl-10 pr-4 py-3 bg-gray-50 border-none rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 h-32 text-sm" placeholder="How can we help you?"></textarea>
+                            </div>
+                        </div>
+                        <div class="mb-6 flex items-start">
+                            <input type="checkbox" id="privacy" class="mt-1 mr-2">
+                            <label for="privacy" class="text-sm text-gray-600">I agree to the <a href="#" class="text-primary hover:underline">Privacy Policy</a> and consent to being contacted.</label>
+                        </div>
+                        <button type="submit" class="w-full bg-primary text-white py-3 px-4 !rounded-button hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 flex items-center justify-center">
+                            <i class="ri-send-plane-fill mr-2"></i> Send Message
+                        </button>
+                        <div id="successMessage" class="hidden mt-4 p-4 bg-green-100 text-green-700 rounded-lg">
+                            Thank you for your message! We'll get back to you shortly.
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('contactForm');
+            const successMessage = document.getElementById('successMessage');
+            form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Simulate form submission
+            setTimeout(() => {
+            form.reset();
+            successMessage.classList.remove('hidden');
+            setTimeout(() => {
+            successMessage.classList.add('hidden');
+            }, 5000);
+            }, 1000);
+            });
+            });
+        </script>
+    </section>
+    <!-- Footer -->
+    <footer class="bg-gradient-to-b from-gray-900 to-gray-950 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-10">
+                <div class="md:col-span-2">
+                    <div class="flex items-center">
+                        <span class="text-3xl font-['Pacifico'] bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">F9XR	</span>
+                        <span class="ml-2 px-3 py-1 text-xs font-semibold bg-primary/20 text-primary rounded-full">Stay connected, stay earning</span>
+                    </div>
+                    <p class="mt-6 text-gray-300 leading-relaxed">Dive into a world of free crypto opportunities with TTEarnCrypto – where informed exploration meets real earning potential, and every tap brings you closer to digital prosperity.</p>
+                    <div class="mt-8">
+                        <div class="flex items-center space-x-3 mb-4">
+                            <div class="w-10 h-10 flex items-center justify-center bg-white/5 rounded-full">
+                                <i class="ri-map-pin-line text-primary"></i>
+                            </div>
+                            <span class="text-gray-300"> SOON </span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 flex items-center justify-center bg-white/5 rounded-full">
+                                <i class="ri-mail-line text-primary"></i>
+                            </div>
+                            <span class="text-gray-300">contact@f9xr.com</span>
+                        </div>
+                    </div>
+                    <div class="flex space-x-4 mt-8">
+                        <a href="#" class="w-10 h-10 flex items-center justify-center bg-white/5 hover:bg-primary/20 rounded-full transition-colors duration-300">
+                            <i class="ri-facebook-fill text-lg text-gray-300 hover:text-white"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 flex items-center justify-center bg-white/5 hover:bg-primary/20 rounded-full transition-colors duration-300">
+                            <i class="ri-twitter-fill text-lg text-gray-300 hover:text-white"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 flex items-center justify-center bg-white/5 hover:bg-primary/20 rounded-full transition-colors duration-300">
+                            <i class="ri-linkedin-fill text-lg text-gray-300 hover:text-white"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 flex items-center justify-center bg-white/5 hover:bg-primary/20 rounded-full transition-colors duration-300">
+                            <i class="ri-instagram-fill text-lg text-gray-300 hover:text-white"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-6 text-white relative inline-block">
+Company
+<span class="absolute -bottom-2 left-0 w-1/2 h-0.5 bg-primary"></span>
+</h3>
+                    <ul class="space-y-4">
+                        <li><a href="#" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center"><i class="ri-arrow-right-s-line mr-2 text-primary"></i>About Us</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center"><i class="ri-arrow-right-s-line mr-2 text-primary"></i>Careers</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center"><i class="ri-arrow-right-s-line mr-2 text-primary"></i>Press</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center"><i class="ri-arrow-right-s-line mr-2 text-primary"></i>Blog</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-6 text-white relative inline-block">
+Resources
+<span class="absolute -bottom-2 left-0 w-1/2 h-0.5 bg-secondary"></span>
+</h3>
+                    <ul class="space-y-4">
+                        <li><a href="#" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center"><i class="ri-arrow-right-s-line mr-2 text-secondary"></i>Documentation</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center"><i class="ri-arrow-right-s-line mr-2 text-secondary"></i>Help Center</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center"><i class="ri-arrow-right-s-line mr-2 text-secondary"></i>API Reference</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center"><i class="ri-arrow-right-s-line mr-2 text-secondary"></i>Status</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-6 text-white relative inline-block">
+Legal
+<span class="absolute -bottom-2 left-0 w-1/2 h-0.5 bg-primary"></span>
+</h3>
+                    <ul class="space-y-4">
+                        <li><a href="#" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center"><i class="ri-arrow-right-s-line mr-2 text-primary"></i>Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center"><i class="ri-arrow-right-s-line mr-2 text-primary"></i>Terms of Service</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center"><i class="ri-arrow-right-s-line mr-2 text-primary"></i>Cookie Policy</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center"><i class="ri-arrow-right-s-line mr-2 text-primary"></i>Security</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-16 pt-10 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 mb-4 md:mb-0">&copy; 2025 F9XR's TTEarnCrypto by <b>TONTUF Web Services</b>. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Terms</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Privacy</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+        const revenueChart = echarts.init(document.getElementById('revenueChart'));
+        const salesChart = echarts.init(document.getElementById('salesChart'));
+        const revenueOption = {
+        animation: false,
+        tooltip: {
+        trigger: 'axis',
+        backgroundColor: 'rgba(255, 255, 255, 0.9)',
+        borderColor: '#e5e7eb',
+        textStyle: { color: '#1f2937' }
+        },
+        grid: {
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+        containLabel: true
+        },
+        xAxis: {
+        type: 'category',
+        data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        axisLine: { show: false },
+        axisTick: { show: false }
+        },
+        yAxis: {
+        type: 'value',
+        axisLine: { show: false },
+        axisTick: { show: false },
+        splitLine: { lineStyle: { color: '#f3f4f6' } }
+        },
+        series: [{
+        data: [15000, 25000, 18000, 30000, 22000, 35000],
+        type: 'line',
+        smooth: true,
+        symbol: 'none',
+        lineStyle: { color: 'rgba(87, 181, 231, 1)' },
+        areaStyle: {
+        color: {
+        type: 'linear',
+        x: 0, y: 0, x2: 0, y2: 1,
+        colorStops: [{
+        offset: 0,
+        color: 'rgba(87, 181, 231, 0.1)'
+        }, {
+        offset: 1,
+        color: 'rgba(87, 181, 231, 0)'
+        }]
+        }
+        }
+        }]
+        };
+        const salesOption = {
+        animation: false,
+        tooltip: {
+        trigger: 'item',
+        backgroundColor: 'rgba(255, 255, 255, 0.9)',
+        borderColor: '#e5e7eb',
+        textStyle: { color: '#1f2937' }
+        },
+        series: [{
+        type: 'pie',
+        radius: ['60%', '80%'],
+        avoidLabelOverlap: false,
+        label: { show: false },
+        emphasis: { label: { show: false } },
+        data: [
+        { value: 35, name: 'Direct' },
+        { value: 30, name: 'Affiliate' },
+        { value: 20, name: 'Email' },
+        { value: 15, name: 'Other' }
+        ],
+        color: [
+        'rgba(87, 181, 231, 1)',
+        'rgba(141, 211, 199, 1)',
+        'rgba(251, 191, 114, 1)',
+        'rgba(252, 141, 98, 1)'
+        ]
+        }]
+        };
+        revenueChart.setOption(revenueOption);
+        salesChart.setOption(salesOption);
+        window.addEventListener('resize', () => {
+        revenueChart.resize();
+        salesChart.resize();
+        });
+    </script>
+</body>
+
+</html>

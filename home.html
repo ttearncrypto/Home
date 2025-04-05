@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TTEarnCrypto - Earn Free Cryptocurrency</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .hero-gradient {
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+        }
+        .crypto-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .progress-bar {
+            transition: width 1s ease-in-out;
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm py-4">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fab fa-bitcoin text-2xl text-yellow-500"></i>
+                <span class="text-xl font-bold text-gray-800">TTEarnCrypto</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="#how-it-works" class="text-gray-600 hover:text-purple-600 font-medium">How It Works</a>
+                <a href="#cryptos" class="text-gray-600 hover:text-purple-600 font-medium">Cryptos</a>
+                <a href="#testimonials" class="text-gray-600 hover:text-purple-600 font-medium">Testimonials</a>
+                <a href="#faq" class="text-gray-600 hover:text-purple-600 font-medium">FAQ</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="hidden md:block px-4 py-2 text-purple-600 font-medium border border-purple-600 rounded-lg hover:bg-purple-50 transition">Login</button>
+                <button class="px-4 py-2 bg-purple-600 text-white font-medium rounded-lg hover:bg-purple-700 transition pulse-animation">
+                    Get Started <i class="fas fa-arrow-right ml-1"></i>
+                </button>
+            </div>
+            <button class="md:hidden text-gray-600">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white py-16 md:py-24">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-10 md:mb-0">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">Earn Free Cryptocurrency Today!</h1>
+                <p class="text-xl mb-8 opacity-90">Complete simple tasks and get paid in Bitcoin, Ethereum, and other popular cryptocurrencies. No investment required!</p>
+                <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
+                    <button class="px-6 py-3 bg-white text-purple-600 font-bold rounded-lg hover:bg-gray-100 transition flex items-center justify-center">
+                        <i class="fab fa-google-play mr-2"></i> Get App
+                    </button>
+                    <button class="px-6 py-3 bg-black text-white font-bold rounded-lg hover:bg-gray-800 transition flex items-center justify-center">
+                        <i class="fab fa-apple mr-2"></i> Download
+                    </button>
+                </div>
+                <div class="mt-8 flex items-center">
+                    <div class="flex -space-x-2">
+                        <img src="https://randomuser.me/api/portraits/women/12.jpg" class="w-10 h-10 rounded-full border-2 border-white">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-10 h-10 rounded-full border-2 border-white">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" class="w-10 h-10 rounded-full border-2 border-white">
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium">Join <span class="font-bold">10,000+</span> users earning crypto</p>
+                        <div class="flex items-center">
+                            <div class="flex">
+                                <i class="fas fa-star text-yellow-300"></i>
+                                <i class="fas fa-star text-yellow-300"></i>
+                                <i class="fas fa-star text-yellow-300"></i>
+                                <i class="fas fa-star text-yellow-300"></i>
+                                <i class="fas fa-star text-yellow-300"></i>
+                            </div>
+                            <span class="ml-2 text-sm">4.9/5.0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center">
+                <div class="relative max-w-md">
+                    <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" class="w-16 h-16 absolute -top-5 -left-5 floating">
+                    <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" class="w-16 h-16 absolute -top-5 -right-5 floating" style="animation-delay: 0.5s;">
+                    <img src="https://cryptologos.cc/logos/solana-sol-logo.png" class="w-16 h-16 absolute -bottom-5 -left-5 floating" style="animation-delay: 1s;">
+                    <img src="https://cryptologos.cc/logos/bnb-bnb-logo.png" class="w-16 h-16 absolute -bottom-5 -right-5 floating" style="animation-delay: 1.5s;">
+                    <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+                        <div class="bg-purple-600 p-4 text-white text-center">
+                            <h3 class="font-bold text-lg">Your Crypto Earnings</h3>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-center mb-6">
+                                <div>
+                                    <p class="text-gray-500">Total Balance</p>
+                                    <h4 class="text-2xl font-bold">$124.75</h4>
+                                </div>
+                                <button class="px-4 py-2 bg-purple-600 text-white rounded-lg text-sm font-medium hover:bg-purple-700">Withdraw</button>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                    <div class="flex items-center">
+                                        <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" class="w-8 h-8 mr-3">
+                                        <div>
+                                            <p class="font-medium">Bitcoin</p>
+                                            <p class="text-sm text-gray-500">0.0032 BTC</p>
+                                        </div>
+                                    </div>
+                                    <span class="font-medium">$98.24</span>
+                                </div>
+                                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                    <div class="flex items-center">
+                                        <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" class="w-8 h-8 mr-3">
+                                        <div>
+                                            <p class="font-medium">Ethereum</p>
+                                            <p class="text-sm text-gray-500">0.056 ETH</p>
+                                        </div>
+                                    </div>
+                                    <span class="font-medium">$26.51</span>
+                                </div>
+                            </div>
+                            <button class="w-full mt-6 py-3 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 flex items-center justify-center">
+                                <i class="fas fa-plus mr-2"></i> Earn More Crypto
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">How It Works</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Earning cryptocurrency has never been easier. Follow these simple steps to start accumulating crypto today.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 p-8 rounded-xl text-center">
+                    <div class="w-16 h-16 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-user-plus text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">1. Create Account</h3>
+                    <p class="text-gray-600">Sign up in less than a minute with just your email address. No personal documents required.</p>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-xl text-center">
+                    <div class="w-16 h-16 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-tasks text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">2. Complete Tasks</h3>
+                    <p class="text-gray-600">Watch videos, take surveys, or try apps to earn crypto rewards. New tasks added daily.</p>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-xl text-center">
+                    <div class="w-16 h-16 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-wallet text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">3. Withdraw Earnings</h3>
+                    <p class="text-gray-600">Transfer your crypto to any wallet or exchange. Minimum withdrawal just $1 equivalent.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Available Cryptos -->
+    <section id="cryptos" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">Available Cryptocurrencies</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Earn from a variety of popular cryptocurrencies. We're constantly adding new options.</p>
+            </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="crypto-card bg-white p-6 rounded-xl shadow-sm transition">
+                    <div class="flex items-center mb-4">
+                        <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" class="w-10 h-10 mr-3">
+                        <h3 class="text-xl font-bold">Bitcoin</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">The original cryptocurrency with the largest market cap.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-500">Earn up to</span>
+                        <span class="font-bold text-purple-600">0.0001 BTC/task</span>
+                    </div>
+                </div>
+                <div class="crypto-card bg-white p-6 rounded-xl shadow-sm transition">
+                    <div class="flex items-center mb-4">
+                        <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" class="w-10 h-10 mr-3">
+                        <h3 class="text-xl font-bold">Ethereum</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Smart contract platform powering decentralized apps.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-500">Earn up to</span>
+                        <span class="font-bold text-purple-600">0.001 ETH/task</span>
+                    </div>
+                </div>
+                <div class="crypto-card bg-white p-6 rounded-xl shadow-sm transition">
+                    <div class="flex items-center mb-4">
+                        <img src="https://cryptologos.cc/logos/solana-sol-logo.png" class="w-10 h-10 mr-3">
+                        <h3 class="text-xl font-bold">Solana</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">High-performance blockchain for fast transactions.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-500">Earn up to</span>
+                        <span class="font-bold text-purple-600">0.01 SOL/task</span>
+                    </div>
+                </div>
+                <div class="crypto-card bg-white p-6 rounded-xl shadow-sm transition">
+                    <div class="flex items-center mb-4">
+                        <img src="https://cryptologos.cc/logos/bnb-bnb-logo.png" class="w-10 h-10 mr-3">
+                        <h3 class="text-xl font-bold">BNB</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Binance Coin powers the Binance ecosystem.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-500">Earn up to</span>
+                        <span class="font-bold text-purple-600">0.01 BNB/task</span>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-10">
+                <button class="px-6 py-3 bg-purple-600 text-white font-medium rounded-lg hover:bg-purple-700 transition">
+                    View All Cryptos <i class="fas fa-chevron-right ml-1"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Earning Potential -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row items-center">
+                <div class="lg:w-1/2 mb-10 lg:mb-0 lg:pr-10">
+                    <h2 class="text-3xl font-bold mb-6">Maximize Your Earning Potential</h2>
+                    <p class="text-gray-600 mb-6">With TTEarnCrypto, you can significantly increase your crypto holdings without any investment. Our platform offers multiple ways to earn.</p>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">Daily Earnings Potential</span>
+                                <span class="font-medium">$5 - $20</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="progress-bar bg-green-500 h-2.5 rounded-full" style="width: 60%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">Weekly Earnings Potential</span>
+                                <span class="font-medium">$35 - $140</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="progress-bar bg-blue-500 h-2.5 rounded-full" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">Monthly Earnings Potential</span>
+                                <span class="font-medium">$150 - $600</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="progress-bar bg-purple-500 h-2.5 rounded-full" style="width: 90%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="mt-8 px-6 py-3 bg-purple-600 text-white font-medium rounded-lg hover:bg-purple-700 transition">
+                        Start Earning Now <i class="fas fa-arrow-right ml-1"></i>
+                    </button>
+                </div>
+                <div class="lg:w-1/2">
+                    <div class="bg-gray-50 p-8 rounded-xl">
+                        <h3 class="text-xl font-bold mb-6 text-center">Top Earning Methods</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start p-4 bg-white rounded-lg shadow-sm">
+                                <div class="bg-purple-100 p-2 rounded-lg mr-4">
+                                    <i class="fas fa-ad text-purple-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold mb-1">Watch Ads</h4>
+                                    <p class="text-gray-600 text-sm">Earn crypto by watching short video advertisements.</p>
+                                    <span class="inline-block mt-2 text-sm font-medium text-purple-600">0.00005 BTC per ad</span>
+                                </div>
+                            </div>
+                            <div class="flex items-start p-4 bg-white rounded-lg shadow-sm">
+                                <div class="bg-purple-100 p-2 rounded-lg mr-4">
+                                    <i class="fas fa-poll text-purple-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold mb-1">Surveys</h4>
+                                    <p class="text-gray-600 text-sm">Share your opinion and get paid in crypto.</p>
+                                    <span class="inline-block mt-2 text-sm font-medium text-purple-600">0.0001 BTC per survey</span>
+                                </div>
+                            </div>
+                            <div class="flex items-start p-4 bg-white rounded-lg shadow-sm">
+                                <div class="bg-purple-100 p-2 rounded-lg mr-4">
+                                    <i class="fas fa-mobile-alt text-purple-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold mb-1">App Testing</h4>
+                                    <p class="text-gray-600 text-sm">Try new apps and games to earn cryptocurrency.</p>
+                                    <span class="inline-block mt-2 text-sm font-medium text-purple-600">0.0003 BTC per app</span>
+                                </div>
+                            </div>
+                            <div class="flex items-start p-4 bg-white rounded-lg shadow-sm">
+                                <div class="bg-purple-100 p-2 rounded-lg mr-4">
+                                    <i class="fas fa-user-friends text-purple-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold mb-1">Refer Friends</h4>
+                                    <p class="text-gray-600 text-sm">Get 10% of your friends' earnings for life.</p>
+                                    <span class="inline-block mt-2 text-sm font-medium text-purple-600">Unlimited earnings</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">What Our Users Say</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Don't just take our word for it. Here's what our community has to say about earning with TTEarnCrypto.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-xl shadow-sm">
+                    <div class="flex mb-4">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                    </div>
+                    <p class="text-gray-600 mb-6">"I've earned over 0.05 BTC in just three months by completing simple tasks. It's amazing to see my crypto portfolio grow without any investment."</p>
+                    <div class="flex items-center">
+                        <img src="https://randomuser.me/api/portraits/women/32.jpg" class="w-10 h-10 rounded-full mr-3">
+                        <div>
+                            <h4 class="font-bold">Sarah K.</h4>
+                            <p class="text-sm text-gray-500">Student</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-sm">
+                    <div class="flex mb-4">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                    </div>
+                    <p class="text-gray-600 mb-6">"As someone new to crypto, this platform helped me accumulate my first coins without spending money. The withdrawal process was super smooth!"</p>
+                    <div class="flex items-center">
+                        <img src="https://randomuser.me/api/portraits/men/54.jpg" class="w-10 h-10 rounded-full mr-3">
+                        <div>
+                            <h4 class="font-bold">Michael T.</h4>
+                            <p class="text-sm text-gray-500">Freelancer</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-sm">
+                    <div class="flex mb-4">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                    </div>
+                    <p class="text-gray-600 mb-6">"I use TTEarnCrypto during my commute. It's an easy way to make my time productive. I've already withdrawn ETH three times!"</p>
+                    <div class="flex items-center">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" class="w-10 h-10 rounded-full mr-3">
+                        <div>
+                            <h4 class="font-bold">Jennifer L.</h4>
+                            <p class="text-sm text-gray-500">Office Worker</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="py-16 bg-white">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">Frequently Asked Questions</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Got questions? We've got answers. If you can't find what you're looking for, contact our support team.</p>
+            </div>
+            <div class="space-y-4">
+                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                    <button class="faq-toggle w-full flex justify-between items-center p-5 text-left font-medium hover:bg-gray-50 transition">
+                        <span>Is TTEarnCrypto really free to use?</span>
+                        <i class="fas fa-chevron-down transition-transform"></i>
+                    </button>
+                    <div class="faq-content hidden px-5 pb-5 text-gray-600">
+                        Yes! TTEarnCrypto is completely free to use. You can start earning cryptocurrency without any investment. We make money from advertisers and developers who want to promote their products, and we share that revenue with you in the form of crypto rewards.
+                    </div>
+                </div>
+                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                    <button class="faq-toggle w-full flex justify-between items-center p-5 text-left font-medium hover:bg-gray-50 transition">
+                        <span>How much can I realistically earn?</span>
+                        <i class="fas fa-chevron-down transition-transform"></i>
+                    </button>
+                    <div class="faq-content hidden px-5 pb-5 text-gray-600">
+                        Earnings vary based on how much time you spend and which tasks you complete. Our average user earns between $5-$20 per day by spending 1-2 hours on the platform. The most active users can earn $100+ per week by completing all available tasks and referring friends.
+                    </div>
+                </div>
+                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                    <button class="faq-toggle w-full flex justify-between items-center p-5 text-left font-medium hover:bg-gray-50 transition">
+                        <span>What's the minimum withdrawal amount?</span>
+                        <i class="fas fa-chevron-down transition-transform"></i>
+                    </button>
+                    <div class="faq-content hidden px-5 pb-5 text-gray-600">
+                        The minimum withdrawal amount is just $1 equivalent in any cryptocurrency. For Bitcoin, this is approximately 0.000025 BTC. Withdrawals are processed within 24 hours and sent directly to your provided wallet address.
+                    </div>
+                </div>
+                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                    <button class="faq-toggle w-full flex justify-between items-center p-5 text-left font-medium hover:bg-gray-50 transition">
+                        <span>Is my personal information safe?</span>
+                        <i class="fas fa-chevron-down transition-transform"></i>
+                    </button>
+                    <div class="faq-content hidden px-5 pb-5 text-gray-600">
+                        We take privacy and security very seriously. We only require an email address to create your account. We never ask for sensitive personal information or documents. All data is encrypted and protected using industry-standard security measures.
+                    </div>
+                </div>
+                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                    <button class="faq-toggle w-full flex justify-between items-center p-5 text-left font-medium hover:bg-gray-50 transition">
+                        <span>Can I use TTEarnCrypto worldwide?</span>
+                        <i class="fas fa-chevron-down transition-transform"></i>
+                    </button>
+                    <div class="faq-content hidden px-5 pb-5 text-gray-600">
+                        TTEarnCrypto is available in most countries worldwide. However, some tasks may be restricted based on your location due to advertiser requirements. We're constantly working to expand our availability to more regions.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-16 hero-gradient text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Start Earning Free Cryptocurrency?</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto opacity-90">Join thousands of users already growing their crypto portfolios with TTEarnCrypto.</p>
+            <button class="px-8 py-4 bg-white text-purple-600 font-bold rounded-lg hover:bg-gray-100 transition text-lg pulse-animation">
+                Sign Up Now - It's Free! <i class="fas fa-arrow-right ml-2"></i>
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fab fa-bitcoin text-2xl text-yellow-500"></i>
+                        <span class="text-xl font-bold text-white">TTEarnCrypto</span>
+                    </div>
+                    <p class="mb-4">The easiest way to earn cryptocurrency without investment.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-reddit"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-white font-medium mb-4">Company</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white">About Us</a></li>
+                        <li><a href="#" class="hover:text-white">Careers</a></li>
+                        <li><a href="#" class="hover:text-white">Blog</a></li>
+                        <li><a href="#" class="hover:text-white">Press</a></li>
+                        <li><a href="#" class="hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white font-medium mb-4">Legal</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-white">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white">Cookie Policy</a></li>
+                        <li><a href="#" class="hover:text-white">GDPR</a></li>
+                        <li><a href="#" class="hover:text-white">Disclaimer</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white font-medium mb-4">Support</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white">Help Center</a></li>
+                        <li><a href="#" class="hover:text-white">Community</a></li>
+                        <li><a href="#" class="hover:text-white">Status</a></li>
+                        <li><a href="#" class="hover:text-white">Report a Bug</a></li>
+                        <li><a href="#" class="hover:text-white">Feedback</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-gray-800 text-sm text-center">
+                <p>© 2023 TTEarnCrypto. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Toggle FAQ items
+        document.querySelectorAll('.faq-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                const icon = button.querySelector('i');
+                
+                content.classList.toggle('hidden');
+                icon.classList.toggle('rotate-180');
+            });
+        });
+
+        // Animate progress bars on load
+        document.addEventListener('DOMContentLoaded', function() {
+            const progressBars = document.querySelectorAll('.progress-bar');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 100);
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

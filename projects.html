@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TTEarnCrypto - Earn Free Crypto Directory</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6c5ce7',
+                        secondary: '#a29bfe',
+                        dark: '#1e1e2d',
+                        darker: '#151521',
+                        accent: '#00cec9',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1e1e2d;
+            color: #fff;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #6c5ce7, #00cec9);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .nav-link:hover {
+            color: #a29bfe;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(90deg, #6c5ce7, #00cec9);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
+        }
+        
+        .stats-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .project-card {
+            transition: all 0.3s ease;
+            background: rgba(30, 30, 45, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .project-card:hover {
+            background: rgba(30, 30, 45, 0.9);
+            border-color: rgba(108, 92, 231, 0.5);
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            background: rgba(108, 92, 231, 0.1);
+            color: #6c5ce7;
+            font-size: 24px;
+        }
+        
+        .mobile-menu {
+            transition: all 0.3s ease;
+            max-height: 0;
+            overflow: hidden;
+        }
+        
+        .mobile-menu.open {
+            max-height: 500px;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-dark">
+    <!-- Navigation -->
+    <nav class="bg-darker border-b border-gray-800 py-4 px-6 lg:px-12 sticky top-0 z-50">
+        <div class="flex justify-between items-center">
+            <div class="flex items-center">
+                <a href="#" class="text-2xl font-bold gradient-text">TTEarnCrypto</a>
+            </div>
+            
+            <div class="hidden md:flex space-x-8">
+                <a href="#" class="nav-link text-gray-300 hover:text-secondary transition">Home</a>
+                <a href="#projects" class="nav-link text-gray-300 hover:text-secondary transition">Projects</a>
+                <a href="#features" class="nav-link text-gray-300 hover:text-secondary transition">Features</a>
+                <a href="#how-it-works" class="nav-link text-gray-300 hover:text-secondary transition">How It Works</a>
+                <a href="#faq" class="nav-link text-gray-300 hover:text-secondary transition">FAQ</a>
+            </div>
+            
+            <div class="hidden md:block">
+                <a href="#" class="btn-primary text-white px-6 py-2 rounded-full font-medium">Get Started</a>
+            </div>
+            
+            <button id="mobile-menu-button" class="md:hidden text-gray-300 focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+        
+        <div id="mobile-menu" class="mobile-menu md:hidden bg-darker mt-2">
+            <div class="flex flex-col space-y-3 py-4 px-4">
+                <a href="#" class="nav-link text-gray-300 hover:text-secondary transition">Home</a>
+                <a href="#projects" class="nav-link text-gray-300 hover:text-secondary transition">Projects</a>
+                <a href="#features" class="nav-link text-gray-300 hover:text-secondary transition">Features</a>
+                <a href="#how-it-works" class="nav-link text-gray-300 hover:text-secondary transition">How It Works</a>
+                <a href="#faq" class="nav-link text-gray-300 hover:text-secondary transition">FAQ</a>
+                <a href="#" class="btn-primary text-white px-6 py-2 rounded-full font-medium text-center">Get Started</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="py-16 px-6 lg:px-12">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+                    Discover the Best Ways to 
+                    <span class="gradient-text">Earn Free Crypto</span>
+                </h1>
+                <p class="text-gray-400 text-lg mb-8">
+                    TTEarnCrypto is your ultimate directory for legitimate projects where you can earn cryptocurrency without investment. Start building your crypto portfolio today!
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#" class="btn-primary text-white px-8 py-3 rounded-full font-medium">Explore Projects</a>
+                    <a href="#" class="border border-secondary text-secondary px-8 py-3 rounded-full font-medium hover:bg-secondary hover:text-white transition">How It Works</a>
+                </div>
+                <div class="mt-8 flex items-center space-x-4">
+                    <div class="flex -space-x-2">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" class="w-10 h-10 rounded-full border-2 border-darker" alt="User">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-10 h-10 rounded-full border-2 border-darker" alt="User">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" class="w-10 h-10 rounded-full border-2 border-darker" alt="User">
+                    </div>
+                    <p class="text-gray-400">
+                        <span class="text-white font-medium">10,000+</span> users already earning
+                    </p>
+                </div>
+            </div>
+            <div class="relative">
+                <div class="bg-gradient-to-br from-primary to-accent p-1 rounded-2xl">
+                    <div class="bg-darker rounded-xl p-6">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="text-xl font-semibold">Featured Projects</h3>
+                            <span class="text-xs bg-primary/20 text-primary px-3 py-1 rounded-full">Updated Daily</span>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-center p-3 bg-gray-800/50 rounded-lg">
+                                <div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center mr-4">
+                                    <i class="fas fa-coins text-secondary"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-medium">FaucetPay</h4>
+                                    <p class="text-xs text-gray-400">Instant crypto faucets</p>
+                                </div>
+                                <span class="text-accent font-medium">+$0.50/day</span>
+                            </div>
+                            
+                            <div class="flex items-center p-3 bg-gray-800/50 rounded-lg">
+                                <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center mr-4">
+                                    <i class="fas fa-gamepad text-primary"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-medium">PlayToEarn</h4>
+                                    <p class="text-xs text-gray-400">Blockchain games</p>
+                                </div>
+                                <span class="text-accent font-medium">+$2.00/day</span>
+                            </div>
+                            
+                            <div class="flex items-center p-3 bg-gray-800/50 rounded-lg">
+                                <div class="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center mr-4">
+                                    <i class="fas fa-chart-line text-green-500"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-medium">Staking Rewards</h4>
+                                    <p class="text-xs text-gray-400">Passive income</p>
+                                </div>
+                                <span class="text-accent font-medium">+$5.00/day</span>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 pt-4 border-t border-gray-800">
+                            <a href="#" class="text-secondary text-sm font-medium flex items-center justify-center">
+                                View All Projects <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-primary/10 rounded-full filter blur-3xl -z-10"></div>
+                <div class="absolute -top-6 -right-6 w-32 h-32 bg-accent/10 rounded-full filter blur-3xl -z-10"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-12 px-6 lg:px-12 bg-darker">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="stats-card p-6 rounded-xl">
+                    <h3 class="text-3xl font-bold gradient-text mb-2">250+</h3>
+                    <p class="text-gray-400">Verified Projects</p>
+                </div>
+                <div class="stats-card p-6 rounded-xl">
+                    <h3 class="text-3xl font-bold gradient-text mb-2">$1M+</h3>
+                    <p class="text-gray-400">Earned by Users</p>
+                </div>
+                <div class="stats-card p-6 rounded-xl">
+                    <h3 class="text-3xl font-bold gradient-text mb-2">50+</h3>
+                    <p class="text-gray-400">Supported Cryptos</p>
+                </div>
+                <div class="stats-card p-6 rounded-xl">
+                    <h3 class="text-3xl font-bold gradient-text mb-2">24/7</h3>
+                    <p class="text-gray-400">Support Available</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-16 px-6 lg:px-12">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-secondary font-medium">PROJECT DIRECTORY</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-4">Featured <span class="gradient-text">Earning Methods</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Browse through our carefully curated selection of legitimate projects to earn cryptocurrency for free.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Project Card 1 -->
+                <div class="project-card rounded-xl p-6 transition">
+                    <div class="flex items-center mb-4">
+                        <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="Bitcoin" class="w-10 h-10 rounded-full mr-3">
+                        <div>
+                            <h3 class="font-bold">Bitcoin Faucets</h3>
+                            <div class="flex items-center mt-1">
+                                <div class="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                                <span class="text-xs text-gray-400">Active</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-4">Claim small amounts of Bitcoin at regular intervals from various faucet websites.</p>
+                    <div class="flex justify-between items-center mb-4">
+                        <div>
+                            <span class="text-xs text-gray-400">Potential Earnings</span>
+                            <p class="font-medium text-accent">$0.50 - $5/day</p>
+                        </div>
+                        <div>
+                            <span class="text-xs text-gray-400">Difficulty</span>
+                            <p class="font-medium">Easy</p>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center">
+                            <i class="fas fa-star text-yellow-400 mr-1"></i>
+                            <span class="text-sm">4.8</span>
+                        </div>
+                        <a href="#" class="text-secondary text-sm font-medium">View Details <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Project Card 2 -->
+                <div class="project-card rounded-xl p-6 transition">
+                    <div class="flex items-center mb-4">
+                        <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="Ethereum" class="w-10 h-10 rounded-full mr-3">
+                        <div>
+                            <h3 class="font-bold">Play-to-Earn Games</h3>
+                            <div class="flex items-center mt-1">
+                                <div class="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                                <span class="text-xs text-gray-400">Active</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-4">Earn crypto by playing blockchain-based games and completing in-game tasks.</p>
+                    <div class="flex justify-between items-center mb-4">
+                        <div>
+                            <span class="text-xs text-gray-400">Potential Earnings</span>
+                            <p class="font-medium text-accent">$2 - $20/day</p>
+                        </div>
+                        <div>
+                            <span class="text-xs text-gray-400">Difficulty</span>
+                            <p class="font-medium">Medium</p>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center">
+                            <i class="fas fa-star text-yellow-400 mr-1"></i>
+                            <span class="text-sm">4.6</span>
+                        </div>
+                        <a href="#" class="text-secondary text-sm font-medium">View Details <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Project Card 3 -->
+                <div class="project-card rounded-xl p-6 transition">
+                    <div class="flex items-center mb-4">
+                        <img src="https://cryptologos.cc/logos/solana-sol-logo.png" alt="Solana" class="w-10 h-10 rounded-full mr-3">
+                        <div>
+                            <h3 class="font-bold">Airdrop Hunting</h3>
+                            <div class="flex items-center mt-1">
+                                <div class="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                                <span class="text-xs text-gray-400">Active</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-4">Participate in crypto airdrops to receive free tokens from new blockchain projects.</p>
+                    <div class="flex justify-between items-center mb-4">
+                        <div>
+                            <span class="text-xs text-gray-400">Potential Earnings</span>
+                            <p class="font-medium text-accent">$10 - $500+</p>
+                        </div>
+                        <div>
+                            <span class="text-xs text-gray-400">Difficulty</span>
+                            <p class="font-medium">Hard</p>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center">
+                            <i class="fas fa-star text-yellow-400 mr-1"></i>
+                            <span class="text-sm">4.3</span>
+                        </div>
+                        <a href="#" class="text-secondary text-sm font-medium">View Details <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Project Card 4 -->
+                <div class="project-card rounded-xl p-6 transition">
+                    <div class="flex items-center mb-4">
+                        <img src="https://cryptologos.cc/logos/bnb-bnb-logo.png" alt="BNB" class="w-10 h-10 rounded-full mr-3">
+                        <div>
+                            <h3 class="font-bold">Micro Tasks</h3>
+                            <div class="flex items-center mt-1">
+                                <div class="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                                <span class="text-xs text-gray-400">Active</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-4">Complete small online tasks and get paid in cryptocurrency for your time.</p>
+                    <div class="flex justify-between items-center mb-4">
+                        <div>
+                            <span class="text-xs text-gray-400">Potential Earnings</span>
+                            <p class="font-medium text-accent">$1 - $10/day</p>
+                        </div>
+                        <div>
+                            <span class="text-xs text-gray-400">Difficulty</span>
+                            <p class="font-medium">Easy</p>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center">
+                            <i class="fas fa-star text-yellow-400 mr-1"></i>
+                            <span class="text-sm">4.5</span>
+                        </div>
+                        <a href="#" class="text-secondary text-sm font-medium">View Details <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Project Card 5 -->
+                <div class="project-card rounded-xl p-6 transition">
+                    <div class="flex items-center mb-4">
+                        <img src="https://cryptologos.cc/logos/cardano-ada-logo.png" alt="Cardano" class="w-10 h-10 rounded-full mr-3">
+                        <div>
+                            <h3 class="font-bold">Staking Rewards</h3>
+                            <div class="flex items-center mt-1">
+                                <div class="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                                <span class="text-xs text-gray-400">Active</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-4">Earn passive income by staking your crypto assets in supported wallets and platforms.</p>
+                    <div class="flex justify-between items-center mb-4">
+                        <div>
+                            <span class="text-xs text-gray-400">Potential Earnings</span>
+                            <p class="font-medium text-accent">5% - 20% APY</p>
+                        </div>
+                        <div>
+                            <span class="text-xs text-gray-400">Difficulty</span>
+                            <p class="font-medium">Medium</p>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center">
+                            <i class="fas fa-star text-yellow-400 mr-1"></i>
+                            <span class="text-sm">4.7</span>
+                        </div>
+                        <a href="#" class="text-secondary text-sm font-medium">View Details <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Project Card 6 -->
+                <div class="project-card rounded-xl p-6 transition">
+                    <div class="flex items-center mb-4">
+                        <img src="https://cryptologos.cc/logos/polkadot-new-dot-logo.png" alt="Polkadot" class="w-10 h-10 rounded-full mr-3">
+                        <div>
+                            <h3 class="font-bold">Referral Programs</h3>
+                            <div class="flex items-center mt-1">
+                                <div class="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                                <span class="text-xs text-gray-400">Active</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-4">Earn commissions by referring friends to crypto platforms and services.</p>
+                    <div class="flex justify-between items-center mb-4">
+                        <div>
+                            <span class="text-xs text-gray-400">Potential Earnings</span>
+                            <p class="font-medium text-accent">$5 - $100+/referral</p>
+                        </div>
+                        <div>
+                            <span class="text-xs text-gray-400">Difficulty</span>
+                            <p class="font-medium">Easy</p>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center">
+                            <i class="fas fa-star text-yellow-400 mr-1"></i>
+                            <span class="text-sm">4.4</span>
+                        </div>
+                        <a href="#" class="text-secondary text-sm font-medium">View Details <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#" class="inline-flex items-center text-secondary font-medium">
+                    View All Projects <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-16 px-6 lg:px-12 bg-darker">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-secondary font-medium">WHY CHOOSE US</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-4">Our <span class="gradient-text">Key Features</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">TTEarnCrypto provides everything you need to start earning cryptocurrency safely and efficiently.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-dark p-6 rounded-xl border border-gray-800">
+                    <div class="feature-icon mb-4">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Verified Projects</h3>
+                    <p class="text-gray-400">All listed projects undergo strict verification to ensure legitimacy and safety for our users.</p>
+                </div>
+                
+                <div class="bg-dark p-6 rounded-xl border border-gray-800">
+                    <div class="feature-icon mb-4">
+                        <i class="fas fa-sort-amount-up"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Earnings Potential</h3>
+                    <p class="text-gray-400">Each project includes estimated earnings to help you choose the most profitable options.</p>
+                </div>
+                
+                <div class="bg-dark p-6 rounded-xl border border-gray-800">
+                    <div class="feature-icon mb-4">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Real-time Alerts</h3>
+                    <p class="text-gray-400">Get notified about new earning opportunities, airdrops, and important updates.</p>
+                </div>
+                
+                <div class="bg-dark p-6 rounded-xl border border-gray-800">
+                    <div class="feature-icon mb-4">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Earnings Tracker</h3>
+                    <p class="text-gray-400">Track your earnings across different projects with our built-in dashboard.</p>
+                </div>
+                
+                <div class="bg-dark p-6 rounded-xl border border-gray-800">
+                    <div class="feature-icon mb-4">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Community Reviews</h3>
+                    <p class="text-gray-400">Read and share experiences with other users to find the best earning methods.</p>
+                </div>
+                
+                <div class="bg-dark p-6 rounded-xl border border-gray-800">
+                    <div class="feature-icon mb-4">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Mobile Friendly</h3>
+                    <p class="text-gray-400">Access our platform from any device and earn crypto on the go.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="py-16 px-6 lg:px-12">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-secondary font-medium">GET STARTED</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-4">How To <span class="gradient-text">Earn Crypto</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Follow these simple steps to start building your crypto portfolio today.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="relative">
+                    <div class="bg-dark p-8 rounded-xl border border-gray-800 h-full">
+                        <div class="absolute -top-4 -left-4 w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white font-bold">1</div>
+                        <h3 class="text-xl font-bold mb-4">Create an Account</h3>
+                        <p class="text-gray-400 mb-6">Sign up for free to access our complete directory of crypto earning projects.</p>
+                        <div class="bg-darker p-4 rounded-lg">
+                            <p class="text-sm text-gray-400">"Signed up in 2 minutes and immediately found 3 great earning opportunities!"</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative">
+                    <div class="bg-dark p-8 rounded-xl border border-gray-800 h-full">
+                        <div class="absolute -top-4 -left-4 w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white font-bold">2</div>
+                        <h3 class="text-xl font-bold mb-4">Browse Projects</h3>
+                        <p class="text-gray-400 mb-6">Filter through our verified projects by earnings potential, difficulty, and category.</p>
+                        <div class="bg-darker p-4 rounded-lg">
+                            <p class="text-sm text-gray-400">"The filtering options helped me find exactly what I was looking for."</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative">
+                    <div class="bg-dark p-8 rounded-xl border border-gray-800 h-full">
+                        <div class="absolute -top-4 -left-4 w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white font-bold">3</div>
+                        <h3 class="text-xl font-bold mb-4">Start Earning</h3>
+                        <p class="text-gray-400 mb-6">Follow the instructions for each project and begin accumulating cryptocurrency.</p>
+                        <div class="bg-darker p-4 rounded-lg">
+                            <p class="text-sm text-gray-400">"Made my first $10 in crypto within 24 hours of joining!"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-16 bg-gradient-to-r from-primary to-accent p-1 rounded-xl max-w-4xl mx-auto">
+                <div class="bg-dark rounded-xl p-8 text-center">
+                    <h3 class="text-2xl font-bold mb-4">Ready to Start Earning Crypto?</h3>
+                    <p class="text-gray-400 mb-6 max-w-2xl mx-auto">Join thousands of users who are already building their crypto portfolios with TTEarnCrypto.</p>
+                    <a href="#" class="btn-primary text-white px-8 py-3 rounded-full font-medium inline-block">Get Started Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-16 px-6 lg:px-12 bg-darker">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-secondary font-medium">HAVE QUESTIONS?</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-4">Frequently Asked <span class="gradient-text">Questions</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Find answers to common questions about earning cryptocurrency with TTEarnCrypto.</p>
+            </div>
+            
+            <div class="space-y-4">
+                <div class="faq-item bg-dark border border-gray-800 rounded-xl overflow-hidden">
+                    <button class="faq-question w-full text-left p-6 flex justify-between items-center">
+                        <span class="font-medium">Is it really possible to earn crypto for free?</span>
+                        <i class="fas fa-chevron-down text-secondary transition-transform"></i>
+                    </button>
+                    <div class="faq-answer px-6 pb-6 hidden">
+                        <p class="text-gray-400">Yes! There are many legitimate ways to earn small amounts of cryptocurrency without investment. These include faucets, microtasks, play-to-earn games, airdrops, and more. While individual earnings may be small, consistent effort can lead to significant accumulation over time.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item bg-dark border border-gray-800 rounded-xl overflow-hidden">
+                    <button class="faq-question w-full text-left p-6 flex justify-between items-center">
+                        <span class="font-medium">How do I know these projects are legitimate?</span>
+                        <i class="fas fa-chevron-down text-secondary transition-transform"></i>
+                    </button>
+                    <div class="faq-answer px-6 pb-6 hidden">
+                        <p class="text-gray-400">Our team thoroughly researches each project before listing it on our platform. We check for payment proofs, community feedback, project longevity, and other trust indicators. We also regularly update our listings to remove any projects that may become unreliable.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item bg-dark border border-gray-800 rounded-xl overflow-hidden">
+                    <button class="faq-question w-full text-left p-6 flex justify-between items-center">
+                        <span class="font-medium">What's the minimum withdrawal amount?</span>
+                        <i class="fas fa-chevron-down text-secondary transition-transform"></i>
+                    </button>
+                    <div class="faq-answer px-6 pb-6 hidden">
+                        <p class="text-gray-400">Minimum withdrawal amounts vary by project. Some faucets allow withdrawals as low as 0.00001 BTC, while other platforms might have higher minimums. Each project listing includes details about payment thresholds and methods.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item bg-dark border border-gray-800 rounded-xl overflow-hidden">
+                    <button class="faq-question w-full text-left p-6 flex justify-between items-center">
+                        <span class="font-medium">Do I need a crypto wallet to get started?</span>
+                        <i class="fas fa-chevron-down text-secondary transition-transform"></i>
+                    </button>
+                    <div class="faq-answer px-6 pb-6 hidden">
+                        <p class="text-gray-400">Yes, you'll need a cryptocurrency wallet to receive your earnings. Many projects support popular wallets like MetaMask, Trust Wallet, or FaucetPay. We provide setup guides for beginners to help you get started with crypto wallets.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item bg-dark border border-gray-800 rounded-xl overflow-hidden">
+                    <button class="faq-question w-full text-left p-6 flex justify-between items-center">
+                        <span class="font-medium">How much can I realistically earn?</span>
+                        <i class="fas fa-chevron-down text-secondary transition-transform"></i>
+                    </button>
+                    <div class="faq-answer px-6 pb-6 hidden">
+                        <p class="text-gray-400">Earnings vary based on the methods you choose and the time you invest. Beginners might earn $1-5 per day, while experienced users combining multiple methods can earn $10-20 daily or more. Passive income methods like staking can provide additional earnings over time.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <p class="text-gray-400 mb-4">Still have questions?</p>
+                <a href="#" class="inline-flex items-center text-secondary font-medium">
+                    Contact Support <i class="fas fa-envelope ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="py-16 px-6 lg:px-12">
+        <div class="max-w-4xl mx-auto bg-dark border border-gray-800 rounded-xl p-8 md:p-12">
+            <div class="text-center">
+                <h2 class="text-2xl md:text-3xl font-bold mb-4">Stay Updated on New Earning Opportunities</h2>
+                <p class="text-gray-400 mb-8 max-w-2xl mx-auto">Subscribe to our newsletter and receive weekly updates on the best new crypto earning projects.</p>
+                
+                <form class="max-w-md mx-auto">
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <input type="email" placeholder="Your email address" class="flex-1 bg-darker border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-primary">
+                        <button type="submit" class="btn-primary text-white px-6 py-3 rounded-lg font-medium">Subscribe</button>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-3">We respect your privacy. Unsubscribe at any time.</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-darker border-t border-gray-800 py-12 px-6 lg:px-12">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <a href="#" class="text-2xl font-bold gradient-text mb-4 inline-block">TTEarnCrypto</a>
+                    <p class="text-gray-400 mb-4">Your trusted directory for legitimate cryptocurrency earning opportunities.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-secondary transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-secondary transition"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-secondary transition"><i class="fab fa-discord"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-secondary transition"><i class="fab fa-reddit"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-white font-medium mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-secondary transition">Home</a></li>
+                        <li><a href="#projects" class="text-gray-400 hover:text-secondary transition">Projects</a></li>
+                        <li><a href="#features" class="text-gray-400 hover:text-secondary transition">Features</a></li>
+                        <li><a href="#how-it-works" class="text-gray-400 hover:text-secondary transition">How It Works</a></li>
+                        <li><a href="#faq" class="text-gray-400 hover:text-secondary transition">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-white font-medium mb-4">Categories</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-secondary transition">Faucets</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-secondary transition">Play-to-Earn</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-secondary transition">Airdrops</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-secondary transition">Micro Tasks</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-secondary transition">Staking</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-white font-medium mb-4">Legal</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-secondary transition">Terms of Service</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-secondary transition">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-secondary transition">Cookie Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-secondary transition">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
+                <p>&copy; 2023 TTEarnCrypto. All rights reserved.</p>
+                <p class="mt-2">Cryptocurrency earnings are subject to market risks. Past performance is not indicative of future results.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+        });
+        
+        // FAQ accordion
+        const faqItems = document.querySelectorAll('.faq-item');
+        
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            const answer = item.querySelector('.faq-answer');
+            const icon = question.querySelector('i');
+            
+            question.addEventListener('click', () => {
+                answer.classList.toggle('hidden');
+                icon.classList.toggle('rotate-180');
+                
+                // Close other open items
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.querySelector('.faq-answer').classList.add('hidden');
+                        otherItem.querySelector('.faq-question i').classList.remove('rotate-180');
+                    }
+                });
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    mobileMenu.classList.remove('open');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
