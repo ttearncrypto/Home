@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreeCrypto | Earn Free Cryptocurrency</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        crypto: {
+                            bitcoin: '#F7931A',
+                            ethereum: '#627EEA',
+                            litecoin: '#345D9D',
+                            dogecoin: '#CBAE4B',
+                            tron: '#FF060A',
+                            cardano: '#0033AD',
+                            solana: '#00FFA3',
+                            ripple: '#27A2DB',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+        .coin-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(99, 102, 241, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0); }
+        }
+        .progress-bar {
+            transition: width 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen text-gray-100">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <header class="flex flex-col md:flex-row justify-between items-center mb-12">
+            <div class="flex items-center mb-4 md:mb-0">
+                <i class="fab fa-bitcoin text-4xl text-crypto-bitcoin mr-3"></i>
+                <h1 class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-600">
+                    Free<span class="text-white">Crypto</span>
+                </h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <div class="relative">
+                    <input type="text" placeholder="Search faucets..." 
+                           class="bg-gray-800 rounded-full py-2 px-4 pl-10 focus:outline-none focus:ring-2 focus:ring-purple-500 w-64">
+                    <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                </div>
+                <button class="bg-purple-600 hover:bg-purple-700 text-white py-2 px-6 rounded-full font-medium transition-all">
+                    Connect Wallet
+                </button>
+            </div>
+        </header>
+
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+            <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 border border-gray-700">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-gray-400">Total Claims</p>
+                        <h3 class="text-2xl font-bold">12,458</h3>
+                    </div>
+                    <div class="bg-purple-600 rounded-full p-3">
+                        <i class="fas fa-coins text-white"></i>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <div class="flex justify-between text-sm text-gray-400 mb-1">
+                        <span>Today</span>
+                        <span>+328</span>
+                    </div>
+                    <div class="w-full bg-gray-700 rounded-full h-2">
+                        <div class="bg-purple-600 h-2 rounded-full progress-bar" style="width: 75%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 border border-gray-700">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-gray-400">Active Users</p>
+                        <h3 class="text-2xl font-bold">3,842</h3>
+                    </div>
+                    <div class="bg-blue-500 rounded-full p-3">
+                        <i class="fas fa-users text-white"></i>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <div class="flex justify-between text-sm text-gray-400 mb-1">
+                        <span>Online Now</span>
+                        <span>+124</span>
+                    </div>
+                    <div class="w-full bg-gray-700 rounded-full h-2">
+                        <div class="bg-blue-500 h-2 rounded-full progress-bar" style="width: 60%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 border border-gray-700">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-gray-400">Total Distributed</p>
+                        <h3 class="text-2xl font-bold">$8,742</h3>
+                    </div>
+                    <div class="bg-green-500 rounded-full p-3">
+                        <i class="fas fa-wallet text-white"></i>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <div class="flex justify-between text-sm text-gray-400 mb-1">
+                        <span>Today</span>
+                        <span>+$1,245</span>
+                    </div>
+                    <div class="w-full bg-gray-700 rounded-full h-2">
+                        <div class="bg-green-500 h-2 rounded-full progress-bar" style="width: 45%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 border border-gray-700">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-gray-400">Referral Earnings</p>
+                        <h3 class="text-2xl font-bold">$2,156</h3>
+                    </div>
+                    <div class="bg-pink-500 rounded-full p-3">
+                        <i class="fas fa-hand-holding-usd text-white"></i>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <div class="flex justify-between text-sm text-gray-400 mb-1">
+                        <span>Available</span>
+                        <span>+$328</span>
+                    </div>
+                    <div class="w-full bg-gray-700 rounded-full h-2">
+                        <div class="bg-pink-500 h-2 rounded-full progress-bar" style="width: 30%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Faucet List -->
+            <div class="lg:col-span-2">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold">Available Faucets</h2>
+                    <div class="flex space-x-2">
+                        <button class="bg-gray-700 hover:bg-gray-600 text-white py-1 px-3 rounded-md text-sm transition-all">
+                            All Coins
+                        </button>
+                        <button class="bg-gray-800 hover:bg-gray-700 text-white py-1 px-3 rounded-md text-sm transition-all">
+                            High Reward
+                        </button>
+                        <button class="bg-gray-800 hover:bg-gray-700 text-white py-1 px-3 rounded-md text-sm transition-all">
+                            Low Timer
+                        </button>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <!-- Bitcoin Faucet -->
+                    <div class="coin-card bg-gray-800 bg-opacity-50 rounded-xl p-6 border border-gray-700 transition-all duration-300 hover:border-crypto-bitcoin">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between">
+                            <div class="flex items-center mb-4 md:mb-0">
+                                <div class="bg-crypto-bitcoin rounded-full p-3 mr-4">
+                                    <i class="fab fa-bitcoin text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-lg">Bitcoin Faucet</h3>
+                                    <p class="text-gray-400 text-sm">Pays 0.000001 BTC every 60 minutes</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-col md:items-end">
+                                <span class="text-crypto-bitcoin font-bold text-xl mb-1">0.000001 BTC</span>
+                                <div class="flex items-center">
+                                    <div class="bg-gray-700 rounded-full px-3 py-1 text-sm mr-3">
+                                        <span id="btc-timer">00:59:42</span>
+                                    </div>
+                                    <button class="bg-crypto-bitcoin hover:bg-yellow-700 text-white py-2 px-6 rounded-full font-medium transition-all pulse">
+                                        Claim Now
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ethereum Faucet -->
+                    <div class="coin-card bg-gray-800 bg-opacity-50 rounded-xl p-6 border border-gray-700 transition-all duration-300 hover:border-crypto-ethereum">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between">
+                            <div class="flex items-center mb-4 md:mb-0">
+                                <div class="bg-crypto-ethereum rounded-full p-3 mr-4">
+                                    <i class="fab fa-ethereum text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-lg">Ethereum Faucet</h3>
+                                    <p class="text-gray-400 text-sm">Pays 0.0001 ETH every 30 minutes</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-col md:items-end">
+                                <span class="text-crypto-ethereum font-bold text-xl mb-1">0.0001 ETH</span>
+                                <div class="flex items-center">
+                                    <div class="bg-gray-700 rounded-full px-3 py-1 text-sm mr-3">
+                                        <span id="eth-timer">00:29:18</span>
+                                    </div>
+                                    <button class="bg-crypto-ethereum hover:bg-blue-700 text-white py-2 px-6 rounded-full font-medium transition-all">
+                                        Claim Now
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Litecoin Faucet -->
+                    <div class="coin-card bg-gray-800 bg-opacity-50 rounded-xl p-6 border border-gray-700 transition-all duration-300 hover:border-crypto-litecoin">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between">
+                            <div class="flex items-center mb-4 md:mb-0">
+                                <div class="bg-crypto-litecoin rounded-full p-3 mr-4">
+                                    <i class="fas fa-coins text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-lg">Litecoin Faucet</h3>
+                                    <p class="text-gray-400 text-sm">Pays 0.001 LTC every 15 minutes</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-col md:items-end">
+                                <span class="text-crypto-litecoin font-bold text-xl mb-1">0.001 LTC</span>
+                                <div class="flex items-center">
+                                    <div class="bg-gray-700 rounded-full px-3 py-1 text-sm mr-3">
+                                        <span id="ltc-timer">00:14:53</span>
+                                    </div>
+                                    <button class="bg-crypto-litecoin hover:bg-blue-800 text-white py-2 px-6 rounded-full font-medium transition-all">
+                                        Claim Now
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dogecoin Faucet -->
+                    <div class="coin-card bg-gray-800 bg-opacity-50 rounded-xl p-6 border border-gray-700 transition-all duration-300 hover:border-crypto-dogecoin">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between">
+                            <div class="flex items-center mb-4 md:mb-0">
+                                <div class="bg-crypto-dogecoin rounded-full p-3 mr-4">
+                                    <i class="fab fa-reddit-alien text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-lg">Dogecoin Faucet</h3>
+                                    <p class="text-gray-400 text-sm">Pays 1 DOGE every 5 minutes</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-col md:items-end">
+                                <span class="text-crypto-dogecoin font-bold text-xl mb-1">1 DOGE</span>
+                                <div class="flex items-center">
+                                    <div class="bg-gray-700 rounded-full px-3 py-1 text-sm mr-3">
+                                        <span id="doge-timer">00:04:37</span>
+                                    </div>
+                                    <button class="bg-crypto-dogecoin hover:bg-yellow-800 text-white py-2 px-6 rounded-full font-medium transition-all">
+                                        Claim Now
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tron Faucet -->
+                    <div class="coin-card bg-gray-800 bg-opacity-50 rounded-xl p-6 border border-gray-700 transition-all duration-300 hover:border-crypto-tron">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between">
+                            <div class="flex items-center mb-4 md:mb-0">
+                                <div class="bg-crypto-tron rounded-full p-3 mr-4">
+                                    <i class="fas fa-bolt text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-lg">Tron Faucet</h3>
+                                    <p class="text-gray-400 text-sm">Pays 0.5 TRX every 10 minutes</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-col md:items-end">
+                                <span class="text-crypto-tron font-bold text-xl mb-1">0.5 TRX</span>
+                                <div class="flex items-center">
+                                    <div class="bg-gray-700 rounded-full px-3 py-1 text-sm mr-3">
+                                        <span id="trx-timer">00:09:12</span>
+                                    </div>
+                                    <button class="bg-crypto-tron hover:bg-red-700 text-white py-2 px-6 rounded-full font-medium transition-all">
+                                        Claim Now
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="lg:col-span-1">
+                <!-- User Profile -->
+                <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 border border-gray-700 mb-6">
+                    <div class="flex items-center mb-6">
+                        <div class="relative">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" class="w-16 h-16 rounded-full border-2 border-purple-500">
+                            <div class="absolute bottom-0 right-0 bg-green-500 rounded-full w-4 h-4 border-2 border-gray-800"></div>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="font-bold">John Crypto</h3>
+                            <p class="text-gray-400 text-sm">Level 3 Collector</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">Total Earned:</span>
+                            <span class="font-medium">$124.75</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">Referrals:</span>
+                            <span class="font-medium">12</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">Next Bonus:</span>
+                            <span class="font-medium">5 claims</span>
+                        </div>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-gray-700">
+                        <button class="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-md font-medium transition-all">
+                            <i class="fas fa-gift mr-2"></i> Claim Daily Bonus
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 border border-gray-700 mb-6">
+                    <h3 class="font-bold mb-4 flex items-center">
+                        <i class="fas fa-chart-line mr-2 text-purple-500"></i> Quick Stats
+                    </h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between text-sm text-gray-400 mb-1">
+                                <span>BTC Claims</span>
+                                <span>24</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="bg-crypto-bitcoin h-2 rounded-full" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm text-gray-400 mb-1">
+                                <span>ETH Claims</span>
+                                <span>18</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="bg-crypto-ethereum h-2 rounded-full" style="width: 60%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm text-gray-400 mb-1">
+                                <span>DOGE Claims</span>
+                                <span>42</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="bg-crypto-dogecoin h-2 rounded-full" style="width: 90%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Referral Program -->
+                <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 border border-gray-700">
+                    <h3 class="font-bold mb-4 flex items-center">
+                        <i class="fas fa-users mr-2 text-blue-500"></i> Referral Program
+                    </h3>
+                    <p class="text-gray-400 text-sm mb-4">Earn 10% of what your referrals claim forever! Share your link below:</p>
+                    <div class="flex mb-4">
+                        <input type="text" value="https://freecrypto.xyz/ref/johncrypto" 
+                               class="bg-gray-700 rounded-l-md py-2 px-4 focus:outline-none w-full" readonly>
+                        <button class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-r-md transition-all">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                    <div class="bg-gray-900 rounded-md p-3">
+                        <div class="flex justify-between text-sm mb-1">
+                            <span class="text-gray-400">Total Earnings:</span>
+                            <span class="font-medium">$24.35</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-400">Last Payout:</span>
+                            <span class="font-medium">$8.12</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Claims -->
+        <div class="mt-12">
+            <h2 class="text-2xl font-bold mb-6">Recent Claims</h2>
+            <div class="bg-gray-800 bg-opacity-50 rounded-xl border border-gray-700 overflow-hidden">
+                <table class="min-w-full divide-y divide-gray-700">
+                    <thead class="bg-gray-900 bg-opacity-50">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">User</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Coin</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Amount</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Time</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-700">
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 h-10 w-10">
+                                        <img class="h-10 w-10 rounded-full" src="https://randomuser.me/api/portraits/women/12.jpg" alt="">
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium">SarahK</div>
+                                        <div class="text-sm text-gray-400">Level 2</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <i class="fab fa-bitcoin text-crypto-bitcoin mr-2"></i>
+                                    <span>Bitcoin</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                0.000001 BTC
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">
+                                2 minutes ago
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-900 text-green-200">
+                                    Completed
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 h-10 w-10">
+                                        <img class="h-10 w-10 rounded-full" src="https://randomuser.me/api/portraits/men/42.jpg" alt="">
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium">CryptoMax</div>
+                                        <div class="text-sm text-gray-400">Level 4</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <i class="fab fa-ethereum text-crypto-ethereum mr-2"></i>
+                                    <span>Ethereum</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                0.0001 ETH
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">
+                                5 minutes ago
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-900 text-green-200">
+                                    Completed
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 h-10 w-10">
+                                        <img class="h-10 w-10 rounded-full" src="https://randomuser.me/api/portraits/women/33.jpg" alt="">
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium">LenaC</div>
+                                        <div class="text-sm text-gray-400">Level 1</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <i class="fas fa-bolt text-crypto-tron mr-2"></i>
+                                    <span>Tron</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                0.5 TRX
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">
+                                8 minutes ago
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-900 text-yellow-200">
+                                    Pending
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 h-10 w-10">
+                                        <img class="h-10 w-10 rounded-full" src="https://randomuser.me/api/portraits/men/64.jpg" alt="">
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium">DogeMaster</div>
+                                        <div class="text-sm text-gray-400">Level 5</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <i class="fab fa-reddit-alien text-crypto-dogecoin mr-2"></i>
+                                    <span>Dogecoin</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                1 DOGE
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">
+                                12 minutes ago
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-900 text-green-200">
+                                    Completed
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-12 pt-8 border-t border-gray-800">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center mb-4 md:mb-0">
+                    <i class="fab fa-bitcoin text-2xl text-crypto-bitcoin mr-2"></i>
+                    <span class="font-medium">FreeCrypto</span>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">About</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">FAQ</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">Terms</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">Privacy</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">Contact</a>
+                </div>
+                <div class="flex space-x-4 mt-4 md:mt-0">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-discord"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-reddit"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="mt-6 text-center text-gray-500 text-sm">
+                © 2023 FreeCrypto. All rights reserved.
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Countdown timers
+        function startCountdown(elementId, minutes) {
+            let seconds = minutes * 60;
+            const countdownElement = document.getElementById(elementId);
+            
+            const interval = setInterval(() => {
+                seconds--;
+                const hrs = Math.floor(seconds / 3600);
+                const mins = Math.floor((seconds % 3600) / 60);
+                const secs = seconds % 60;
+                
+                countdownElement.textContent = `${String(hrs).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+                
+                if (seconds <= 0) {
+                    clearInterval(interval);
+                    countdownElement.textContent = "Ready!";
+                    countdownElement.parentElement.classList.add('bg-green-600');
+                    countdownElement.parentElement.classList.remove('bg-gray-700');
+                }
+            }, 1000);
+        }
+
+        // Initialize all timers
+        document.addEventListener('DOMContentLoaded', () => {
+            startCountdown('btc-timer', 60);   // 60 minutes
+            startCountdown('eth-timer', 30);   // 30 minutes
+            startCountdown('ltc-timer', 15);   // 15 minutes
+            startCountdown('doge-timer', 5);   // 5 minutes
+            startCountdown('trx-timer', 10);   // 10 minutes
+
+            // Simulate progress bar animation
+            setTimeout(() => {
+                document.querySelectorAll('.progress-bar').forEach(bar => {
+                    const randomWidth = Math.floor(Math.random() * 30) + 20;
+                    bar.style.width = `${randomWidth}%`;
+                });
+            }, 500);
+        });
+
+        // Claim button functionality
+        document.querySelectorAll('.coin-card button').forEach(button => {
+            button.addEventListener('click', function() {
+                const card = this.closest('.coin-card');
+                const coinName = card.querySelector('h3').textContent;
+                
+                // Pulse animation
+                this.classList.add('animate-ping');
+                setTimeout(() => {
+                    this.classList.remove('animate-ping');
+                }, 300);
+                
+                // Show success message
+                alert(`Successfully claimed from ${coinName}!`);
+            });
+        });
+    </script>
+</body>
+</html>

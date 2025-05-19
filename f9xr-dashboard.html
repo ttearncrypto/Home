@@ -1,0 +1,2138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F9XR Dashboard - Modern UI</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&family=Lato:wght@300;400;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        /* --- Base & Reset --- */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html {
+            font-size: 16px;
+            line-height: 1.6;
+            height: 100%;
+            overflow: hidden;
+            font-family: var(--f9xr-font-family, 'Poppins', sans-serif);
+            background-color: #111827; /* Fallback background */
+        }
+
+        body {
+            height: 100%;
+            overflow: hidden;
+            background-color: transparent; /* Let container handle background */
+        }
+
+        /* --- CSS Variables --- */
+        :root { /* Define variables on root for global access */
+            /* Spacing */
+            --f9xr-space-xxs: 0.25rem; /* 4px */
+            --f9xr-space-xs: 0.5rem;   /* 8px */
+            --f9xr-space-sm: 0.75rem;  /* 12px */
+            --f9xr-space-md: 1rem;     /* 16px */
+            --f9xr-space-lg: 1.5rem;   /* 24px */
+            --f9xr-space-xl: 2rem;     /* 32px */
+            --f9xr-space-xxl: 3rem;    /* 48px */
+
+            /* Borders */
+            --f9xr-border-radius-sm: 6px;  /* Slightly more rounded */
+            --f9xr-border-radius-md: 10px;
+            --f9xr-border-radius-lg: 16px;
+            --f9xr-border-width: 1px;
+
+             /* Transitions */
+            --f9xr-transition-fast: 0.2s ease-in-out;
+            --f9xr-transition-medium: 0.35s ease-in-out; /* Slightly slower for smoother feel */
+            --f9xr-transition-slow: 0.5s ease-in-out;
+
+             /* Sidebar */
+             --f9xr-sidebar-width: 280px;
+             --f9xr-sidebar-collapsed-width: 75px; /* Slightly wider collapsed */
+             --f9xr-sidebar-item-vertical-padding: var(--f9xr-space-sm);
+
+            /* Fonts */
+            --f9xr-font-family: 'Poppins', sans-serif;
+            --f9xr-base-font-size: 1rem;
+
+            /* Glassmorphism */
+            --f9xr-blur-intensity-light: 8px;
+            --f9xr-blur-intensity-medium: 12px;
+            --f9xr-blur-intensity-heavy: 18px;
+
+            /* Animation */
+            --f9xr-animation-float: f9xr-float 6s ease-in-out infinite alternate;
+        }
+
+        /* --- Light Theme Variables --- */
+        .f9xr-light-theme {
+            --f9xr-bg-primary-opaque: #ffffff;
+            --f9xr-bg-secondary-opaque: #f9fafb;
+            --f9xr-bg-tertiary-opaque: #f3f4f6;
+
+            --f9xr-bg-primary: rgba(255, 255, 255, 0.5); /* Glass */
+            --f9xr-bg-secondary: rgba(249, 250, 251, 0.6); /* Lighter Glass */
+            --f9xr-bg-tertiary: rgba(243, 244, 246, 0.7);
+            --f9xr-text-primary: #1f2937;
+            --f9xr-text-secondary: #4b5563;
+            --f9xr-text-muted: #6b7280;
+            --f9xr-accent-primary: #3b82f6; /* Brighter Blue */
+            --f9xr-accent-secondary: #10b981; /* Brighter Emerald */
+            --f9xr-border-color: rgba(0, 0, 0, 0.1);
+            --f9xr-glass-border-color: rgba(255, 255, 255, 0.4); /* Light border for glass */
+            --f9xr-card-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.05), 0 4px 8px -2px rgba(0, 0, 0, 0.04);
+            --f9xr-card-hover-shadow: 0 12px 20px -4px rgba(0, 0, 0, 0.1), 0 8px 10px -4px rgba(0, 0, 0, 0.08);
+            --f9xr-gradient-vibrant-bg: linear-gradient(145deg, #e0f2fe 0%, #fce7f3 100%); /* Light pastel gradient */
+            --f9xr-gradient-header: linear-gradient(to right, rgba(255, 255, 255, 0.7), rgba(249, 250, 251, 0.5));
+            --f9xr-hr-color: linear-gradient(to right, transparent, var(--f9xr-border-color), transparent);
+            --f9xr-iframe-bg: var(--f9xr-bg-tertiary-opaque); /* More opaque for content */
+            --f9xr-loader-dot-color: var(--f9xr-accent-primary);
+            --f9xr-scrollbar-thumb: #cbd5e1;
+            --f9xr-scrollbar-thumb-hover: #94a3b8;
+            --f9xr-sidebar-bg: rgba(255, 255, 255, 0.35);
+            --f9xr-sidebar-item-hover-bg: rgba(0, 0, 0, 0.05);
+            --f9xr-sidebar-item-active-bg: rgba(59, 130, 246, 0.15);
+            --f9xr-input-bg: rgba(255, 255, 255, 0.7);
+            --f9xr-input-border: rgba(0, 0, 0, 0.1);
+            --f9xr-input-focus-border: var(--f9xr-accent-primary);
+            --f9xr-input-focus-shadow: rgba(59, 130, 246, 0.2);
+            --f9xr-settings-bg: rgba(255, 255, 255, 0.7);
+            --f9xr-particle-color: '#cbd5e1'; /* JS needs string */
+            --f9xr-particle-link-color: '#94a3b8';
+        }
+
+        /* --- Dark Theme Variables (Default) --- */
+        :root, .f9xr-dark-theme {
+             --f9xr-bg-primary-opaque: #111827;
+             --f9xr-bg-secondary-opaque: #1f2937;
+             --f9xr-bg-tertiary-opaque: #374151;
+
+            --f9xr-bg-primary: rgba(17, 24, 39, 0.5); /* Dark Glass */
+            --f9xr-bg-secondary: rgba(31, 41, 55, 0.6); /* Darker Glass */
+            --f9xr-bg-tertiary: rgba(55, 65, 81, 0.7);
+            --f9xr-text-primary: #f9fafb;
+            --f9xr-text-secondary: #d1d5db;
+            --f9xr-text-muted: #9ca3af;
+            --f9xr-accent-primary: #60a5fa;
+            --f9xr-accent-secondary: #34d399;
+            --f9xr-border-color: rgba(255, 255, 255, 0.1);
+            --f9xr-glass-border-color: rgba(255, 255, 255, 0.15); /* Light border for dark glass */
+            --f9xr-card-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.15), 0 4px 8px -2px rgba(0, 0, 0, 0.1);
+            --f9xr-card-hover-shadow: 0 12px 20px -4px rgba(0, 0, 0, 0.25), 0 8px 10px -4px rgba(0, 0, 0, 0.2);
+            --f9xr-gradient-vibrant-bg: linear-gradient(145deg, #1e3a8a 0%, #4a044e 100%); /* Dark vibrant gradient */
+            --f9xr-gradient-header: linear-gradient(to right, rgba(17, 24, 39, 0.6), rgba(31, 41, 55, 0.4));
+            --f9xr-gradient-accent: linear-gradient(90deg, var(--f9xr-accent-primary), var(--f9xr-accent-secondary));
+            --f9xr-hr-color: linear-gradient(to right, transparent, var(--f9xr-border-color), transparent);
+            --f9xr-iframe-bg: var(--f9xr-bg-secondary-opaque); /* More opaque */
+            --f9xr-loader-dot-color: var(--f9xr-accent-primary);
+            --f9xr-scrollbar-thumb: var(--f9xr-bg-tertiary);
+            --f9xr-scrollbar-thumb-hover: var(--f9xr-text-muted);
+            --f9xr-sidebar-bg: rgba(17, 24, 39, 0.4); /* More transparent */
+            --f9xr-sidebar-item-hover-bg: rgba(255, 255, 255, 0.08);
+            --f9xr-sidebar-item-active-bg: rgba(96, 165, 250, 0.15);
+            --f9xr-input-bg: rgba(31, 41, 55, 0.7);
+            --f9xr-input-border: rgba(255, 255, 255, 0.1);
+            --f9xr-input-focus-border: var(--f9xr-accent-primary);
+            --f9xr-input-focus-shadow: rgba(96, 165, 250, 0.3);
+            --f9xr-settings-bg: rgba(31, 41, 55, 0.7);
+            --f9xr-particle-color: '#4b5563';
+            --f9xr-particle-link-color: '#6b7280';
+        }
+
+        /* --- Animated Background & Floating Shapes --- */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1; /* Behind everything */
+            background: var(--f9xr-gradient-vibrant-bg);
+        }
+
+        @keyframes f9xr-float {
+            0% { transform: translateY(0px) rotate(0deg); opacity: 0.3; }
+            50% { transform: translateY(-20px) rotate(10deg); opacity: 0.6; }
+            100% { transform: translateY(0px) rotate(0deg); opacity: 0.3; }
+        }
+
+        .f9xr-floating-shape {
+            position: fixed;
+            z-index: -1;
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; /* Blob shape */
+            background: var(--f9xr-accent-primary);
+            animation: var(--f9xr-animation-float);
+            filter: blur(30px); /* Soften the shape */
+            opacity: 0.4; /* Start subtle */
+        }
+
+        .f9xr-floating-shape.shape1 {
+            width: 250px; height: 250px;
+            top: 10%; left: 5%;
+            background: var(--f9xr-accent-secondary);
+            animation-duration: 7s;
+        }
+        .f9xr-floating-shape.shape2 {
+            width: 180px; height: 180px;
+            bottom: 15%; right: 10%;
+            background: var(--f9xr-accent-primary);
+            animation-duration: 5s;
+            animation-delay: 1s;
+        }
+         .f9xr-floating-shape.shape3 { /* Add more if desired */
+            width: 120px; height: 120px;
+            top: 60%; left: 20%;
+            background: #facc15; /* Example color */
+            animation-duration: 8s;
+            animation-delay: 0.5s;
+        }
+
+
+        /* Apply base styles */
+        .f9xr-dashboard-container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            width: 100%;
+            /* Background managed by #particles-js */
+            color: var(--f9xr-text-primary);
+            overflow: hidden;
+            position: relative; /* For absolute elements like shapes */
+            font-family: var(--f9xr-font-family);
+            font-size: var(--f9xr-base-font-size, 1rem);
+            /* Main container isn't glass itself, but contains glass elements */
+        }
+
+
+        /* --- Header --- */
+        .f9xr-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--f9xr-space-sm) var(--f9xr-space-lg);
+            background: var(--f9xr-gradient-header);
+            backdrop-filter: blur(var(--f9xr-blur-intensity-medium));
+            -webkit-backdrop-filter: blur(var(--f9xr-blur-intensity-medium));
+            border-bottom: var(--f9xr-border-width) solid var(--f9xr-glass-border-color); /* Glass border */
+            flex-shrink: 0;
+            gap: var(--f9xr-space-md);
+            position: relative; /* For z-index if needed */
+            z-index: 10;
+        }
+        /* ... (header left/logo styles remain similar) */
+        .f9xr-header-logo {
+            font-size: 1.4rem; font-weight: 700;
+            display: flex; align-items: center; gap: var(--f9xr-space-xs);
+            color: var(--f9xr-text-primary); text-decoration: none; flex-shrink: 0;
+            transition: color var(--f9xr-transition-fast);
+        }
+        .f9xr-header-logo:hover { color: var(--f9xr-accent-primary); }
+        .f9xr-header-logo i { color: var(--f9xr-accent-primary); font-size: 1.3rem; }
+
+        /* Enhanced Search Bar */
+        .f9xr-header-search {
+            position: relative;
+            flex-grow: 1;
+            max-width: 550px; /* Made larger */
+        }
+        .f9xr-header-search-input {
+            width: 100%;
+            padding: var(--f9xr-space-sm) var(--f9xr-space-xxl) var(--f9xr-space-sm) calc(var(--f9xr-space-md) + var(--f9xr-space-lg)); /* Space for icon and clear button */
+            border-radius: var(--f9xr-border-radius-md);
+            border: var(--f9xr-border-width) solid var(--f9xr-input-border);
+            background-color: var(--f9xr-input-bg);
+            color: var(--f9xr-text-primary);
+            font-size: 1rem; /* Slightly larger font */
+            transition: all var(--f9xr-transition-fast);
+            backdrop-filter: blur(var(--f9xr-blur-intensity-light));
+            -webkit-backdrop-filter: blur(var(--f9xr-blur-intensity-light));
+        }
+        .f9xr-header-search-input:focus {
+            outline: none;
+            border-color: var(--f9xr-input-focus-border);
+            box-shadow: 0 0 0 3px var(--f9xr-input-focus-shadow);
+            background-color: var(--f9xr-bg-secondary); /* Slightly change bg on focus */
+        }
+        .f9xr-header-search-input::placeholder {
+            color: var(--f9xr-text-muted);
+            opacity: 0.8;
+        }
+        .f9xr-header-search .fa-search { /* Search Icon */
+            position: absolute;
+            left: var(--f9xr-space-md);
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--f9xr-text-muted);
+            font-size: 1rem;
+            pointer-events: none;
+        }
+        .f9xr-search-clear-btn { /* Clear Button */
+            position: absolute;
+            right: var(--f9xr-space-sm);
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--f9xr-text-muted);
+            font-size: 1.3rem; /* Larger clear icon */
+            cursor: pointer;
+            padding: var(--f9xr-space-xs);
+            line-height: 1;
+            transition: color var(--f9xr-transition-fast), opacity var(--f9xr-transition-fast);
+            opacity: 0.7;
+        }
+        .f9xr-search-clear-btn:hover {
+            color: var(--f9xr-text-primary);
+            opacity: 1;
+        }
+         .f9xr-search-clear-btn.f9xr-hidden {
+             opacity: 0;
+             pointer-events: none;
+         }
+
+        /* ... (header right/buttons remain similar) */
+        .f9xr-settings-toggle-btn, .f9xr-nav-toggle {
+            background: none; border: none;
+            color: var(--f9xr-text-secondary);
+            font-size: 1.5rem; /* Slightly larger icons */
+            cursor: pointer;
+            padding: var(--f9xr-space-xxs);
+            transition: color var(--f9xr-transition-fast), transform var(--f9xr-transition-fast);
+            border-radius: 50%; /* Round hover effect */
+            width: 40px; height: 40px; display: inline-flex; justify-content: center; align-items: center;
+        }
+        .f9xr-settings-toggle-btn:hover, .f9xr-nav-toggle:hover {
+             color: var(--f9xr-text-primary);
+             background-color: var(--f9xr-sidebar-item-hover-bg); /* Use consistent hover */
+             transform: scale(1.1);
+        }
+        .f9xr-nav-toggle { display: none; }
+
+        /* --- Main Content Area --- */
+        .f9xr-main-content {
+            display: flex;
+            flex-grow: 1;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* --- Sidebar --- */
+        .f9xr-sidebar {
+            width: var(--f9xr-sidebar-width);
+            background: var(--f9xr-sidebar-bg);
+            backdrop-filter: blur(var(--f9xr-blur-intensity-heavy));
+            -webkit-backdrop-filter: blur(var(--f9xr-blur-intensity-heavy));
+            padding: var(--f9xr-space-lg) 0;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: width var(--f9xr-transition-medium), transform var(--f9xr-transition-medium);
+            border-right: var(--f9xr-border-width) solid var(--f9xr-glass-border-color); /* Glass border */
+            flex-shrink: 0;
+            position: relative;
+            z-index: 5;
+        }
+        /* ... (sidebar-inner, scrollbar, section-title remain similar) */
+        .f9xr-sidebar-inner {
+             padding: 0 var(--f9xr-space-md);
+             overflow-y: auto; overflow-x: hidden; height: 100%;
+             display: flex; flex-direction: column; gap: var(--f9xr-space-md);
+         }
+         .f9xr-sidebar-inner::-webkit-scrollbar { width: 6px; }
+         .f9xr-sidebar-inner::-webkit-scrollbar-track { background: transparent; }
+         .f9xr-sidebar-inner::-webkit-scrollbar-thumb { background: var(--f9xr-scrollbar-thumb); border-radius: 3px; }
+         .f9xr-sidebar-inner::-webkit-scrollbar-thumb:hover { background: var(--f9xr-scrollbar-thumb-hover); }
+
+         .f9xr-sidebar-section-title {
+             font-size: 0.8rem; font-weight: 600; color: var(--f9xr-text-muted);
+             padding: 0 var(--f9xr-space-xs) var(--f9xr-space-xs) var(--f9xr-space-xs);
+             margin-top: var(--f9xr-space-lg); margin-bottom: var(--f9xr-space-xs);
+             /* border-bottom: var(--f9xr-border-width) solid var(--f9xr-border-color); */
+             text-transform: uppercase; letter-spacing: 1px; white-space: nowrap;
+             opacity: 0.8;
+         }
+         .f9xr-sidebar-section-title:first-of-type { margin-top: 0;}
+
+        /* Enhanced Sidebar Links */
+        .f9xr-sidebar-nav-link {
+            display: flex; align-items: center;
+            gap: var(--f9xr-space-md);
+            padding: var(--f9xr-sidebar-item-vertical-padding) var(--f9xr-space-md);
+            border-radius: var(--f9xr-border-radius-md); /* Smoother radius */
+            cursor: pointer; transition: all var(--f9xr-transition-fast);
+            font-size: 0.95rem; color: var(--f9xr-text-secondary);
+            text-decoration: none; white-space: nowrap;
+            overflow: hidden; position: relative; /* For active indicator */
+        }
+        .f9xr-sidebar-nav-link::before { /* Active indicator */
+            content: '';
+            position: absolute;
+            left: 0; top: 50%; transform: translateY(-50%) scaleX(0);
+            width: 4px; height: 60%;
+            background: var(--f9xr-accent-primary);
+            border-radius: 0 4px 4px 0;
+            transition: transform var(--f9xr-transition-medium);
+            transform-origin: left;
+        }
+        .f9xr-sidebar-nav-link:hover {
+            background-color: var(--f9xr-sidebar-item-hover-bg);
+            color: var(--f9xr-text-primary);
+            transform: translateX(5px);
+        }
+        .f9xr-sidebar-nav-link.f9xr-active-section {
+            background-color: var(--f9xr-sidebar-item-active-bg);
+            color: var(--f9xr-accent-primary); font-weight: 600;
+        }
+         .f9xr-sidebar-nav-link.f9xr-active-section::before {
+            transform: translateY(-50%) scaleX(1);
+        }
+        .f9xr-sidebar-nav-link i {
+             width: 22px; /* Slightly larger icon area */
+             text-align: center; flex-shrink: 0; font-size: 1.15em;
+             transition: color var(--f9xr-transition-fast);
+             color: var(--f9xr-text-muted);
+             z-index: 1; /* Keep icon above potential background effects */
+         }
+         .f9xr-sidebar-nav-link:hover i,
+         .f9xr-sidebar-nav-link.f9xr-active-section i { color: var(--f9xr-accent-primary); }
+         .f9xr-sidebar-nav-link .f9xr-link-text {
+            opacity: 1; transition: opacity var(--f9xr-transition-fast) ease;
+            margin-left: var(--f9xr-space-xs);
+            z-index: 1;
+         }
+
+
+        /* ... (Filter styles remain similar, maybe adjust radius/padding slightly) ... */
+        .f9xr-filter-container { margin-bottom: var(--f9xr-space-md); }
+        .f9xr-filter-header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: var(--f9xr-space-sm) var(--f9xr-space-xs);
+            cursor: pointer; border-radius: var(--f9xr-border-radius-sm);
+            transition: background-color var(--f9xr-transition-fast);
+            margin-bottom: var(--f9xr-space-xs);
+        }
+        .f9xr-filter-header:hover { background-color: var(--f9xr-sidebar-item-hover-bg); }
+        .f9xr-filter-title { font-size: 0.9rem; font-weight: 500; color: var(--f9xr-text-secondary); display: flex; align-items: center; gap: var(--f9xr-space-sm); white-space: nowrap; }
+        .f9xr-filter-toggle-icon { transition: transform var(--f9xr-transition-medium); font-size: 0.8rem; color: var(--f9xr-text-muted); }
+        .f9xr-filter-container.f9xr-collapsed .f9xr-filter-toggle-icon { transform: rotate(-90deg); }
+        .f9xr-filter-categories { display: flex; flex-direction: column; gap: var(--f9xr-space-xxs); max-height: 200px; overflow-y: auto; padding: 0 var(--f9xr-space-xs) 0 var(--f9xr-space-sm); transition: max-height var(--f9xr-transition-medium) ease-in-out, padding var(--f9xr-transition-medium) ease-in-out; }
+        .f9xr-filter-container.f9xr-collapsed .f9xr-filter-categories { max-height: 0; padding-top: 0; padding-bottom: 0; overflow: hidden; }
+        .f9xr-filter-categories::-webkit-scrollbar { width: 4px; }
+        .f9xr-filter-categories::-webkit-scrollbar-track { background: transparent; }
+        .f9xr-filter-categories::-webkit-scrollbar-thumb { background: var(--f9xr-scrollbar-thumb); border-radius: 2px; }
+        .f9xr-filter-categories::-webkit-scrollbar-thumb:hover { background: var(--f9xr-scrollbar-thumb-hover); }
+        .f9xr-category-filter-item label { display: flex; align-items: center; cursor: pointer; padding: var(--f9xr-space-xs) var(--f9xr-space-sm); border-radius: var(--f9xr-border-radius-sm); transition: background-color var(--f9xr-transition-fast); font-size: 0.85rem; color: var(--f9xr-text-secondary); gap: var(--f9xr-space-sm); white-space: nowrap; }
+        .f9xr-category-filter-item input[type="checkbox"] { appearance: none; -webkit-appearance: none; width: 16px; height: 16px; border: 1.5px solid var(--f9xr-text-muted); border-radius: var(--f9xr-border-radius-sm); cursor: pointer; position: relative; flex-shrink: 0; background-color: transparent; transition: all var(--f9xr-transition-fast); display: grid; place-content: center; }
+        .f9xr-category-filter-item input[type="checkbox"]::before { content: ''; width: 9px; height: 9px; background-color: var(--f9xr-bg-secondary); clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%); transform: scale(0); transition: transform 120ms ease-in-out; }
+        .f9xr-category-filter-item input[type="checkbox"]:checked { background-color: var(--f9xr-accent-primary); border-color: var(--f9xr-accent-primary); }
+        .f9xr-category-filter-item input[type="checkbox"]:checked::before { transform: scale(1); }
+        .f9xr-category-filter-item label:hover { background-color: var(--f9xr-sidebar-item-hover-bg); }
+        .f9xr-reset-button { display: flex; align-items: center; justify-content: center; gap: var(--f9xr-space-xs); width: 100%; padding: var(--f9xr-space-sm); margin-top: var(--f9xr-space-md); border: var(--f9xr-border-width) solid var(--f9xr-border-color); background: transparent; color: var(--f9xr-text-muted); border-radius: var(--f9xr-border-radius-md); cursor: pointer; transition: all var(--f9xr-transition-fast); font-size: 0.9rem; white-space: nowrap; }
+        .f9xr-reset-button:hover { background-color: var(--f9xr-sidebar-item-hover-bg); color: var(--f9xr-text-secondary); border-color: var(--f9xr-text-muted); transform: translateY(-2px); box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .f9xr-reset-button i { margin-right: var(--f9xr-space-xs); }
+
+        /* ... (Project List styles remain similar, maybe adjust radius/padding slightly) ... */
+        .f9xr-project-list { flex-grow: 1; overflow-y: auto; overflow-x: hidden; padding-right: var(--f9xr-space-xxs); }
+        .f9xr-project-list::-webkit-scrollbar { width: 4px; }
+        .f9xr-project-list::-webkit-scrollbar-track { background: transparent; }
+        .f9xr-project-list::-webkit-scrollbar-thumb { background: var(--f9xr-scrollbar-thumb); border-radius: 2px; }
+        .f9xr-project-list::-webkit-scrollbar-thumb:hover { background: var(--f9xr-scrollbar-thumb-hover); }
+        .f9xr-category-container { margin-bottom: var(--f9xr-space-xs); }
+        .f9xr-category-header { display: flex; justify-content: space-between; align-items: center; padding: var(--f9xr-space-sm) var(--f9xr-space-xs); cursor: pointer; border-radius: var(--f9xr-border-radius-sm); transition: background-color var(--f9xr-transition-fast); margin-bottom: var(--f9xr-space-xxs); white-space: nowrap; }
+        .f9xr-category-header:hover { background-color: var(--f9xr-sidebar-item-hover-bg); }
+        .f9xr-category-title { font-weight: 500; font-size: 0.9rem; color: var(--f9xr-text-secondary); display: flex; align-items: center; gap: var(--f9xr-space-sm); overflow: hidden; text-overflow: ellipsis; }
+        .f9xr-category-title i { color: var(--f9xr-text-muted); font-size: 0.85rem; flex-shrink: 0; }
+        .f9xr-category-toggle-icon { transition: transform var(--f9xr-transition-medium); font-size: 0.8rem; color: var(--f9xr-text-muted); flex-shrink: 0; }
+        .f9xr-category-header.f9xr-collapsed .f9xr-category-toggle-icon { transform: rotate(-90deg); }
+        .f9xr-category-projects { padding-left: var(--f9xr-space-md); max-height: 500px; overflow: hidden; transition: max-height var(--f9xr-transition-slow) ease-in-out; }
+        .f9xr-category-projects.f9xr-collapsed { max-height: 0; }
+        .f9xr-project-item { display: block; padding: var(--f9xr-sidebar-item-vertical-padding) var(--f9xr-space-md); margin-bottom: var(--f9xr-space-xxs); border-radius: var(--f9xr-border-radius-md); cursor: pointer; transition: all var(--f9xr-transition-fast); font-size: 0.9rem; color: var(--f9xr-text-secondary); background-color: transparent; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .f9xr-project-item:hover { background-color: var(--f9xr-sidebar-item-hover-bg); color: var(--f9xr-text-primary); transform: translateX(4px); }
+        .f9xr-project-item.f9xr-active-project { background-color: var(--f9xr-sidebar-item-active-bg); color: var(--f9xr-accent-primary); font-weight: 500; }
+        .f9xr-project-item.f9xr-highlight { background-color: rgba(96, 165, 250, 0.2); }
+
+         /* --- Sidebar Collapse Button (Enhanced) --- */
+         .f9xr-sidebar-collapse-btn {
+             position: absolute;
+             bottom: var(--f9xr-space-lg); /* Raise slightly */
+             right: 0; /* Align with edge */
+             transform: translateX(50%); /* Position halfway over the edge */
+             background-color: var(--f9xr-bg-tertiary);
+             color: var(--f9xr-text-muted);
+             border: var(--f9xr-border-width) solid var(--f9xr-border-color);
+             border-radius: 50%;
+             width: 36px; /* Larger */
+             height: 36px;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             cursor: pointer;
+             z-index: 10;
+             transition: all var(--f9xr-transition-medium);
+             box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+             backdrop-filter: blur(5px);
+             -webkit-backdrop-filter: blur(5px);
+         }
+          .f9xr-sidebar-collapse-btn:hover {
+             background-color: var(--f9xr-accent-primary);
+             color: var(--f9xr-bg-primary-opaque); /* Opaque color for better contrast */
+             border-color: var(--f9xr-accent-primary);
+             transform: translateX(50%) scale(1.15) rotate(360deg); /* Add rotate */
+         }
+         .f9xr-sidebar-collapse-btn i { transition: transform var(--f9xr-transition-medium); font-size: 1rem; }
+
+
+        /* Sidebar Collapsed State */
+        .f9xr-sidebar.f9xr-sidebar-collapsed {
+            width: var(--f9xr-sidebar-collapsed-width);
+        }
+         .f9xr-sidebar.f9xr-sidebar-collapsed .f9xr-sidebar-inner {
+             padding: 0 var(--f9xr-space-sm); align-items: center;
+         }
+        /* ... (Elements to hide when collapsed remain the same) ... */
+        .f9xr-sidebar.f9xr-sidebar-collapsed .f9xr-sidebar-section-title,
+        .f9xr-sidebar.f9xr-sidebar-collapsed .f9xr-link-text,
+        .f9xr-sidebar.f9xr-sidebar-collapsed .f9xr-filter-title span,
+        .f9xr-sidebar.f9xr-sidebar-collapsed .f9xr-filter-toggle-icon,
+        .f9xr-sidebar.f9xr-sidebar-collapsed .f9xr-category-title span,
+        .f9xr-sidebar.f9xr-sidebar-collapsed .f9xr-category-toggle-icon,
+        .f9xr-sidebar.f9xr-sidebar-collapsed .f9xr-reset-button span,
+         .f9xr-sidebar.f9xr-sidebar-collapsed .f9xr-category-filter-item label span,
+         .f9xr-sidebar.f9xr-sidebar-collapsed .f9xr-project-item {
+            opacity: 0; width: 0; overflow: hidden; display: none;
+        }
+         .f9xr-sidebar.f9xr-sidebar-collapsed .f9xr-sidebar-nav-link,
+         .f9xr-sidebar.f9xr-sidebar-collapsed .f9xr-filter-header,
+         .f9xr-sidebar.f9xr-sidebar-collapsed .f9xr-category-header,
+         .f9xr-sidebar.f9xr-sidebar-collapsed .f9xr-reset-button {
+             justify-content: center; padding: var(--f9xr-sidebar-item-vertical-padding) var(--f9xr-space-xs);
+         }
+         .f9xr-sidebar.f9xr-sidebar-collapsed .f9xr-filter-header { cursor: default; }
+         .f9xr-sidebar.f9xr-sidebar-collapsed .f9xr-filter-categories { max-height: 0; padding: 0; }
+         .f9xr-sidebar.f9xr-sidebar-collapsed .f9xr-sidebar-collapse-btn {
+             right: 50%; transform: translateX(50%);
+         }
+         .f9xr-sidebar.f9xr-sidebar-collapsed .f9xr-sidebar-collapse-btn i { transform: rotate(180deg); }
+         .f9xr-sidebar.f9xr-sidebar-collapsed .f9xr-sidebar-collapse-btn:hover {
+             transform: translateX(50%) scale(1.15) rotate(180deg); /* Keep rotated on hover */
+         }
+
+
+        /* --- Resizer Handle --- */
+        .f9xr-resizer {
+            width: 6px; /* Slightly thicker */
+            background-color: transparent;
+            cursor: col-resize; flex-shrink: 0; position: relative; z-index: 6; /* Above sidebar */
+            transition: background-color var(--f9xr-transition-fast);
+        }
+        .f9xr-resizer:hover, .f9xr-resizer.f9xr-resizing {
+             background-color: var(--f9xr-accent-primary); /* Show on hover/drag */
+             opacity: 0.7;
+        }
+        .f9xr-resizer::before { content: ''; position: absolute; top: 0; bottom: 0; left: -7px; width: 20px; cursor: col-resize; }
+
+
+        /* --- Main View Area --- */
+        .f9xr-main-view {
+            flex-grow: 1;
+            /* Background is handled by container/particles */
+            background: transparent; /* Make transparent */
+            overflow-y: auto; overflow-x: hidden;
+            padding: var(--f9xr-space-xl);
+            position: relative; /* For loader positioning */
+            z-index: 1; /* Above particles/shapes */
+        }
+         /* Scrollbar */
+        .f9xr-main-view::-webkit-scrollbar { width: 8px; }
+        .f9xr-main-view::-webkit-scrollbar-track { background: transparent; }
+        .f9xr-main-view::-webkit-scrollbar-thumb { background: var(--f9xr-scrollbar-thumb); border-radius: 4px; }
+        .f9xr-main-view::-webkit-scrollbar-thumb:hover { background: var(--f9xr-scrollbar-thumb-hover); }
+
+
+        /* --- Content Section & Cards --- */
+        .f9xr-content-section { margin-bottom: var(--f9xr-space-xxl); }
+        .f9xr-dashboard-header { /* Enhanced Header */
+            margin-bottom: var(--f9xr-space-xl);
+            padding: var(--f9xr-space-lg) var(--f9xr-space-xl); /* More padding */
+            border-radius: var(--f9xr-border-radius-lg);
+            background: rgba(0,0,0, 0.1); /* Subtle dark overlay */
+            border: 1px solid var(--f9xr-glass-border-color);
+            backdrop-filter: blur(var(--f9xr-blur-intensity-light));
+            -webkit-backdrop-filter: blur(var(--f9xr-blur-intensity-light));
+            color: var(--f9xr-text-primary);
+             text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+         .f9xr-dashboard-header h1 {
+             font-size: 2.5rem; /* Larger */
+             font-weight: 700;
+             margin-bottom: var(--f9xr-space-sm);
+         }
+         .f9xr-dashboard-header p {
+             color: var(--f9xr-text-secondary);
+             font-size: 1.1rem;
+             max-width: 800px; /* Limit width */
+         }
+         .f9xr-quick-start-guide { /* New Quick Start Section */
+             margin-top: var(--f9xr-space-xl);
+             margin-bottom: var(--f9xr-space-xl);
+         }
+
+        .f9xr-grid-container {
+             display: grid;
+             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjust min width */
+             gap: var(--f9xr-space-xl); /* Increased gap */
+         }
+         .f9xr-section-subheader { /* Enhanced Subheader */
+             font-size: 1.8rem; /* Larger */
+             font-weight: 600;
+             color: var(--f9xr-text-primary);
+             margin-top: var(--f9xr-space-xxl); /* More spacing */
+             margin-bottom: var(--f9xr-space-lg);
+             display: flex;
+             align-items: center;
+             gap: var(--f9xr-space-md);
+             padding-bottom: var(--f9xr-space-sm);
+             border-bottom: 1px solid var(--f9xr-glass-border-color);
+             opacity: 0.9;
+         }
+         .f9xr-section-subheader i {
+             color: var(--f9xr-accent-secondary);
+             font-size: 1.5rem; /* Larger icon */
+             background: var(--f9xr-gradient-accent);
+             -webkit-background-clip: text;
+             -webkit-text-fill-color: transparent;
+             background-clip: text;
+             text-fill-color: transparent;
+          }
+
+        /* Modern Card Style */
+        .f9xr-card {
+            background-color: var(--f9xr-bg-secondary); /* Use glass background */
+            backdrop-filter: blur(var(--f9xr-blur-intensity-medium));
+            -webkit-backdrop-filter: blur(var(--f9xr-blur-intensity-medium));
+            border-radius: var(--f9xr-border-radius-lg);
+            padding: var(--f9xr-space-xl); /* More padding */
+            box-shadow: var(--f9xr-card-shadow);
+            border: var(--f9xr-border-width) solid var(--f9xr-glass-border-color);
+            transition: transform var(--f9xr-transition-medium), box-shadow var(--f9xr-transition-medium);
+            transform-style: preserve-3d;
+            overflow: hidden; /* Contain potential pseudo-elements */
+            position: relative;
+        }
+        .f9xr-card::before { /* Subtle gradient overlay on card */
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 50%);
+            opacity: 0.5;
+            pointer-events: none;
+            transition: opacity var(--f9xr-transition-medium);
+            z-index: 0;
+        }
+        .f9xr-card:hover::before {
+            opacity: 0.8;
+        }
+        .f9xr-card:hover {
+            /* Enhanced 3D Effect */
+            transform: perspective(1200px) rotateY(var(--f9xr-rotate-y, 2deg)) rotateX(var(--f9xr-rotate-x, 4deg)) translateY(-8px) translateZ(25px);
+            box-shadow: var(--f9xr-card-hover-shadow);
+        }
+         .f9xr-card > * { /* Ensure content is above pseudo-element */
+            position: relative; z-index: 1;
+        }
+        .f9xr-card h3 {
+            font-size: 1.2rem; color: var(--f9xr-text-primary); margin-bottom: var(--f9xr-space-md);
+            display: flex; align-items: center; gap: var(--f9xr-space-sm); font-weight: 600;
+        }
+         .f9xr-card h3 i {
+             color: var(--f9xr-accent-secondary); font-size: 1.2rem;
+             text-shadow: 0 0 10px var(--f9xr-accent-secondary); /* Icon glow */
+         }
+        .f9xr-card p, .f9xr-card li { color: var(--f9xr-text-secondary); margin-bottom: var(--f9xr-space-sm); line-height: 1.7; }
+        .f9xr-card ul { list-style: none; padding-left: 0; }
+        .f9xr-card li { padding-left: 1.8em; position: relative; }
+        .f9xr-card li::before { content: "\f00c"; font-family: "Font Awesome 6 Free"; font-weight: 900; position: absolute; left: 0; top: 5px; color: var(--f9xr-accent-secondary); font-size: 0.9em; }
+        .f9xr-card strong { color: var(--f9xr-text-primary); font-weight: 600; }
+
+        /* Stats Cards Specific Styles */
+        .f9xr-stat-card { text-align: center; padding: var(--f9xr-space-xl); }
+        .f9xr-stat-icon {
+             font-size: 3rem; /* Larger */
+             margin-bottom: var(--f9xr-space-md); display: block;
+             background: var(--f9xr-gradient-accent);
+             -webkit-background-clip: text;
+             -webkit-text-fill-color: transparent;
+             background-clip: text;
+             text-fill-color: transparent;
+             filter: drop-shadow(0 2px 5px rgba(0,0,0,0.2));
+        }
+        .f9xr-stat-number { font-size: 3rem; font-weight: 700; color: var(--f9xr-text-primary); margin-bottom: var(--f9xr-space-xs); line-height: 1.1; letter-spacing: -1px; }
+        .f9xr-stat-label { font-size: 0.85rem; color: var(--f9xr-text-muted); text-transform: uppercase; letter-spacing: 1px; }
+
+         /* Review Card Specific Styles */
+         .f9xr-review-card { border-left: 5px solid var(--f9xr-accent-secondary); background: var(--f9xr-bg-tertiary); /* Slightly different background */ }
+         .f9xr-review-author { font-weight: 600; color: var(--f9xr-text-primary); margin-top: var(--f9xr-space-md); display: block; opacity: 0.9; }
+         .f9xr-review-stars { color: #facc15; margin-bottom: var(--f9xr-space-sm); font-size: 1.1rem; text-shadow: 0 0 5px rgba(250, 204, 21, 0.5); }
+
+          /* FAQ Item Specific Styles */
+          .f9xr-faq-item { border: none; border-radius: var(--f9xr-border-radius-md); margin-bottom: var(--f9xr-space-sm); overflow: hidden; background-color: var(--f9xr-bg-secondary); transition: background-color var(--f9xr-transition-fast); }
+          .f9xr-faq-item:hover { background-color: var(--f9xr-bg-tertiary); }
+          .f9xr-faq-question { display: flex; justify-content: space-between; align-items: center; padding: var(--f9xr-space-md) var(--f9xr-space-lg); cursor: pointer; transition: background-color var(--f9xr-transition-fast); font-weight: 500; color: var(--f9xr-text-primary); }
+          .f9xr-faq-toggle-icon { transition: transform var(--f9xr-transition-medium); color: var(--f9xr-text-muted); }
+          .f9xr-faq-item.f9xr-active .f9xr-faq-toggle-icon { transform: rotate(180deg); color: var(--f9xr-accent-primary); }
+          .f9xr-faq-answer { padding: 0 var(--f9xr-space-lg); max-height: 0; overflow: hidden; transition: max-height var(--f9xr-transition-medium) ease-out, padding var(--f9xr-transition-medium) ease-out; color: var(--f9xr-text-secondary); background: var(--f9xr-bg-primary); /* Slightly different bg for answer */ }
+          .f9xr-faq-answer p { margin-top: var(--f9xr-space-md); margin-bottom: var(--f9xr-space-md); }
+          .f9xr-faq-item.f9xr-active .f9xr-faq-answer { max-height: 300px; padding-top: var(--f9xr-space-sm); padding-bottom: var(--f9xr-space-lg); transition: max-height 0.4s ease-in-out, padding var(--f9xr-transition-medium) ease-in-out; }
+
+          /* Chat Card */
+          .f9xr-chat-card { padding: 0; /* Remove default padding */ overflow: hidden; /* Clip iframe */ }
+          .f9xr-chat-card h3 { padding: var(--f9xr-space-lg) var(--f9xr-space-xl) 0; /* Add padding back to title */ }
+          minnit-chat { /* Style the chat embed itself */
+              display: block; /* Ensure it takes block layout */
+              border-radius: 0 0 var(--f9xr-border-radius-lg) var(--f9xr-border-radius-lg); /* Match card bottom radius */
+          }
+
+        /* --- Iframe Area & Loader --- */
+        .f9xr-iframe-wrapper {
+            flex-grow: 1; width: 100%; height: 100%; position: relative;
+            display: flex; flex-direction: column; background-color: var(--f9xr-iframe-bg);
+            border-radius: var(--f9xr-border-radius-lg); overflow: hidden;
+            border: 1px solid var(--f9xr-border-color); /* Add border */
+            box-shadow: var(--f9xr-card-shadow);
+        }
+        .f9xr-iframe-loader {
+            position: absolute; inset: 0; background: rgba(0,0,0, 0.3); /* Semi-transparent overlay */
+            backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
+            display: flex; justify-content: center; align-items: center;
+            z-index: 10; flex-direction: column; gap: var(--f9xr-space-lg); /* Increased gap */
+            color: var(--f9xr-text-primary); /* White text on overlay */
+            transition: opacity var(--f9xr-transition-medium) ease var(--f9xr-transition-fast), visibility var(--f9xr-transition-medium) ease var(--f9xr-transition-fast);
+            opacity: 1; visibility: visible;
+        }
+        .f9xr-iframe-loader.f9xr-hidden { opacity: 0; visibility: hidden; transition-delay: 0s; }
+        /* Enhanced Loader: Spinning Cube or similar */
+        .f9xr-loader-dots { /* Keeping dots for now, could be replaced */
+            display: flex; gap: var(--f9xr-space-md);
+        }
+        .f9xr-loader-dots div {
+            width: 15px; height: 15px; /* Larger dots */
+            background-color: var(--f9xr-loader-dot-color);
+            border-radius: 50%;
+            animation: f9xr-pulse 1.4s infinite ease-in-out both;
+            box-shadow: 0 0 10px var(--f9xr-loader-dot-color), 0 0 20px var(--f9xr-loader-dot-color); /* Glow effect */
+        }
+        .f9xr-loader-dots div:nth-child(1) { animation-delay: -0.32s; }
+        .f9xr-loader-dots div:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes f9xr-pulse {
+            0%, 80%, 100% { transform: scale(0.8); opacity: 0.5; }
+            40% { transform: scale(1.2); opacity: 1; }
+        }
+        .f9xr-iframe-loader span { font-size: 1.1rem; font-weight: 500; }
+
+        .f9xr-iframe { width: 100%; height: 100%; border: none; display: block; flex-grow: 1; }
+
+        /* --- Custom HR --- */
+        .f9xr-hr {
+             height: 1px;
+             border: none;
+             background: var(--f9xr-hr-color);
+             margin: var(--f9xr-space-xxl) 0; /* More spacing */
+             opacity: 0.5;
+        }
+
+        /* --- Settings Panel --- */
+        .f9xr-settings-panel {
+            position: fixed; top: 0; right: 0; bottom: 0;
+            width: 340px; /* Slightly wider */
+            background-color: var(--f9xr-settings-bg);
+            backdrop-filter: blur(var(--f9xr-blur-intensity-heavy));
+            -webkit-backdrop-filter: blur(var(--f9xr-blur-intensity-heavy));
+            border-left: var(--f9xr-border-width) solid var(--f9xr-glass-border-color);
+            box-shadow: -8px 0 25px rgba(0,0,0,0.2);
+            z-index: 1010;
+            transform: translateX(100%);
+            transition: transform var(--f9xr-transition-medium) ease-in-out;
+            display: flex;
+            flex-direction: column;
+        }
+        .f9xr-settings-panel.f9xr-settings-visible { transform: translateX(0); }
+
+        .f9xr-settings-header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: var(--f9xr-space-md) var(--f9xr-space-lg);
+            border-bottom: var(--f9xr-border-width) solid var(--f9xr-glass-border-color);
+            flex-shrink: 0;
+        }
+        .f9xr-settings-header h3 { font-size: 1.3rem; color: var(--f9xr-text-primary); margin: 0; display: flex; align-items: center; gap: var(--f9xr-space-sm); font-weight: 600; }
+         .f9xr-settings-header h3 i { color: var(--f9xr-accent-primary); }
+        .f9xr-settings-close-btn { background: none; border: none; font-size: 1.6rem; color: var(--f9xr-text-muted); cursor: pointer; transition: color var(--f9xr-transition-fast), transform var(--f9xr-transition-fast); padding: var(--f9xr-space-xs); border-radius: 50%; }
+        .f9xr-settings-close-btn:hover { color: var(--f9xr-text-primary); transform: rotate(90deg); background-color: var(--f9xr-sidebar-item-hover-bg); }
+
+        .f9xr-settings-content {
+             padding: var(--f9xr-space-lg);
+             overflow-y: auto;
+             flex-grow: 1;
+             display: flex;
+             flex-direction: column;
+             gap: var(--f9xr-space-xl);
+         }
+         /* Settings Scrollbar */
+        .f9xr-settings-content::-webkit-scrollbar { width: 6px; }
+        .f9xr-settings-content::-webkit-scrollbar-track { background: transparent; }
+        .f9xr-settings-content::-webkit-scrollbar-thumb { background: var(--f9xr-scrollbar-thumb); border-radius: 3px; }
+        .f9xr-settings-content::-webkit-scrollbar-thumb:hover { background: var(--f9xr-scrollbar-thumb-hover); }
+
+         .f9xr-setting-group { display: flex; flex-direction: column; gap: var(--f9xr-space-sm); }
+         .f9xr-setting-group label, .f9xr-setting-group .f9xr-setting-label { /* Added class for non-input labels */
+             font-weight: 500; color: var(--f9xr-text-secondary); font-size: 0.95rem; margin-bottom: var(--f9xr-space-xxs); display: block;
+         }
+         .f9xr-setting-group select,
+         .f9xr-setting-group input[type="range"],
+         .f9xr-setting-group input[type="text"], /* Style other inputs potentially */
+         .f9xr-setting-group textarea {
+             width: 100%; padding: var(--f9xr-space-sm); border-radius: var(--f9xr-border-radius-md);
+             border: var(--f9xr-border-width) solid var(--f9xr-input-border);
+             background-color: var(--f9xr-input-bg); color: var(--f9xr-text-primary);
+             font-size: 0.9rem; transition: border-color var(--f9xr-transition-fast), background-color var(--f9xr-transition-fast);
+             backdrop-filter: blur(var(--f9xr-blur-intensity-light));
+             -webkit-backdrop-filter: blur(var(--f9xr-blur-intensity-light));
+         }
+         .f9xr-setting-group select { cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23${'var(--f9xr-text-muted)'.substring(1)}'%3E%3Cpath fill-rule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z' clip-rule='evenodd' /%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right var(--f9xr-space-sm) center; background-size: 1.5em 1.5em; padding-right: calc(var(--f9xr-space-sm) * 2 + 1.5em); } /* Custom dropdown arrow */
+         .f9xr-setting-group select:focus,
+         .f9xr-setting-group input:focus,
+         .f9xr-setting-group textarea:focus {
+            outline: none; border-color: var(--f9xr-input-focus-border);
+            box-shadow: 0 0 0 3px var(--f9xr-input-focus-shadow);
+            background-color: var(--f9xr-bg-secondary); /* Change bg on focus */
+         }
+          /* Placeholder for new features */
+          .f9xr-setting-group .f9xr-placeholder-input {
+             padding: var(--f9xr-space-lg); text-align: center;
+             border: 2px dashed var(--f9xr-border-color);
+             color: var(--f9xr-text-muted); font-style: italic;
+             background-color: rgba(0,0,0,0.05);
+          }
+
+         /* Theme Radio Buttons (Enhanced) */
+         .f9xr-theme-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--f9xr-space-sm); }
+         .f9xr-theme-options label {
+             display: flex; flex-direction: column; align-items: center; gap: var(--f9xr-space-xs);
+             cursor: pointer; padding: var(--f9xr-space-md) var(--f9xr-space-sm); border-radius: var(--f9xr-border-radius-md);
+             border: 2px solid var(--f9xr-input-border); transition: all var(--f9xr-transition-fast);
+             background-color: var(--f9xr-input-bg);
+             backdrop-filter: blur(var(--f9xr-blur-intensity-light));
+             -webkit-backdrop-filter: blur(var(--f9xr-blur-intensity-light));
+         }
+          .f9xr-theme-options input[type="radio"] { appearance: none; -webkit-appearance: none; position: absolute; opacity: 0; }
+          .f9xr-theme-options label .f9xr-theme-icon { font-size: 1.8rem; color: var(--f9xr-text-secondary); transition: color var(--f9xr-transition-fast); }
+          .f9xr-theme-options label span { font-size: 0.8rem; color: var(--f9xr-text-muted); transition: color var(--f9xr-transition-fast); }
+          .f9xr-theme-options input[type="radio"]:checked + label {
+             border-color: var(--f9xr-accent-primary); background-color: var(--f9xr-sidebar-item-active-bg);
+             box-shadow: 0 0 10px -2px var(--f9xr-accent-primary);
+          }
+         .f9xr-theme-options input[type="radio"]:checked + label .f9xr-theme-icon,
+         .f9xr-theme-options input[type="radio"]:checked + label span { color: var(--f9xr-accent-primary); font-weight: 500; }
+          .f9xr-theme-options label:hover { border-color: var(--f9xr-text-secondary); background-color: var(--f9xr-bg-tertiary); }
+
+          /* Font size display */
+          .f9xr-font-size-display { text-align: right; font-size: 0.85rem; color: var(--f9xr-text-muted); margin-top: -5px; }
+
+          /* Sidebar Spacing */
+           .f9xr-spacing-options { display: flex; justify-content: space-between; gap: var(--f9xr-space-sm); }
+           .f9xr-spacing-options button {
+               flex: 1; /* Equal width */
+               background-color: var(--f9xr-input-bg); border: 1px solid var(--f9xr-input-border);
+               color: var(--f9xr-text-secondary); padding: var(--f9xr-space-sm);
+               border-radius: var(--f9xr-border-radius-md); cursor: pointer; font-size: 0.85rem;
+               transition: all var(--f9xr-transition-fast);
+               backdrop-filter: blur(var(--f9xr-blur-intensity-light));
+               -webkit-backdrop-filter: blur(var(--f9xr-blur-intensity-light));
+           }
+           .f9xr-spacing-options button:hover { border-color: var(--f9xr-text-secondary); background-color: var(--f9xr-bg-tertiary); color: var(--f9xr-text-primary); }
+            .f9xr-spacing-options button.f9xr-active {
+                 background-color: var(--f9xr-accent-primary); color: var(--f9xr-bg-primary-opaque);
+                 border-color: var(--f9xr-accent-primary); font-weight: 500;
+                 box-shadow: 0 0 8px -2px var(--f9xr-accent-primary);
+            }
+
+         .f9xr-settings-footer {
+             padding: var(--f9xr-space-lg); margin-top: auto;
+             border-top: var(--f9xr-border-width) solid var(--f9xr-glass-border-color);
+             flex-shrink: 0; display: flex; flex-direction: column; gap: var(--f9xr-space-md);
+         }
+          /* Reset Settings Button */
+          .f9xr-settings-reset-btn {
+             width: 100%; padding: var(--f9xr-space-sm) var(--f9xr-space-md);
+             border: 1px solid #f87171; /* Red border */
+             background-color: rgba(248, 113, 113, 0.1); /* Light red background */
+             color: #f87171; /* Red text */
+             border-radius: var(--f9xr-border-radius-md);
+             cursor: pointer; font-size: 0.9rem; font-weight: 500;
+             transition: all var(--f9xr-transition-fast);
+             display: flex; align-items: center; justify-content: center; gap: var(--f9xr-space-sm);
+          }
+          .f9xr-settings-reset-btn:hover {
+              background-color: rgba(248, 113, 113, 0.2);
+              border-color: #ef4444;
+              color: #ef4444;
+              transform: translateY(-2px);
+              box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+          }
+         .f9xr-settings-footer a {
+             color: var(--f9xr-text-muted); text-decoration: none; font-size: 0.9rem; /* Slightly larger */
+             transition: color var(--f9xr-transition-fast); display: flex; align-items: center; gap: var(--f9xr-space-md); /* More gap */
+             padding: var(--f9xr-space-xs) 0;
+         }
+         .f9xr-settings-footer a:hover { color: var(--f9xr-accent-primary); transform: translateX(3px); }
+         .f9xr-settings-footer a i { width: 18px; text-align: center; font-size: 1.1em; }
+
+
+        /* --- Settings Overlay --- */
+        .f9xr-settings-overlay {
+             position: fixed; inset: 0;
+             background-color: rgba(0, 0, 0, 0.6); /* Darker overlay */
+             backdrop-filter: blur(5px); /* Blur the background behind overlay */
+             -webkit-backdrop-filter: blur(5px);
+             z-index: 1005;
+             opacity: 0; visibility: hidden;
+             transition: opacity var(--f9xr-transition-medium), visibility var(--f9xr-transition-medium);
+         }
+         .f9xr-settings-overlay.f9xr-settings-visible { opacity: 1; visibility: visible; }
+
+
+        /* --- Helper Classes --- */
+        .f9xr-hidden { display: none !important; }
+
+        /* --- Responsiveness --- */
+        @media (max-width: 992px) {
+            .f9xr-header-search { max-width: 400px; }
+             .f9xr-grid-container { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--f9xr-space-lg); }
+             .f9xr-stat-number { font-size: 2.5rem; }
+             .f9xr-stat-icon { font-size: 2.5rem; }
+             .f9xr-dashboard-header h1 { font-size: 2.2rem; }
+             .f9xr-section-subheader { font-size: 1.6rem; }
+        }
+
+        @media (max-width: 768px) {
+            html { font-size: 15px; }
+            .f9xr-main-content { flex-direction: column; position: relative; }
+            .f9xr-nav-toggle { display: inline-flex; } /* Use flex for centering */
+            .f9xr-settings-toggle-btn { font-size: 1.3rem; }
+            .f9xr-sidebar-collapse-btn, .f9xr-resizer { display: none; }
+
+            .f9xr-sidebar {
+                position: fixed; left: 0; top: 0; bottom: 0; height: 100%;
+                width: 280px !important;
+                transform: translateX(-100%);
+                z-index: 1000;
+                transition: transform var(--f9xr-transition-medium);
+                border-right: var(--f9xr-border-width) solid var(--f9xr-glass-border-color);
+                box-shadow: 5px 0 20px rgba(0,0,0,0.2); /* Enhance shadow */
+                /* Ensure blur applies correctly */
+                 background: var(--f9xr-sidebar-bg);
+                 backdrop-filter: blur(var(--f9xr-blur-intensity-heavy));
+                 -webkit-backdrop-filter: blur(var(--f9xr-blur-intensity-heavy));
+            }
+            .f9xr-sidebar.f9xr-sidebar-visible { transform: translateX(0); }
+             /* Reset potential desktop collapsed styles */
+             .f9xr-sidebar.f9xr-sidebar-collapsed { width: 280px !important; transform: translateX(-100%); /* Ensure hidden initially */ }
+             .f9xr-sidebar.f9xr-sidebar-collapsed.f9xr-sidebar-visible { transform: translateX(0); }
+             .f9xr-sidebar.f9xr-sidebar-collapsed .f9xr-sidebar-inner,
+             .f9xr-sidebar.f9xr-sidebar-collapsed .f9xr-sidebar-nav-link,
+             .f9xr-sidebar.f9xr-sidebar-collapsed .f9xr-filter-header,
+             .f9xr-sidebar.f9xr-sidebar-collapsed .f9xr-category-header,
+             .f9xr-sidebar.f9xr-sidebar-collapsed .f9xr-reset-button { justify-content: flex-start; padding: initial; }
+             .f9xr-sidebar.f9xr-sidebar-collapsed .f9xr-sidebar-section-title,
+             .f9xr-sidebar.f9xr-sidebar-collapsed .f9xr-link-text,
+             .f9xr-sidebar.f9xr-sidebar-collapsed .f9xr-filter-title span,
+             .f9xr-sidebar.f9xr-sidebar-collapsed .f9xr-category-title span,
+             .f9xr-sidebar.f9xr-sidebar-collapsed .f9xr-reset-button span,
+             .f9xr-sidebar.f9xr-sidebar-collapsed .f9xr-category-filter-item label span,
+             .f9xr-sidebar.f9xr-sidebar-collapsed .f9xr-project-item { opacity: 1; width: auto; display: initial; }
+             .f9xr-sidebar.f9xr-sidebar-collapsed .f9xr-filter-toggle-icon,
+             .f9xr-sidebar.f9xr-sidebar-collapsed .f9xr-category-toggle-icon { display: block; }
+
+
+            .f9xr-main-view { width: 100%; padding: var(--f9xr-space-lg); }
+            .f9xr-dashboard-header h1 { font-size: 2rem; }
+            .f9xr-card { padding: var(--f9xr-space-lg); }
+            .f9xr-card:hover { transform: translateY(-5px); /* Simpler hover on mobile */ } /* Disable 3D */
+
+             /* Mobile Nav Overlay */
+            .f9xr-mobile-nav-overlay {
+                 position: fixed; inset: 0; background: rgba(0, 0, 0, 0.6);
+                 backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+                 z-index: 999;
+                 opacity: 0; visibility: hidden;
+                 transition: opacity var(--f9xr-transition-medium), visibility var(--f9xr-transition-medium);
+             }
+             .f9xr-mobile-nav-overlay.f9xr-overlay-visible { opacity: 1; visibility: visible; }
+
+             /* Settings Panel on Mobile */
+             .f9xr-settings-panel { width: 90%; max-width: 340px; }
+             /* Floating shapes might be too distracting/heavy on mobile */
+             .f9xr-floating-shape { display: none; }
+        }
+         @media (max-width: 480px) {
+            html { font-size: 14px; }
+            .f9xr-main-view { padding: var(--f9xr-space-md); }
+            .f9xr-header { padding: var(--f9xr-space-sm) var(--f9xr-space-md); gap: var(--f9xr-space-sm); }
+            .f9xr-header-logo { font-size: 1.2rem; }
+            .f9xr-header-logo i { font-size: 1.1rem;}
+            .f9xr-header-search { display: none; }
+            .f9xr-grid-container { grid-template-columns: 1fr; }
+            .f9xr-dashboard-header h1 { font-size: 1.8rem; }
+            .f9xr-dashboard-header p { font-size: 1rem; }
+            .f9xr-section-subheader { font-size: 1.4rem; }
+            .f9xr-settings-toggle-btn, .f9xr-nav-toggle { font-size: 1.2rem; width: 35px; height: 35px; }
+         }
+
+    </style>
+</head>
+<body itemscope itemtype="https://schema.org/WebPage">
+
+<!-- Animated Background -->
+<div id="particles-js"></div>
+<div class="f9xr-floating-shape shape1"></div>
+<div class="f9xr-floating-shape shape2"></div>
+<div class="f9xr-floating-shape shape3"></div>
+
+
+<div class="f9xr-dashboard-container f9xr-dark-theme" id="f9xr-dashboard-container">
+    <header class="f9xr-header">
+        <div class="f9xr-header-left">
+            <button class="f9xr-nav-toggle" id="f9xr-nav-toggle-btn" aria-label="Toggle Navigation Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <a href="#" class="f9xr-header-logo" id="f9xr-logo-link" itemprop="url">
+                <i class="fas fa-rocket"></i>
+                <span itemprop="name">F9XR Dashboard</span>
+            </a>
+        </div>
+
+        <div class="f9xr-header-search">
+            <i class="fas fa-search"></i>
+            <input type="text" id="f9xr-header-search-input" class="f9xr-header-search-input" placeholder="Search projects, features, settings...">
+            <button class="f9xr-search-clear-btn f9xr-hidden" id="f9xr-search-clear-btn" aria-label="Clear Search">&times;</button>
+        </div>
+
+        <div class="f9xr-header-right">
+            <button class="f9xr-settings-toggle-btn" id="f9xr-settings-toggle-btn" aria-label="Open Settings">
+                <i class="fas fa-cog fa-spin-hover"></i> <!-- Added hover spin (requires extra CSS if needed) -->
+            </button>
+        </div>
+    </header>
+
+    <div class="f9xr-main-content" id="f9xr-main-content">
+        <aside class="f9xr-sidebar" id="f9xr-sidebar" itemscope itemtype="https://schema.org/SiteNavigationElement">
+            <div class="f9xr-sidebar-inner">
+                <!-- Dashboard Section Link -->
+                <div class="f9xr-sidebar-nav">
+                    <a class="f9xr-sidebar-nav-link f9xr-active-section" data-section="f9xr-dashboard-section" itemprop="url">
+                        <i class="fas fa-tachometer-alt"></i> <span class="f9xr-link-text" itemprop="name">Dashboard</span>
+                    </a>
+                </div>
+
+                 <!-- Project Navigation -->
+                 <div class="f9xr-sidebar-section-title">Projects</div>
+
+                <!-- Filters -->
+                 <div class="f9xr-filter-container" id="f9xr-filter-container">
+                     <div class="f9xr-filter-header" id="f9xr-filter-header">
+                         <h4 class="f9xr-filter-title"><i class="fas fa-filter"></i> <span>Filter by Category</span></h4>
+                         <i class="fas fa-chevron-down f9xr-filter-toggle-icon"></i>
+                     </div>
+                     <div class="f9xr-filter-categories" id="f9xr-filter-categories">
+                         <!-- Category filters populated here -->
+                     </div>
+                 </div>
+
+                <button class="f9xr-reset-button" id="f9xr-reset-button">
+                    <i class="fas fa-undo"></i> <span>Reset Filters</span>
+                </button>
+
+                <!-- Project List -->
+                <div class="f9xr-project-list" id="f9xr-project-list" itemscope itemtype="https://schema.org/ItemList">
+                    <!-- Project list populated here -->
+                </div>
+
+            </div> <!-- End sidebar-inner -->
+
+            <button class="f9xr-sidebar-collapse-btn" id="f9xr-sidebar-collapse-btn" aria-label="Collapse Sidebar">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+
+        </aside>
+
+        <div class="f9xr-resizer" id="f9xr-resizer"></div>
+
+        <main class="f9xr-main-view" id="f9xr-main-view" itemprop="mainContentOfPage">
+
+            <!-- Consolidated Dashboard Section -->
+            <section class="f9xr-content-section" id="f9xr-dashboard-section">
+                 <header class="f9xr-dashboard-header">
+                     <!-- UPDATED HEADER TEXT -->
+                     <h1>Welcome to F9XR Dashboard</h1>
+                     <p>Explore our projects, monitor statistics and manage our portfolio with ease.</p>
+                 </header>
+
+                 <!-- NEW: Quick Start Guide Section -->
+                 <section class="f9xr-quick-start-guide">
+                      <h2 class="f9xr-section-subheader"><i class="fas fa-rocket"></i> Quick Start Guide</h2>
+                      <div class="f9xr-grid-container">
+                          <div class="f9xr-card">
+                              <h3><i class="fas fa-mouse-pointer"></i> Navigate Projects</h3>
+                              <p>Use the sidebar on the left to browse projects by category or click directly on a project name.</p>
+                          </div>
+                          <div class="f9xr-card">
+                              <h3><i class="fas fa-search"></i> Find Quickly</h3>
+                              <p>Use the search bar at the top to instantly filter projects by name.</p>
+                          </div>
+                          <div class="f9xr-card">
+                              <h3><i class="fas fa-sliders-h"></i> Filter & Customize</h3>
+                              <p>Expand the "Filter by Category" section in the sidebar or click the <i class="fas fa-cog"></i> icon (top-right) to adjust themes, fonts, and layout.</p>
+                          </div>
+                          <div class="f9xr-card">
+                                <h3><i class="fas fa-comments"></i> Connect & Chat</h3>
+                                <p>Scroll down to find the embedded community chat or use the links in Settings to connect via social media.</p>
+                           </div>
+                      </div>
+                 </section>
+
+                 <div class="f9xr-hr"></div>
+
+                 <!-- Stats Section -->
+                 <h2 class="f9xr-section-subheader"><i class="fas fa-chart-pie"></i> Statistics</h2>
+                 <div class="f9xr-grid-container f9xr-stats-container">
+                      <div class="f9xr-card f9xr-stat-card">
+                         <i class="fas fa-project-diagram f9xr-stat-icon"></i>
+                         <div class="f9xr-stat-number" data-target="0">0</div>
+                         <div class="f9xr-stat-label">Total Projects</div>
+                     </div>
+                     <div class="f9xr-card f9xr-stat-card">
+                         <i class="fas fa-tags f9xr-stat-icon"></i>
+                         <div class="f9xr-stat-number" data-target="0">0</div>
+                         <div class="f9xr-stat-label">Categories</div>
+                     </div>
+                      <div class="f9xr-card f9xr-stat-card">
+                         <i class="fas fa-users f9xr-stat-icon"></i>
+                         <div class="f9xr-stat-number" data-target="1572">0</div> <!-- Demo -->
+                         <div class="f9xr-stat-label">Active Users (Demo)</div>
+                     </div>
+                     <div class="f9xr-card f9xr-stat-card">
+                         <i class="fas fa-eye f9xr-stat-icon"></i>
+                         <div class="f9xr-stat-number" data-target="8950">0</div> <!-- Demo -->
+                         <div class="f9xr-stat-label">Page Views (Demo)</div>
+                     </div>
+                 </div>
+
+                 <div class="f9xr-hr"></div>
+
+                 <!-- Features Section -->
+                 <h2 class="f9xr-section-subheader"><i class="fas fa-star"></i> Core Features</h2>
+                 <div class="f9xr-grid-container">
+                      <div class="f9xr-card">
+                          <h3><i class="fas fa-list-alt"></i> Centralized Access</h3>
+                          <p>View all your projects from a single, unified interface.</p>
+                      </div>
+                      <div class="f9xr-card">
+                          <h3><i class="fas fa-search"></i> Header Search</h3>
+                          <p>Instantly find projects using the search bar in the header.</p>
+                      </div>
+                      <div class="f9xr-card">
+                          <h3><i class="fas fa-filter"></i> Advanced Filtering</h3>
+                          <p>Filter projects efficiently by one or multiple categories.</p>
+                      </div>
+                      <div class="f9xr-card">
+                           <h3><i class="fas fa-arrows-alt-h"></i> Resizable Layout</h3>
+                           <p>Adjust the sidebar width to your preference on desktop.</p>
+                       </div>
+                       <div class="f9xr-card">
+                           <h3><i class="fas fa-cog"></i> Customization</h3>
+                           <p>Personalize theme, fonts, and sizes via the settings panel.</p>
+                       </div>
+                       <div class="f9xr-card">
+                           <h3><i class="fas fa-mobile-alt"></i> Responsive Design</h3>
+                           <p>Access your dashboard seamlessly on any device.</p>
+                       </div>
+                 </div>
+
+                 <div class="f9xr-hr"></div>
+
+                 <!-- Embedded Chat Section -->
+                 <h2 class="f9xr-section-subheader"><i class="fas fa-comments"></i> Community Chat</h2>
+                 <div class="f9xr-card f9xr-chat-card">
+                     <!-- Chat Embed Code -->
+                     <script defer src="https://minnit.chat/js/embed.js"></script>
+                     <minnit-chat
+                           data-chatname="https://organizations.minnit.chat/436125458391812/Main?embed&nickname="
+                           data-style="width:100%;height:500px;"
+                           data-theme="dark_glass"> {/* Example: Use a theme if Minnit supports it */}
+                           </minnit-chat>
+                     <!-- End Chat Embed Code -->
+                 </div>
+
+
+                 <div class="f9xr-hr"></div>
+
+                 <!-- User Reviews (Integrated - Demo) -->
+                 <h2 class="f9xr-section-subheader"><i class="fas fa-star-half-alt"></i> User Reviews (Demo)</h2>
+                 <div class="f9xr-grid-container">
+                     <div class="f9xr-card f9xr-review-card">
+                         <div class="f9xr-review-stars">
+                             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                         </div>
+                         <p>"This dashboard is exactly what I needed! Makes navigating between my crypto projects so much easier."</p>
+                         <span class="f9xr-review-author">- Crypto Enthusiast</span>
+                     </div>
+                     <div class="f9xr-card f9xr-review-card">
+                          <div class="f9xr-review-stars">
+                              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                          </div>
+                          <p>"Love the modern design, theme options, and responsiveness. Works perfectly on my phone."</p>
+                          <span class="f9xr-review-author">- Web Developer</span>
+                      </div>
+                      <div class="f9xr-card f9xr-review-card">
+                          <div class="f9xr-review-stars">
+                              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                          </div>
+                          <p>"Great tool for organizing blogspot sites. The adjustable layout and glass effect are nice touches."</p>
+                          <span class="f9xr-review-author">- Blogger</span>
+                      </div>
+                 </div>
+
+                 <div class="f9xr-hr"></div>
+
+                 <!-- FAQ Section -->
+                  <h2 class="f9xr-section-subheader"><i class="fas fa-question-circle"></i> FAQ</h2>
+                 <div>
+                     <div class="f9xr-faq-item">
+                         <div class="f9xr-faq-question">
+                             <span>Why can't I see some project websites?</span>
+                             <i class="fas fa-chevron-down f9xr-faq-toggle-icon"></i>
+                         </div>
+                         <div class="f9xr-faq-answer">
+                             <p>Some websites implement security policies (like `X-Frame-Options`) that prevent them from being embedded in an iframe. This is controlled by the external website for security reasons.</p>
+                         </div>
+                     </div>
+                     <div class="f9xr-faq-item">
+                         <div class="f9xr-faq-question">
+                             <span>How do I change the appearance?</span>
+                             <i class="fas fa-chevron-down f9xr-faq-toggle-icon"></i>
+                         </div>
+                         <div class="f9xr-faq-answer">
+                             <p>Click the gear icon <i class="fas fa-cog"></i> in the top-right header to open the Settings panel. You can adjust the theme (light/dark/system), font family, font size, and sidebar spacing.</p>
+                         </div>
+                     </div>
+                     <div class="f9xr-faq-item">
+                         <div class="f9xr-faq-question">
+                             <span>How does the resizable sidebar work?</span>
+                             <i class="fas fa-chevron-down f9xr-faq-toggle-icon"></i>
+                         </div>
+                         <div class="f9xr-faq-answer">
+                             <p>On desktop screens, hover your mouse over the thin line between the sidebar and the main content area. Your cursor will change. Click and drag to resize the sidebar. You can also click the arrow button <i class="fas fa-chevron-left"></i> at the bottom of the sidebar to fully collapse or expand it.</p>
+                         </div>
+                     </div>
+                 </div>
+
+            </section> <!-- End f9xr-dashboard-section -->
+
+            <!-- Iframe Container -->
+            <div class="f9xr-iframe-wrapper f9xr-hidden" id="f9xr-iframe-wrapper">
+                 <div class="f9xr-iframe-loader" id="f9xr-iframe-loader">
+                    <div class="f9xr-loader-dots"> <div></div> <div></div> <div></div> </div>
+                    <span>Loading Project...</span>
+                 </div>
+                <iframe id="f9xr-iframe" class="f9xr-iframe" src="about:blank" title="Project Content" sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-top-navigation-by-user-activation"></iframe> <!-- Enhanced sandbox -->
+            </div>
+
+        </main>
+    </div>
+
+     <!-- Mobile Nav Overlay -->
+     <div class="f9xr-mobile-nav-overlay f9xr-hidden" id="f9xr-mobile-nav-overlay"></div>
+
+     <!-- Settings Panel -->
+     <div class="f9xr-settings-overlay f9xr-hidden" id="f9xr-settings-overlay"></div>
+     <div class="f9xr-settings-panel" id="f9xr-settings-panel">
+         <div class="f9xr-settings-header">
+             <h3><i class="fas fa-palette"></i> Settings</h3>
+             <button class="f9xr-settings-close-btn" id="f9xr-settings-close-btn" aria-label="Close Settings"><i class="fas fa-times"></i></button>
+         </div>
+         <div class="f9xr-settings-content">
+             <!-- Theme Selection -->
+             <div class="f9xr-setting-group">
+                 <label class="f9xr-setting-label">Theme</label>
+                 <div class="f9xr-theme-options">
+                     <input type="radio" id="f9xr-theme-light" name="theme" value="light">
+                     <label for="f9xr-theme-light">
+                         <i class="fas fa-sun f9xr-theme-icon"></i><span>Light</span>
+                     </label>
+                     <input type="radio" id="f9xr-theme-dark" name="theme" value="dark">
+                     <label for="f9xr-theme-dark">
+                         <i class="fas fa-moon f9xr-theme-icon"></i><span>Dark</span>
+                     </label>
+                     <input type="radio" id="f9xr-theme-system" name="theme" value="system">
+                     <label for="f9xr-theme-system">
+                          <i class="fas fa-desktop f9xr-theme-icon"></i><span>System</span>
+                     </label>
+                 </div>
+             </div>
+
+             <!-- Font Family -->
+             <div class="f9xr-setting-group">
+                 <label for="f9xr-font-family-select">Font Family</label>
+                 <select id="f9xr-font-family-select">
+                     <option value="'Poppins', sans-serif">Poppins</option>
+                     <option value="'Roboto', sans-serif">Roboto</option>
+                     <option value="'Lato', sans-serif">Lato</option>
+                     <option value="'Montserrat', sans-serif">Montserrat</option>
+                     <option value="sans-serif">System Default</option>
+                 </select>
+             </div>
+
+             <!-- Font Size -->
+             <div class="f9xr-setting-group">
+                 <label for="f9xr-font-size-slider">Font Size</label>
+                 <input type="range" id="f9xr-font-size-slider" min="12" max="20" step="1" value="16">
+                 <span class="f9xr-font-size-display" id="f9xr-font-size-display">16px</span>
+             </div>
+
+             <!-- Sidebar Item Spacing -->
+              <div class="f9xr-setting-group">
+                  <label class="f9xr-setting-label">Sidebar Item Spacing</label>
+                  <div class="f9xr-spacing-options" id="f9xr-spacing-options">
+                      <button data-spacing="0.5rem">Compact</button>
+                      <button data-spacing="0.75rem" class="f9xr-active">Default</button>
+                      <button data-spacing="1rem">Comfortable</button>
+                  </div>
+              </div>
+
+              <!-- Translation Dropdown (Placeholder) -->
+             <div class="f9xr-setting-group">
+                 <label for="f9xr-translation-select">Language (Beta)</label>
+                 <select id="f9xr-translation-select" disabled>
+                     <option value="en">English (Default)</option>
+                     <option value="es">Español (Coming Soon)</option>
+                     <option value="fr">Français (Coming Soon)</option>
+                     <option value="de">Deutsch (Coming Soon)</option>
+                 </select>
+                 <small style="font-size: 0.75rem; color: var(--f9xr-text-muted); opacity: 0.7;">Full translation support planned for future updates.</small>
+             </div>
+
+              <!-- Save Pages (Placeholder) -->
+              <div class="f9xr-setting-group">
+                  <span class="f9xr-setting-label"><i class="fas fa-save"></i> Save Favorite Pages</span>
+                  <div class="f9xr-placeholder-input">Feature Coming Soon</div>
+              </div>
+
+              <!-- Notes (Placeholder) -->
+              <div class="f9xr-setting-group">
+                  <span class="f9xr-setting-label"><i class="fas fa-sticky-note"></i> Make Notes</span>
+                  <div class="f9xr-placeholder-input">Feature Coming Soon</div>
+              </div>
+
+              <!-- Calendar/Tasks (Placeholder) -->
+              <div class="f9xr-setting-group">
+                  <span class="f9xr-setting-label"><i class="fas fa-calendar-alt"></i> Schedule Tasks</span>
+                  <div class="f9xr-placeholder-input">Feature Coming Soon</div>
+              </div>
+
+
+         </div>
+         <div class="f9xr-settings-footer">
+             <!-- Reset Button -->
+             <button class="f9xr-settings-reset-btn" id="f9xr-settings-reset-btn">
+                 <i class="fas fa-undo"></i> Reset All Settings
+             </button>
+             <hr style="border-color: var(--f9xr-glass-border-color); opacity: 0.5; margin: var(--f9xr-space-xs) 0;">
+             <!-- Social Link -->
+             <a href="https://bento.me/ttearncrypto" target="_blank" rel="noopener noreferrer">
+                 <i class="fas fa-link"></i> Connect with Us (Bento)
+             </a>
+             <a href="#" target="_blank"><i class="fas fa-file-contract"></i> Terms of Service</a>
+             <a href="#" target="_blank"><i class="fas fa-user-shield"></i> Privacy Policy</a>
+             <a href="#" target="_blank"><i class="fas fa-envelope"></i> Contact Us</a>
+             <a href="#" target="_blank"><i class="fas fa-flag"></i> Report / Feedback</a>
+         </div>
+     </div>
+
+</div> <!-- End f9xr-dashboard-container -->
+
+<!-- Particles.js Library -->
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+<script>
+    const projectData = [
+        // ... (Keep the exact same JSON data as before)
+        { "name": "TTEarnCrypto - Earn FREE Crypto", "projectURL": "https://ttearncrypto.blogspot.com/", "category": "Crypto, Directory" },
+        { "name": "FREE Crypto Radar", "projectURL": "https://freecryptoradar.blogspot.com/", "category": "Crypto, Directory" },
+        { "name": "FREE Crypto Shop", "projectURL": "https://freecryptoshop.blogspot.com/", "category": "Crypto, Directory" },
+        { "name": "Airdrop Central", "projectURL": "https://ttairdropcentral.blogspot.com/", "category": "Crypto, Directory" },
+        { "name": "TTAppStore", "projectURL": "https://ttappstore.blogspot.com/", "category": "Crypto, Directory" },
+        { "name": "TONTUFcs", "projectURL": "https://tontufcs.blogspot.com/", "category": "Author" },
+        { "name": "MaxBlue Online Games", "projectURL": "https://maxblueonline.blogspot.com/", "category": "Gaming" },
+        { "name": "GHOULx Network", "projectURL": "https://ghoulx.blogspot.com/", "category": "Network" },
+        { "name": "Growth with Guidance Blog", "projectURL": "https://growwithguidance.blogspot.com/", "category": "Blog, Author" },
+        { "name": "TONTUF Tools", "projectURL": "http://tontuftools.blogspot.com/", "category": "Tools, Directory" },
+        { "name": "Advice with AI", "projectURL": "https://adviceofai.blogspot.com/", "category": "AI, Directory" },
+        { "name": "Kirmada", "projectURL": "https://kirmadakm.blogspot.com/", "category": "Gallery" },
+        { "name": "TONTUF", "projectURL": "http://tontuf.blogspot.com/", "category": "Home" },
+        { "name": "Gallery of Odds", "projectURL": "http://galleryofodds.blogspot.com/", "category": "Gallery" },
+        { "name": "Online Helpfull Tools Portal", "projectURL": "http://onlinehelptoolsportal.blogspot.com/", "category": "Home" },
+        { "name": "Dashboard", "projectURL": "http://f9xrdashboard.blogspot.com/", "category": "Home" },
+        { "name": "FREE Crypto Shopping", "projectURL": "http://freecryptoshopping.blogspot.com/", "category": "Crypto, Directory" },
+        { "name": "F9XR", "projectURL": "http://f9xr.blogspot.com/", "category": "Home" },
+        { "name": "Blogger Bookmark Articles", "projectURL": "http://bloggerbookmarkarticles.blogspot.com/", "category": "Blog, Author" },
+        { "name": "FREE Crypto Bors", "projectURL": "http://freecryptobros.blogspot.com/", "category": "Crypto, Directory" },
+        { "name": "Profit Networks", "projectURL": "http://networksradar.blogspot.com/", "category": "Network" },
+        { "name": "Crypto News Radar", "projectURL": "https://cryptoradarnews.blogspot.com/", "category": "News, Author" },
+        { "name": "TONTUF Money News", "projectURL": "https://tontufmoney-news.blogspot.com/", "category": "News, Author" }
+    ];
+
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- Element References ---
+        const container = document.getElementById('f9xr-dashboard-container');
+        const sidebar = document.getElementById('f9xr-sidebar');
+        const resizer = document.getElementById('f9xr-resizer');
+        const mainView = document.getElementById('f9xr-main-view');
+        const projectListContainer = document.getElementById('f9xr-project-list');
+        const categoryFilterContainer = document.getElementById('f9xr-filter-categories');
+        const filterContainer = document.getElementById('f9xr-filter-container');
+        const filterHeader = document.getElementById('f9xr-filter-header');
+        const searchInput = document.getElementById('f9xr-header-search-input');
+        const searchClearBtn = document.getElementById('f9xr-search-clear-btn'); // New Search Clear Button
+        const resetButton = document.getElementById('f9xr-reset-button');
+        const iframe = document.getElementById('f9xr-iframe');
+        const iframeWrapper = document.getElementById('f9xr-iframe-wrapper');
+        const iframeLoader = document.getElementById('f9xr-iframe-loader');
+        const navToggleBtn = document.getElementById('f9xr-nav-toggle-btn');
+        const mobileNavOverlay = document.getElementById('f9xr-mobile-nav-overlay');
+        const dashboardSectionLink = document.querySelector('.f9xr-sidebar-nav-link[data-section="f9xr-dashboard-section"]');
+        const contentSections = document.querySelectorAll('.f9xr-content-section');
+        const faqItems = document.querySelectorAll('.f9xr-faq-item');
+        const logoLink = document.getElementById('f9xr-logo-link');
+        const sidebarCollapseBtn = document.getElementById('f9xr-sidebar-collapse-btn');
+        const particlesContainerId = 'particles-js'; // ID for particles container
+
+        // Settings Panel Elements
+         const settingsToggleBtn = document.getElementById('f9xr-settings-toggle-btn');
+         const settingsPanel = document.getElementById('f9xr-settings-panel');
+         const settingsOverlay = document.getElementById('f9xr-settings-overlay');
+         const settingsCloseBtn = document.getElementById('f9xr-settings-close-btn');
+         const themeRadios = document.querySelectorAll('input[name="theme"]');
+         const fontFamilySelect = document.getElementById('f9xr-font-family-select');
+         const fontSizeSlider = document.getElementById('f9xr-font-size-slider');
+         const fontSizeDisplay = document.getElementById('f9xr-font-size-display');
+         const spacingOptionsContainer = document.getElementById('f9xr-spacing-options');
+         const spacingButtons = spacingOptionsContainer.querySelectorAll('button');
+         const settingsResetBtn = document.getElementById('f9xr-settings-reset-btn'); // New Reset Button
+         // Placeholder for translation select if needed later:
+         // const translationSelect = document.getElementById('f9xr-translation-select');
+
+        let allCategories = new Set();
+        let groupedProjects = {};
+        let uniqueProjectCount = 0;
+        const uniqueUrls = new Set();
+
+        // --- Constants ---
+        const SIDEBAR_WIDTH_STORAGE_KEY = 'f9xr_sidebarWidth_v3'; // Updated key for new version
+        const SIDEBAR_COLLAPSED_STORAGE_KEY = 'f9xr_sidebarCollapsed_v3';
+        const THEME_STORAGE_KEY = 'f9xr_theme_v3';
+        const FONT_FAMILY_STORAGE_KEY = 'f9xr_fontFamily_v3';
+        const FONT_SIZE_STORAGE_KEY = 'f9xr_fontSize_v3';
+        const SPACING_STORAGE_KEY = 'f9xr_spacing_v3';
+        const MIN_SIDEBAR_WIDTH = 200; // Adjusted min width
+        const MAX_SIDEBAR_WIDTH_PERCENT = 40; // Adjusted max width
+
+
+        // --- Data Processing ---
+        // (Keep the same logic as before)
+        projectData.forEach((project, index) => {
+             if (!uniqueUrls.has(project.projectURL)) {
+                 uniqueUrls.add(project.projectURL);
+                 uniqueProjectCount++;
+             }
+            const categories = project.category.split(',').map(cat => cat.trim()).filter(cat => cat);
+            if (categories.length === 0) categories.push('Uncategorized');
+
+            categories.forEach(cat => {
+                allCategories.add(cat);
+                if (!groupedProjects[cat]) groupedProjects[cat] = [];
+                 if (!groupedProjects[cat].some(p => p.projectURL === project.projectURL)) {
+                    groupedProjects[cat].push({ ...project, id: `proj-${index}`, originalCategories: categories });
+                 }
+            });
+        });
+        const sortedCategories = Array.from(allCategories).sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }));
+
+        // --- Update Stats ---
+        // (Keep the same logic)
+        function updateStats() {
+            const projectStatEl = document.querySelector('#f9xr-dashboard-section .f9xr-stat-number[data-target="0"]');
+            const categoryStatEl = document.querySelectorAll('#f9xr-dashboard-section .f9xr-stat-number[data-target="0"]')[1];
+
+            if (projectStatEl) projectStatEl.dataset.target = uniqueProjectCount;
+            if (categoryStatEl) categoryStatEl.dataset.target = sortedCategories.length;
+
+             if (!document.getElementById('f9xr-dashboard-section').classList.contains('f9xr-hidden')) {
+                 if (projectStatEl) projectStatEl.textContent = '0';
+                 if (categoryStatEl) categoryStatEl.textContent = '0';
+                 animateCounters();
+                 statsAnimated = true;
+             }
+        }
+
+
+        // --- Animated Counter Function ---
+        // (Keep the same logic, adjusted duration maybe)
+        function animateCounters() {
+            const counters = document.querySelectorAll('#f9xr-dashboard-section .f9xr-stat-number');
+            counters.forEach(counter => {
+                const target = +counter.dataset.target;
+                if (isNaN(target)) return;
+
+                 if (counter.dataset.isAnimating === 'true' || parseInt(counter.textContent.replace(/,/g, '')) === target) {
+                     return;
+                 }
+                 counter.dataset.isAnimating = 'true';
+
+                counter.innerText = '0';
+                const duration = 1800; // Slightly longer duration
+                const stepTime = 25;
+                const steps = duration / stepTime;
+                const increment = Math.ceil(target / steps) || 1; // Ensure increment is at least 1
+
+                let current = 0;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        counter.innerText = target.toLocaleString();
+                        clearInterval(timer);
+                         delete counter.dataset.isAnimating;
+                    } else {
+                        counter.innerText = current.toLocaleString();
+                    }
+                }, stepTime);
+            });
+        }
+
+        // --- Intersection Observer for Stats Animation ---
+        // (Keep the same logic)
+        let statsAnimated = false;
+        const dashboardSection = document.getElementById('f9xr-dashboard-section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !statsAnimated && entry.target.id === 'f9xr-dashboard-section') {
+                    animateCounters();
+                    statsAnimated = true;
+                }
+            });
+        }, { threshold: 0.2 }); // Trigger when 20% visible
+
+        if (dashboardSection) {
+            observer.observe(dashboardSection);
+        }
+
+
+        // --- Populate UI ---
+        // (Keep the same logic, maybe minor class adjustments if needed)
+        function populateSidebar() {
+            projectListContainer.innerHTML = '';
+            categoryFilterContainer.innerHTML = '';
+
+            // Filters
+            sortedCategories.forEach(category => {
+                const filterId = `f9xr-filter-${category.replace(/[^a-zA-Z0-9]/g, '-')}`;
+                const filterItem = document.createElement('div');
+                filterItem.className = 'f9xr-category-filter-item';
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox'; checkbox.id = filterId; checkbox.value = category;
+                checkbox.className = 'f9xr-category-filter-checkbox';
+                checkbox.addEventListener('change', applyFiltersAndSearch);
+                const label = document.createElement('label');
+                label.htmlFor = filterId;
+                 const labelText = document.createElement('span');
+                 labelText.textContent = category;
+                label.append(checkbox, labelText); filterItem.appendChild(label);
+                categoryFilterContainer.appendChild(filterItem);
+            });
+
+            // Projects with Schema
+            let categoryPosition = 0;
+            sortedCategories.forEach(category => {
+                if (groupedProjects[category]?.length > 0) {
+                    categoryPosition++;
+                    const categoryContainer = document.createElement('div');
+                    categoryContainer.className = 'f9xr-category-container';
+                    categoryContainer.dataset.category = category;
+                     categoryContainer.setAttribute('itemprop', 'itemListElement');
+                     categoryContainer.setAttribute('itemscope', '');
+                     categoryContainer.setAttribute('itemtype', 'https://schema.org/ListItem');
+                     const metaCatPos = document.createElement('meta');
+                     metaCatPos.setAttribute('itemprop', 'position');
+                     metaCatPos.content = categoryPosition;
+                     categoryContainer.appendChild(metaCatPos);
+
+                    const categoryHeader = document.createElement('div');
+                    categoryHeader.className = 'f9xr-category-header';
+                    categoryHeader.innerHTML = `
+                        <span class="f9xr-category-title"><i class="fas fa-folder"></i> <span>${category}</span></span>
+                        <i class="fas fa-chevron-down f9xr-category-toggle-icon"></i>`;
+
+                    const projectsContainer = document.createElement('div');
+                    projectsContainer.className = 'f9xr-category-projects';
+
+                    groupedProjects[category].sort((a, b) => a.name.localeCompare(b.name));
+
+                    let projectPosition = 0;
+                    groupedProjects[category].forEach(project => {
+                        projectPosition++;
+                        const projectItem = document.createElement('div');
+                        projectItem.className = 'f9xr-project-item';
+                        projectItem.setAttribute('itemprop', 'itemListElement');
+                        projectItem.setAttribute('itemscope', '');
+                        projectItem.setAttribute('itemtype', 'https://schema.org/ListItem');
+
+                         const metaProjPos = document.createElement('meta');
+                         metaProjPos.setAttribute('itemprop', 'position');
+                         metaProjPos.content = `${categoryPosition}.${projectPosition}`;
+                         projectItem.appendChild(metaProjPos);
+
+                         const nameSpan = document.createElement('span');
+                         nameSpan.setAttribute('itemprop', 'name');
+                         nameSpan.textContent = project.name;
+                         projectItem.appendChild(nameSpan);
+
+                         const linkTag = document.createElement('link');
+                         linkTag.setAttribute('itemprop', 'url');
+                         linkTag.href = project.projectURL;
+                         projectItem.appendChild(linkTag);
+
+                        projectItem.dataset.url = project.projectURL;
+                        projectItem.dataset.name = project.name.toLowerCase();
+                        projectItem.dataset.categories = JSON.stringify(project.originalCategories);
+                        projectItem.addEventListener('click', () => loadProject(project.projectURL, projectItem));
+                        projectsContainer.appendChild(projectItem);
+                    });
+
+                    categoryHeader.addEventListener('click', () => {
+                        const isCollapsed = projectsContainer.classList.toggle('f9xr-collapsed');
+                        categoryHeader.classList.toggle('f9xr-collapsed', isCollapsed);
+                        const icon = categoryHeader.querySelector('.f9xr-category-title i');
+                        if (icon) icon.className = isCollapsed ? 'fas fa-folder' : 'fas fa-folder-open';
+                    });
+
+                    categoryContainer.appendChild(categoryHeader);
+                    categoryContainer.appendChild(projectsContainer);
+                    projectListContainer.appendChild(categoryContainer);
+                }
+            });
+        }
+
+        // --- Load Project into Iframe ---
+        // (Keep the same logic)
+        function loadProject(url, clickedItem) {
+            contentSections.forEach(sec => sec.classList.add('f9xr-hidden'));
+            iframeWrapper.classList.remove('f9xr-hidden');
+            iframeLoader.classList.remove('f9xr-hidden');
+             iframeLoader.innerHTML = `
+                 <div class="f9xr-loader-dots"> <div></div> <div></div> <div></div> </div>
+                 <span>Loading Project...</span>
+             `;
+            iframe.src = 'about:blank';
+
+            setTimeout(() => {
+                 if (!url || !url.toLowerCase().startsWith('http')) {
+                    console.error("Invalid project URL:", url);
+                    showLoadError("Invalid project URL provided.");
+                    return;
+                 }
+                 iframe.src = url;
+             }, 100);
+
+            document.querySelectorAll('.f9xr-project-item.f9xr-active-project').forEach(item => item.classList.remove('f9xr-active-project'));
+            if (clickedItem) clickedItem.classList.add('f9xr-active-project');
+             dashboardSectionLink?.classList.remove('f9xr-active-section');
+
+            if (window.innerWidth <= 768) {
+                sidebar.classList.remove('f9xr-sidebar-visible');
+                mobileNavOverlay.classList.add('f9xr-hidden');
+                mobileNavOverlay.classList.remove('f9xr-overlay-visible');
+            }
+        }
+
+        // --- Show Iframe Loading Error ---
+        // (Keep the same logic)
+         function showLoadError(message = "Error loading project.") {
+             iframeLoader.innerHTML = `
+                 <i class="fas fa-exclamation-triangle fa-3x" style="color: #f87171; margin-bottom: var(--f9xr-space-sm);"></i>
+                 <span style="font-size: 1.2rem; font-weight: 500;">${message}</span>
+                 <small style="max-width: 80%; text-align: center; color: var(--f9xr-text-secondary);">The website might prevent embedding (X-Frame-Options) or the URL is invalid.</small>
+             `;
+              iframeLoader.classList.remove('f9xr-hidden');
+         }
+
+        // --- Iframe Load/Error Events ---
+        // (Keep the same logic, maybe adjust timeout)
+        iframe.addEventListener('load', () => iframeLoader.classList.add('f9xr-hidden'));
+        let loadTimeout;
+        iframe.addEventListener('loadstart', () => { // Still potentially non-standard
+            clearTimeout(loadTimeout);
+            loadTimeout = setTimeout(() => {
+                if (!iframeLoader.classList.contains('f9xr-hidden')) {
+                    showLoadError("Loading timed out or was blocked by the website.");
+                }
+            }, 12000); // 12 second timeout
+        });
+         iframe.addEventListener('load', () => clearTimeout(loadTimeout));
+
+
+        // --- Filtering and Search Logic ---
+        function applyFiltersAndSearch() {
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            const selectedCategories = Array.from(categoryFilterContainer.querySelectorAll('input:checked')).map(cb => cb.value);
+
+            // Show/hide clear button
+            searchClearBtn.classList.toggle('f9xr-hidden', searchTerm === '');
+
+            document.querySelectorAll('.f9xr-project-item.f9xr-highlight').forEach(item => item.classList.remove('f9xr-highlight'));
+
+            let hasVisibleProjects = false;
+            document.querySelectorAll('.f9xr-project-item').forEach(item => {
+                const projectName = item.dataset.name;
+                const projectCategories = JSON.parse(item.dataset.categories || '[]');
+                const nameMatch = !searchTerm || projectName.includes(searchTerm);
+                const categoryMatch = selectedCategories.length === 0 || selectedCategories.some(sc => projectCategories.includes(sc));
+
+                const isVisible = nameMatch && categoryMatch;
+                item.classList.toggle('f9xr-hidden', !isVisible);
+                if (isVisible) {
+                    hasVisibleProjects = true;
+                    if (searchTerm && nameMatch) {
+                        item.classList.add('f9xr-highlight');
+                    }
+                }
+            });
+
+            // Show/Hide category headers
+            document.querySelectorAll('.f9xr-category-container').forEach(container => {
+                const hasVisibleItems = container.querySelector('.f9xr-project-item:not(.f9xr-hidden)');
+                container.classList.toggle('f9xr-hidden', !hasVisibleItems);
+            });
+
+             // Optional: Show a "No results" message
+             // const noResultsMsg = document.getElementById('f9xr-no-results');
+             // if (noResultsMsg) noResultsMsg.classList.toggle('f9xr-hidden', hasVisibleProjects);
+        }
+
+
+        // --- Show Dashboard Section ---
+        // (Keep the same logic)
+        function showDashboardSection() {
+             iframeWrapper.classList.add('f9xr-hidden');
+             iframe.src = 'about:blank';
+             contentSections.forEach(sec => sec.classList.remove('f9xr-hidden'));
+             dashboardSectionLink?.classList.add('f9xr-active-section');
+             document.querySelectorAll('.f9xr-project-item.f9xr-active-project').forEach(item => item.classList.remove('f9xr-active-project'));
+             if (!statsAnimated) {
+                setTimeout(animateCounters, 50);
+                statsAnimated = true;
+             }
+             if (window.innerWidth <= 768) {
+                 sidebar.classList.remove('f9xr-sidebar-visible');
+                 mobileNavOverlay.classList.add('f9xr-hidden');
+                 mobileNavOverlay.classList.remove('f9xr-overlay-visible');
+             }
+        }
+
+         // --- Toggle Filter Section ---
+         // (Keep the same logic)
+         function toggleFilterCollapse() {
+             filterContainer.classList.toggle('f9xr-collapsed');
+         }
+
+        // --- Sidebar Resizing Logic ---
+        // (Keep the same logic, using updated MIN/MAX constants)
+        let isResizing = false;
+        let initialSidebarWidth = 0;
+        let startX = 0;
+
+        function startResize(e) {
+            if (e.touches || window.innerWidth <= 768 || sidebar.classList.contains('f9xr-sidebar-collapsed')) return;
+            isResizing = true;
+            startX = e.clientX;
+            initialSidebarWidth = sidebar.offsetWidth;
+            resizer.classList.add('f9xr-resizing');
+            document.body.style.cursor = 'col-resize';
+            document.body.style.userSelect = 'none';
+            document.addEventListener('mousemove', doResize, { passive: true }); // Use passive listener
+            document.addEventListener('mouseup', stopResize);
+        }
+        function doResize(e) {
+            if (!isResizing) return;
+            const currentX = e.clientX;
+            const diffX = currentX - startX;
+            let newWidth = initialSidebarWidth + diffX;
+            const maxAllowedWidth = window.innerWidth * (MAX_SIDEBAR_WIDTH_PERCENT / 100);
+             newWidth = Math.max(MIN_SIDEBAR_WIDTH, newWidth);
+             newWidth = Math.min(newWidth, maxAllowedWidth);
+            sidebar.style.width = `${newWidth}px`;
+        }
+        function stopResize() {
+            if (isResizing) {
+                isResizing = false;
+                resizer.classList.remove('f9xr-resizing');
+                document.body.style.cursor = '';
+                document.body.style.userSelect = '';
+                document.removeEventListener('mousemove', doResize);
+                document.removeEventListener('mouseup', stopResize);
+                if (!sidebar.classList.contains('f9xr-sidebar-collapsed')) { // Only save if not collapsed
+                    localStorage.setItem(SIDEBAR_WIDTH_STORAGE_KEY, sidebar.style.width);
+                }
+            }
+        }
+
+        // --- Sidebar Collapse Logic ---
+        // (Keep the same logic)
+        function toggleSidebarCollapse() {
+            sidebar.classList.toggle('f9xr-sidebar-collapsed');
+             const isCollapsed = sidebar.classList.contains('f9xr-sidebar-collapsed');
+            localStorage.setItem(SIDEBAR_COLLAPSED_STORAGE_KEY, isCollapsed);
+             if (isCollapsed) {
+                 sidebar.style.width = '';
+             } else {
+                 const storedWidth = localStorage.getItem(SIDEBAR_WIDTH_STORAGE_KEY);
+                 sidebar.style.width = storedWidth || 'var(--f9xr-sidebar-width)';
+             }
+        }
+
+        // --- Settings Panel Logic ---
+        // (Keep the same open/close logic)
+        function openSettings() {
+            settingsPanel.classList.add('f9xr-settings-visible');
+            settingsOverlay.classList.add('f9xr-settings-visible');
+            settingsOverlay.classList.remove('f9xr-hidden');
+        }
+        function closeSettings() {
+            settingsPanel.classList.remove('f9xr-settings-visible');
+            settingsOverlay.classList.remove('f9xr-settings-visible');
+            setTimeout(() => settingsOverlay.classList.add('f9xr-hidden'), 350); // Match transition duration
+        }
+
+         // Apply Theme & Update Particles
+         function applyTheme(theme) {
+             const lightClass = 'f9xr-light-theme';
+             const darkClass = 'f9xr-dark-theme'; // Assuming default is dark or use explicit dark theme class
+             container.classList.remove(lightClass, darkClass);
+
+             let particleColorVar = '--f9xr-particle-color';
+             let particleLinkColorVar = '--f9xr-particle-link-color';
+
+             if (theme === 'light') {
+                 container.classList.add(lightClass);
+             } else if (theme === 'dark') {
+                  container.classList.add(darkClass);
+             } else { // System theme
+                  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                  container.classList.add(prefersDark ? darkClass : lightClass);
+              }
+              localStorage.setItem(THEME_STORAGE_KEY, theme);
+
+              // Update particles after theme class is applied and CSS vars are updated
+              updateParticlesTheme();
+         }
+
+          // Apply Font Family
+         function applyFontFamily(font) {
+             document.documentElement.style.setProperty('--f9xr-font-family', font); // Apply to root for wider coverage
+             localStorage.setItem(FONT_FAMILY_STORAGE_KEY, font);
+         }
+
+          // Apply Font Size
+         function applyFontSize(size) {
+             document.documentElement.style.fontSize = `${size}px`;
+             fontSizeDisplay.textContent = `${size}px`;
+             localStorage.setItem(FONT_SIZE_STORAGE_KEY, size);
+         }
+
+         // Apply Spacing
+         function applySpacing(spacingValue) {
+             container.style.setProperty('--f9xr-sidebar-item-vertical-padding', spacingValue);
+             localStorage.setItem(SPACING_STORAGE_KEY, spacingValue);
+             spacingButtons.forEach(btn => {
+                 btn.classList.toggle('f9xr-active', btn.dataset.spacing === spacingValue);
+             });
+         }
+
+         // Reset Settings Function
+         function resetAllSettings() {
+             if (confirm('Are you sure you want to reset all settings to their defaults? This action cannot be undone.')) {
+                 localStorage.removeItem(THEME_STORAGE_KEY);
+                 localStorage.removeItem(FONT_FAMILY_STORAGE_KEY);
+                 localStorage.removeItem(FONT_SIZE_STORAGE_KEY);
+                 localStorage.removeItem(SPACING_STORAGE_KEY);
+                 localStorage.removeItem(SIDEBAR_WIDTH_STORAGE_KEY);
+                 localStorage.removeItem(SIDEBAR_COLLAPSED_STORAGE_KEY);
+                 // Potentially remove filter state etc. if saved
+
+                 // Re-apply defaults directly or reload
+                 // Option 1: Reload (simplest)
+                 location.reload();
+
+                 // Option 2: Re-apply defaults without reload (more complex)
+                 /*
+                 applyTheme('system'); // Or your preferred default
+                 document.querySelector(`input[name="theme"][value="system"]`).checked = true;
+                 const defaultFont = "'Poppins', sans-serif";
+                 applyFontFamily(defaultFont);
+                 fontFamilySelect.value = defaultFont;
+                 const defaultSize = '16';
+                 applyFontSize(defaultSize);
+                 fontSizeSlider.value = defaultSize;
+                 const defaultSpacing = '0.75rem';
+                 applySpacing(defaultSpacing);
+                 // Reset sidebar state
+                 sidebar.classList.remove('f9xr-sidebar-collapsed');
+                 sidebar.style.width = ''; // Use CSS default
+                 loadSettings(); // Re-apply any remaining default logic
+                 */
+             }
+         }
+
+         // Load Settings from Local Storage
+         // (Keep the same logic, using updated keys)
+         function loadSettings() {
+             // Sidebar Width & Collapse State
+             const storedWidth = localStorage.getItem(SIDEBAR_WIDTH_STORAGE_KEY);
+             const isCollapsed = localStorage.getItem(SIDEBAR_COLLAPSED_STORAGE_KEY) === 'true';
+             if (isCollapsed && window.innerWidth > 768) {
+                 sidebar.classList.add('f9xr-sidebar-collapsed');
+                 sidebar.style.width = '';
+             } else if (storedWidth && window.innerWidth > 768 && !isCollapsed) { // Ensure not collapsed when applying width
+                 sidebar.style.width = storedWidth;
+             } else {
+                 sidebar.style.width = ''; // Use CSS default
+                 if (isCollapsed && window.innerWidth <= 768) { // If mobile was collapsed, remove class
+                    sidebar.classList.remove('f9xr-sidebar-collapsed');
+                 }
+             }
+
+             // Theme (Load before other settings that might depend on CSS vars)
+             const storedTheme = localStorage.getItem(THEME_STORAGE_KEY) || 'system'; // Default to system
+             applyTheme(storedTheme); // This will also trigger particle update
+             const themeRadio = document.querySelector(`input[name="theme"][value="${storedTheme}"]`);
+             if (themeRadio) themeRadio.checked = true;
+
+
+             // Font Family
+             const defaultFont = "'Poppins', sans-serif";
+             const storedFont = localStorage.getItem(FONT_FAMILY_STORAGE_KEY) || defaultFont;
+             applyFontFamily(storedFont);
+             fontFamilySelect.value = storedFont;
+
+              // Font Size
+             const defaultSize = '16';
+             const storedSize = localStorage.getItem(FONT_SIZE_STORAGE_KEY) || defaultSize;
+             applyFontSize(storedSize);
+             fontSizeSlider.value = storedSize;
+
+             // Spacing
+             const defaultSpacing = '0.75rem';
+             const storedSpacing = localStorage.getItem(SPACING_STORAGE_KEY) || defaultSpacing;
+             applySpacing(storedSpacing);
+         }
+
+         // Listen for system theme changes
+         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+             const currentTheme = localStorage.getItem(THEME_STORAGE_KEY) || 'system';
+             if (currentTheme === 'system') {
+                 applyTheme('system');
+             }
+         });
+
+        // --- Particles.js Initialization ---
+        function initializeParticles(particleColor, linkColor) {
+            if (typeof particlesJS !== 'undefined') {
+                particlesJS(particlesContainerId, {
+                    "particles": {
+                        "number": {
+                            "value": 60, // Density
+                            "density": { "enable": true, "value_area": 800 }
+                        },
+                        "color": { "value": particleColor },
+                        "shape": {
+                            "type": "circle",
+                            "stroke": { "width": 0, "color": "#000000" },
+                            "polygon": { "nb_sides": 5 },
+                        },
+                        "opacity": {
+                            "value": 0.4, // Make particles subtle
+                            "random": true,
+                            "anim": { "enable": true, "speed": 0.5, "opacity_min": 0.1, "sync": false }
+                        },
+                        "size": {
+                            "value": 3,
+                            "random": true,
+                            "anim": { "enable": false, "speed": 40, "size_min": 0.1, "sync": false }
+                        },
+                        "line_linked": {
+                            "enable": true,
+                            "distance": 150,
+                            "color": linkColor,
+                            "opacity": 0.3, // Subtle links
+                            "width": 1
+                        },
+                        "move": {
+                            "enable": true,
+                            "speed": 2, // Slower movement
+                            "direction": "none",
+                            "random": true,
+                            "straight": false,
+                            "out_mode": "out",
+                            "bounce": false,
+                            "attract": { "enable": false, "rotateX": 600, "rotateY": 1200 }
+                        }
+                    },
+                    "interactivity": {
+                        "detect_on": "canvas",
+                        "events": {
+                            "onhover": { "enable": true, "mode": "grab" }, // Grab effect on hover
+                            "onclick": { "enable": true, "mode": "push" }, // Push particles on click
+                            "resize": true
+                        },
+                        "modes": {
+                            "grab": { "distance": 140, "line_linked": { "opacity": 0.7 } },
+                            "bubble": { "distance": 400, "size": 40, "duration": 2, "opacity": 8, "speed": 3 },
+                            "repulse": { "distance": 200, "duration": 0.4 },
+                            "push": { "particles_nb": 4 },
+                            "remove": { "particles_nb": 2 }
+                        }
+                    },
+                    "retina_detect": true
+                });
+            } else {
+                console.warn("particles.js not loaded yet.");
+            }
+        }
+
+        // Function to get computed style for CSS variables
+        function getCssVariable(variableName) {
+            return getComputedStyle(document.documentElement).getPropertyValue(variableName).trim();
+        }
+
+         // Update Particle Colors Based on Theme
+         function updateParticlesTheme() {
+             // Ensure DOM is ready and styles are applied
+             requestAnimationFrame(() => {
+                 const particleColor = getCssVariable('--f9xr-particle-color').replace(/'/g, ''); // Remove quotes if any
+                 const particleLinkColor = getCssVariable('--f9xr-particle-link-color').replace(/'/g, '');
+                 // Check if particlesJS instance exists and update (pJS is the global instance)
+                 if (window.pJSDom && window.pJSDom[0] && window.pJSDom[0].pJS) {
+                      const pJS = window.pJSDom[0].pJS;
+                      pJS.particles.color.value = particleColor;
+                      pJS.particles.line_linked.color = particleLinkColor;
+                      pJS.fn.particlesRefresh(); // Refresh the canvas
+                 } else {
+                     // If not initialized yet, initialize with current theme colors
+                     initializeParticles(particleColor, particleLinkColor);
+                 }
+             });
+         }
+
+
+        // --- Event Listeners ---
+        searchInput.addEventListener('input', applyFiltersAndSearch);
+        searchClearBtn.addEventListener('click', () => {
+            searchInput.value = '';
+            applyFiltersAndSearch(); // Trigger search/filter update
+            searchInput.focus(); // Keep focus on input
+        });
+        filterHeader.addEventListener('click', toggleFilterCollapse);
+
+        resetButton.addEventListener('click', () => {
+            searchInput.value = '';
+            categoryFilterContainer.querySelectorAll('input').forEach(cb => cb.checked = false);
+            applyFiltersAndSearch();
+            showDashboardSection(); // Show default section
+        });
+
+        logoLink.addEventListener('click', (e) => { e.preventDefault(); showDashboardSection(); });
+        dashboardSectionLink?.addEventListener('click', (e) => { e.preventDefault(); showDashboardSection(); });
+
+
+        // FAQ Toggles
+        faqItems.forEach(item => {
+            const question = item.querySelector('.f9xr-faq-question');
+            question?.addEventListener('click', () => item.classList.toggle('f9xr-active'));
+        });
+
+        // Sidebar Resize Listener
+        resizer?.addEventListener('mousedown', startResize);
+        sidebarCollapseBtn?.addEventListener('click', toggleSidebarCollapse);
+
+        // Mobile Nav Toggle
+         navToggleBtn.addEventListener('click', (e) => {
+             e.stopPropagation(); // Prevent triggering overlay click
+             sidebar.classList.toggle('f9xr-sidebar-visible');
+             mobileNavOverlay.classList.toggle('f9xr-overlay-visible');
+             mobileNavOverlay.classList.toggle('f9xr-hidden');
+         });
+         mobileNavOverlay.addEventListener('click', () => {
+             sidebar.classList.remove('f9xr-sidebar-visible');
+             mobileNavOverlay.classList.add('f9xr-hidden');
+             mobileNavOverlay.classList.remove('f9xr-overlay-visible');
+         });
+
+        // Settings Panel Listeners
+        settingsToggleBtn.addEventListener('click', openSettings);
+        settingsCloseBtn.addEventListener('click', closeSettings);
+        settingsOverlay.addEventListener('click', closeSettings);
+        themeRadios.forEach(radio => radio.addEventListener('change', (e) => applyTheme(e.target.value)));
+        fontFamilySelect.addEventListener('change', (e) => applyFontFamily(e.target.value));
+        fontSizeSlider.addEventListener('input', (e) => applyFontSize(e.target.value));
+        spacingButtons.forEach(button => button.addEventListener('click', () => applySpacing(button.dataset.spacing)));
+        settingsResetBtn.addEventListener('click', resetAllSettings); // Add listener for reset
+
+
+        // 3D Card Effect Listener
+        // (Keep the same logic)
+        document.querySelectorAll('.f9xr-card').forEach(card => {
+             card.addEventListener('mousemove', (e) => {
+                if (window.innerWidth < 768) return;
+
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+
+                const rotateY = (x / (rect.width / 2)) * 4; // Slightly more rotation
+                const rotateX = (-y / (rect.height / 2)) * 4;
+
+                card.style.setProperty('--f9xr-rotate-x', `${rotateX}deg`);
+                card.style.setProperty('--f9xr-rotate-y', `${rotateY}deg`);
+            });
+
+             card.addEventListener('mouseleave', () => {
+                card.style.setProperty('--f9xr-rotate-x', `0deg`);
+                card.style.setProperty('--f9xr-rotate-y', `0deg`);
+             });
+         });
+
+        // --- Initialisation ---
+        loadSettings(); // Load saved settings first (includes theme and particle init)
+        updateStats();
+        populateSidebar();
+        applyFiltersAndSearch(); // Apply initial filters/search state (handles clear button visibility)
+        showDashboardSection(); // Show Dashboard by default
+
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitcoin Directory Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+        }
+        .header h1 {
+            font-size: 24px;
+            color: #f7931a;
+        }
+        .toggle {
+            cursor: pointer;
+        }
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+        .card-content {
+            padding: 15px;
+        }
+        .card-content h3 {
+            margin: 0 0 10px;
+            font-size: 18px;
+        }
+        .card-content p {
+            margin: 0 0 15px;
+            color: #666;
+        }
+        .card-content .rating {
+            color: #f7931a;
+        }
+        .card-content .visit {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #f7931a;
+            color: #fff;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        .card-content .visit:hover {
+            background-color: #e67e22;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Bitcoin Directory</h1>
+            <div class="toggle">🌙</div>
+        </div>
+        <p>Discover a comprehensive directory for Bitcoin enthusiasts, featuring top casinos, secure wallets, news sites, and reliable exchanges.</p>
+        <div class="cards">
+            <!-- Example Card -->
+            <div class="card">
+                <img src="https://via.placeholder.com/250" alt="Logo">
+                <div class="card-content">
+                    <h3>Bitcoin Casino</h3>
+                    <p>Experience the thrill of gambling with Bitcoin.</p>
+                    <div class="rating">⭐⭐⭐⭐⭐</div>
+                    <a href="#" class="visit">Visit</a>
+                </div>
+            </div>
+            <!-- More cards can be added here -->
+        </div>
+    </div>
+    <script>
+        // JavaScript for dark/light mode toggle
+        const toggle = document.querySelector('.toggle');
+        toggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+        });
+    </script>
+</body>
+</html>

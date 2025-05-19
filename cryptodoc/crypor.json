@@ -1,0 +1,354 @@
+[
+    {
+        "Platform Name": "CoinMarketCap",
+        "Preview": "![CoinMarketcap](https://user-images.githubusercontent.com/102221198/228283708-6b4bf70c-f1ea-4b40-8da4-55850b8b4cd8.png)",
+        "Live Website URL": "[coinmarketcap.com](https://coinmarketcap.com/)",
+        "Social": "[Twitter](https://twitter.com/CoinMarketCap)",
+        "Short Description": "CoinMarketCap is the world's most-referenced price-tracking website for cryptoassets in the rapidly growing cryptocurrency space.",
+        "": ""
+    },
+    {
+        "Platform Name": "CoinGecko",
+        "Preview": "![CoinGecko](https://user-images.githubusercontent.com/102221198/228284028-b02c3ce5-ca4b-4e25-8d9b-dd6702f7af79.png)",
+        "Live Website URL": "[coingecko.com](https://coingecko.com)",
+        "Social": "[Twitter](https://twitter.com/coingecko)",
+        "Short Description": "View top cryptocurrency prices live, crypto charts, market cap, and trading volume. Discover today's new and trending coins, and analyze it.",
+        "": ""
+    },
+    {
+        "Platform Name": "Cryptonary",
+        "Preview": "![Cryptonary Image](https://github.com/user-attachments/assets/c057c0ec-9e92-47f5-a694-978a555aa141)",
+        "Live Website URL": "[cryptonary.com](https://cryptonary.com/)",
+        "Social": "[Instagram](https://www.instagram.com/cryptonary/)",
+        "Short Description": "Cryptonary, a crypto research tool that helps everyday investors find winning crypto opportunities, started in 2017.",
+        "": ""
+    },
+    {
+        "Platform Name": "Trading View",
+        "Preview": "![Trading View](https://user-images.githubusercontent.com/102221198/229077777-5f4f1a2d-50a6-4430-a425-f574c3df8c0d.png)",
+        "Live Website URL": "[tradingview.com](https://tradingview.com)",
+        "Social": "[Twitter](https://twitter.com/tradingview)",
+        "Short Description": "Track All Markets - Do Technical Analysis.",
+        "": ""
+    },
+    {
+        "Platform Name": "Nansen",
+        "Preview": "![Nansen](https://user-images.githubusercontent.com/102221198/229078325-ca52209b-87d8-4cc2-98f8-215e82cc45d8.png)",
+        "Live Website URL": "[Nansen.ai](https://Nansen.ai/)",
+        "Social": "[Twitter](https://twitter.com/nansen_ai)",
+        "Short Description": "Crypto, DeFi & NFT Analysis",
+        "": ""
+    },
+    {
+        "Platform Name": "Dex Screener",
+        "Preview": "![Dex Screener](https://user-images.githubusercontent.com/102221198/229078242-8162c871-ab29-4ea3-97d3-30b705236267.png)",
+        "Live Website URL": "[dexscreener.com](https://dexscreener.com/)",
+        "Social": "[Twitter](https://twitter.com/dexscreener)",
+        "Short Description": "A powerful price analysis platform with data streams updating as quickly as 5 minutes apart and across multiple decentralized exchanges and chains.",
+        "": ""
+    },
+    {
+        "Platform Name": "Debank",
+        "Preview": "![Debank](https://user-images.githubusercontent.com/102221198/229078200-70607092-b13e-4fc4-9d3e-a8f2a6b88754.png)",
+        "Live Website URL": "[debank.com](https://debank.com/)",
+        "Social": "[Twitter](https://twitter.com/DeBankDeFi)",
+        "Short Description": "The Web3 Messenger & Best Web3 Portfolio Tracker",
+        "": ""
+    },
+    {
+        "Platform Name": "Dune Analytics",
+        "Preview": "![Dune](https://user-images.githubusercontent.com/102221198/229078258-eddea074-1e08-476a-8402-73f35b7ac291.png)",
+        "Live Website URL": "[dune.com](https://dune.com/browse/dashboards)",
+        "Social": "[Twitter](https://twitter.com/DuneAnalytics)",
+        "Short Description": "Dune Analytics is a blockchain data tool for crypto analysts and investors. It allows users to query, extract, and visualize data from different public blockchains.",
+        "": ""
+    },
+    {
+        "Platform Name": "Token Terminal",
+        "Preview": "![Token Terminal](https://user-images.githubusercontent.com/102221198/229078380-149c8377-dfab-42e1-a3d2-8ab8a33c0989.png)",
+        "Live Website URL": "[tokenterminal.com](https://tokenterminal.com/)",
+        "Social": "[Twitter](https://twitter.com/tokenterminal)",
+        "Short Description": "Fundamentals for crypto.",
+        "": ""
+    },
+    {
+        "Platform Name": "Greed and Fear Index",
+        "Preview": "![Alternative](https://user-images.githubusercontent.com/102221198/229077832-7dd18256-de21-49af-a57b-828dca5df6de.png)",
+        "Live Website URL": "[alternative.me](https://alternative.me/crypto/fear-and-greed-index/)",
+        "Social": "[Twitter](https://twitter.com/BitcoinFear)",
+        "Short Description": "Analyze emotions and sentiments from different sources and crunch them into one simple number.",
+        "": ""
+    },
+    {
+        "Platform Name": "Glassnode",
+        "Preview": "![Glass Node](https://user-images.githubusercontent.com/102221198/229078271-fe0510a1-e087-4cbb-b770-7d79e29c4075.png)",
+        "Live Website URL": "[glassnode.com](https://glassnode.com/)",
+        "Social": "[Twitter](https://twitter.com/glassnode)",
+        "Short Description": "On-chain Market Intelligence.",
+        "": ""
+    },
+    {
+        "Platform Name": "Messari",
+        "Preview": "![Messari](https://user-images.githubusercontent.com/102221198/229080590-db238a1c-124e-4ec2-adf0-a8bf4bd43c9c.png)",
+        "Live Website URL": "[messari.io](https://messari.io/)",
+        "Social": "[Twitter](https://twitter.com/MessariCrypto)",
+        "Short Description": "Crypto Research, Data and Tools.",
+        "": ""
+    },
+    {
+        "Platform Name": "Lunar Crush",
+        "Preview": "![Lunr](https://user-images.githubusercontent.com/102221198/229078312-c65ab3b9-8eaf-49d7-8bcb-8632a4533dd2.png)",
+        "Live Website URL": "[lunarcrush.com](https://lunarcrush.com)",
+        "Social": "[Twitter](https://twitter.com/LunarCrush)",
+        "Short Description": "Trade what people can't stop talking about Smart Analysis.",
+        "": ""
+    },
+    {
+        "Platform Name": "Santiment",
+        "Preview": "![Santiment](https://user-images.githubusercontent.com/102221198/229078332-5b0093dc-0de1-4ba3-81ff-237822258c6e.png)",
+        "Live Website URL": "[santiment.net](https://santiment.net/)",
+        "Social": "[Twitter](https://twitter.com/santimentfeed)",
+        "Short Description": "Santiment makes powerful OnChain, Social & Financial analysis accessible to anyone.",
+        "": ""
+    },
+    {
+        "Platform Name": "Coinmarket Cal",
+        "Preview": "![CoinMarketCal](https://user-images.githubusercontent.com/102221198/229078072-e2a5f21c-cda9-4627-bd56-984e8c5c5fc3.png)",
+        "Live Website URL": "[coinmarketcal.com](https://coinmarketcal.com/en/)",
+        "Social": "[Twitter](https://twitter.com/CoinMarketCal)",
+        "Short Description": "Cryptoasset Calendar Evidence-based & community-driven.",
+        "": ""
+    },
+    {
+        "Platform Name": "Coin Metrics",
+        "Preview": "![Coin Metrics](https://user-images.githubusercontent.com/102221198/229078018-af4017ba-60ef-4c9a-9bfb-d87ca9275c37.png)",
+        "Live Website URL": "[coinmetrics.io](https://coinmetrics.io/)",
+        "Social": "[Twitter](https://twitter.com/coinmetrics)",
+        "Short Description": "Crypto Intelligence for the Future of Finance.",
+        "": ""
+    },
+    {
+        "Platform Name": "Coin Owl",
+        "Preview": "![Coinowl](https://user-images.githubusercontent.com/102221198/229078089-0772c22c-98f4-4772-a630-da6bb7f20115.png)",
+        "Live Website URL": "[coinowl.io](https://coinowl.io/past-token-unlocks)",
+        "Social": "[Twitter](https://twitter.com/Coinowl_io)",
+        "Short Description": "See the Upcoming and Previous Tokens or Coins Unlocks.",
+        "": ""
+    },
+    {
+        "Platform Name": "Crypto Panic",
+        "Preview": "![Crypto Panic](https://user-images.githubusercontent.com/102221198/229078151-bf166bfd-ea05-4cec-af7e-5308cf60a076.png)",
+        "Live Website URL": "[cryptopanic.com](https://cryptopanic.com/)",
+        "Social": "[Twitter](https://twitter.com/CryptoPanicCom)",
+        "Short Description": "News aggregator platform indicating impact on prices.",
+        "": ""
+    },
+    {
+        "Platform Name": "DefiLlama",
+        "Preview": "![Defillama](https://user-images.githubusercontent.com/102221198/229078228-9aea98d0-7eb2-4e5f-ad99-dca2f354f27b.png)",
+        "Live Website URL": "[defillama.com](https://defillama.com/)",
+        "Social": "[Twitter](https://twitter.com/DefiLlama)",
+        "Short Description": "DeFi Dashboard",
+        "": ""
+    },
+    {
+        "Platform Name": "UniWhale",
+        "Preview": "![UniWhale](https://user-images.githubusercontent.com/102221198/229078417-9ba7b84d-61a7-48dd-be1c-9cd3704b5ee1.png)",
+        "Live Website URL": "[uniwhales.io](https://uniwhales.io/)",
+        "Social": "[Twitter](https://twitter.com/uniwhalesio)",
+        "Short Description": "Tracking Crypto Whales.",
+        "": ""
+    },
+    {
+        "Platform Name": "Bread Crumbs",
+        "Preview": "![Breadcrumbs](https://user-images.githubusercontent.com/102221198/229077986-11372efa-a5fe-4d13-89d0-1a1d44dc7f6e.png)",
+        "Live Website URL": "[breadcrumbs.app](https://www.breadcrumbs.app)",
+        "Social": "[Twitter](https://twitter.com/AppBreadcrumbs)",
+        "Short Description": "Breadcrumbs is an open blockchain analytics platform. It offers a set of tools that empowers you to trace and monitor crypto transactions.",
+        "": ""
+    },
+    {
+        "Platform Name": "Ape Board",
+        "Preview": "![Apeboard](https://user-images.githubusercontent.com/102221198/229077890-41685b04-6543-4205-a951-497b59ca4ece.png)",
+        "Live Website URL": "[apeboard.finance](https://apeboard.finance/)",
+        "Social": "[Twitter](https://twitter.com/nansenportfolio)",
+        "Short Description": "Multichain DeFi Dashboard .",
+        "": ""
+    },
+    {
+        "Platform Name": "Crypto Rank",
+        "Preview": "![Cryptorank](https://user-images.githubusercontent.com/102221198/229078169-cf95474f-e7d4-4977-88c2-b7800ba76eed.png)",
+        "Live Website URL": "[cryptorank.io](https://cryptorank.io)",
+        "Social": "[Twitter](https://twitter.com/CryptoRank_io)",
+        "Short Description": "Crypto Market Insights and Analytics.",
+        "": ""
+    },
+    {
+        "Platform Name": "Ico Drops",
+        "Preview": "![ICO Drops](https://user-images.githubusercontent.com/102221198/229078284-bd9c20e7-6271-4672-8f52-8e799576284e.png)",
+        "Live Website URL": "[icodrops.com](https://icodrops.com)",
+        "Social": "[Twitter](https://twitter.com/ICODrops)",
+        "Short Description": "Calender of Upcoming ICO, IDO or IEOs.",
+        "": ""
+    },
+    {
+        "Platform Name": "Dapp Radar",
+        "Preview": "![Dappradar](https://user-images.githubusercontent.com/102221198/229078177-f686a6b7-8f88-4617-960c-7f72f18ca468.png)",
+        "Live Website URL": "[dappradar.com](https://dappradar.com/)",
+        "Social": "[Twitter](https://twitter.com/DappRadar)",
+        "Short Description": "The World’s Dapp Store",
+        "": "Discover, Track & Trade Everything DeFi, NFT and Gaming."
+    },
+    {
+        "Platform Name": "Coin Glass",
+        "Preview": "![coinglass](https://user-images.githubusercontent.com/102221198/229078066-5952a460-ca18-4acb-8526-089c0c24e571.png)",
+        "Live Website URL": "[coinglass.com](https://www.coinglass.com/)",
+        "Social": "[Twitter](https://twitter.com/coinglass_com)",
+        "Short Description": "Cryptocurrency Derivatives Data Analysis.",
+        "": ""
+    },
+    {
+        "Platform Name": "The Block",
+        "Preview": "![The Block](https://user-images.githubusercontent.com/102221198/229078345-67f3e65b-ab93-4eaa-a977-4b3739c01a44.png)",
+        "Live Website URL": "[theblock.co](http://theblock.co)",
+        "Social": "[Twitter](https://twitter.com/TheBlock__)",
+        "Short Description": "The first and final World in Digital Assets.",
+        "": ""
+    },
+    {
+        "Platform Name": "Web3alerts",
+        "Preview": "![Web3 Alerts](https://user-images.githubusercontent.com/102221198/229078441-39db2c35-a0fc-41f1-9576-f2f7de54a82f.png)",
+        "Live Website URL": "[Web3alerts.app](http://Web3alerts.app)",
+        "Social": "[Twitter](https://twitter.com/Web3Alerts)",
+        "Short Description": "Find the hottest new Web3 projects before anyone else.",
+        "": ""
+    },
+    {
+        "Platform Name": "Defi Yield",
+        "Preview": "![DeFi Yield](https://user-images.githubusercontent.com/102221198/229078219-a8515821-bfe3-4078-b0b9-6cdfdd1f260d.png)",
+        "Live Website URL": "[defiyield.app](http://defiyield.app)",
+        "Social": "[Twitter](https://twitter.com/defiyield_app)",
+        "Short Description": "Web3 Super App & Antivirus.",
+        "": ""
+    },
+    {
+        "Platform Name": "Degens Finance",
+        "Preview": "![Degens](https://user-images.githubusercontent.com/102221198/229078231-6c5aa70f-188d-40af-a1e9-df0e1357e652.png)",
+        "Live Website URL": "[degens.finance](https://www.degenz.finance/)",
+        "Social": "[Twitter](https://twitter.com/DegenzNFT)",
+        "Short Description": "Digital NFTs Analysis.",
+        "": ""
+    },
+    {
+        "Platform Name": "Dex Guru",
+        "Preview": "![Dex Guru](https://user-images.githubusercontent.com/102221198/229083116-08197872-8634-4c36-a289-feaddf85facb.png)",
+        "Live Website URL": "[dex.guru](http://dex.guru)",
+        "Social": "[Twitter](https://twitter.com/dexguru)",
+        "Short Description": "Guru️ knows a thing or two about what is going on at AMM DEXs.",
+        "": ""
+    },
+    {
+        "Platform Name": "Token Unlocks",
+        "Preview": "![TokenUnlocks](https://user-images.githubusercontent.com/102221198/229078386-d58fc4f5-beb1-485b-ad27-5986cc7ddfc9.png)",
+        "Live Website URL": "[token.unlocks](http://token.unlocks.app)",
+        "Social": "[Twitter](https://twitter.com/Token_Unlocks)",
+        "Short Description": "The best token Unlocks Schedule & Tokenomics Data.",
+        "": ""
+    },
+    {
+        "Platform Name": "Block Pour",
+        "Preview": "![Blockpour](https://user-images.githubusercontent.com/102221198/229077959-5ce76bba-a4af-4c1f-b5de-f23016340caa.png)",
+        "Live Website URL": "[blockpour.com](https://app.blockpour.com/)",
+        "Social": "[Twitter](https://twitter.com/Blockpour)",
+        "Short Description": "Discover your Alpha in Crypto.",
+        "": ""
+    },
+    {
+        "Platform Name": "Chain List",
+        "Preview": "![ChainList](https://user-images.githubusercontent.com/102221198/229078008-e57bf98e-8c5e-4d02-b42b-d132e6e11005.png)",
+        "Live Website URL": "[chainlist.org](https://chainlist.org/)",
+        "Social": "[Twitter](https://twitter.com/DefiLlama)",
+        "Short Description": "Chainlist is a list of EVM networks.",
+        "": ""
+    },
+    {
+        "Platform Name": "Coin Analyze",
+        "Preview": "![Coin Analyze](https://user-images.githubusercontent.com/102221198/229078012-ef0d2dd1-1727-4200-af58-a90d6974f19a.png)",
+        "Live Website URL": "[coinalyze.net](https://coinalyze.net)",
+        "Social": "[Twitter](https://twitter.com/coinalyzetool)",
+        "Short Description": "Cryptocurrency Futures Market Data: Open Interest - Funding Rate - Liquidations.",
+        "": ""
+    },
+    {
+        "Platform Name": "Cointelegraph",
+        "Preview": "![Cointelegraph](https://user-images.githubusercontent.com/102221198/229078093-19d6fc6a-b6a0-47a6-a699-b0cf773a465b.png)",
+        "Live Website URL": "[cointelegraph.com](https://cointelegraph.com/)",
+        "Social": "[Twitter](https://twitter.com/Cointelegraph)",
+        "Short Description": "Latest Cryptocurrency News, Technical, Fundamentals, and on-chain Analysis.",
+        "": ""
+    },
+    {
+        "Platform Name": "Watcher Guru",
+        "Preview": "![Watcher Guru](https://user-images.githubusercontent.com/102221198/229078430-ad65f2e8-6d75-452a-8162-5f2163528e30.png)",
+        "Live Website URL": "[watcher.guru](https://watcher.guru/)",
+        "Social": "[Twitter](https://twitter.com/WatcherGuru)",
+        "Short Description": "Latest Cryptocurrency News, Technical, Fundamentals, and on-chain Analysis.",
+        "": ""
+    },
+    {
+        "Platform Name": "Coin Desk",
+        "Preview": "![Coindesk](https://user-images.githubusercontent.com/102221198/229078030-e4e1ff44-62d9-4ae7-a903-1853865648ab.png)",
+        "Live Website URL": "[coindesk.com](https://www.coindesk.com/)",
+        "Social": "[Twitter](https://twitter.com/CoinDesk)",
+        "Short Description": "Latest Cryptocurrency News, Technical, Fundamentals, and on-chain Analysis.",
+        "": ""
+    },
+    {
+        "Platform Name": "Arkham",
+        "Preview": "![Arkham](https://user-images.githubusercontent.com/102221198/229077906-dd81dc6e-22a3-4aab-95cf-ab05097866ac.png)",
+        "Live Website URL": "[arkhamintelligence.com](https://www.arkhamintelligence.com/)",
+        "Social": "[Twitter](https://twitter.com/arkhamintel)",
+        "Short Description": "Total Crypto Intelligence.",
+        "": ""
+    },
+    {
+        "Platform Name": "BubbleMaps",
+        "Preview": "![Bubble Maps](https://user-images.githubusercontent.com/102221198/236861753-25f9124f-a54a-44dc-9229-8c9fb49a78e2.png)",
+        "Live Website URL": "[bubblemaps.io](https://bubblemaps.io/)",
+        "Social": "[Twitter](https://twitter.com/bubblemaps)",
+        "Short Description": "Innovative Visuals for Blockchain Data.",
+        "": ""
+    },
+    {
+        "Platform Name": "Coinfeeds",
+        "Preview": "![coinfeeds](https://github.com/AsharibAli/crypto-research-tools/assets/102221198/7b5f3043-9636-4c93-9680-ba1ac3fa9512)",
+        "Live Website URL": "[coinfeeds.io](https://coinfeeds.io/)",
+        "Social": "[Twitter](https://twitter.com/coinfeeds_ai)",
+        "Short Description": "Coinfeeds is a crypto AI tool for traders and investors, a platform for digital assets that embraces open data.",
+        "": ""
+    },
+    {
+        "Platform Name": "CryptoMediaCap",
+        "Preview": "![cryptomediacap](https://github.com/AsharibAli/blockchain-research-tools/assets/102221198/3de70c9e-7d8d-4a4a-adfb-114488beca2f)",
+        "Live Website URL": "[cryptomediacap.com](https://coinmediacap.com/)",
+        "Social": "[LinkedIn](https://www.linkedin.com/in/michaeldieckmann/)",
+        "Short Description": "CryptoMediaCap aggregate social media data and rate coin news with AI for rumors, innovation etc.",
+        "": ""
+    },
+    {
+        "Platform Name": "Momentum Radar",
+        "Preview": "![Momentum Radar](https://github.com/user-attachments/assets/8ed83743-d342-451f-a734-a38a0d70fce1)",
+        "Live Website URL": "[momentumradar.com](https://momentumradar.com/)",
+        "Social": "[Contact](https://momentumradar.com/contact-us/)",
+        "Short Description": "Tactical & Strategic Blueprint For Financial Markets",
+        "": ""
+    },
+    {
+        "Platform Name": "Holder.io",
+        "Preview": "![Holder.io](https://github.com/user-attachments/assets/dfec5e5a-2795-4e01-a6fe-5d5dc857db19)",
+        "Live Website URL": "[holder.io](https://holder.io/)",
+        "Social": "[Twitter](https://x.com/Holder_io)",
+        "Short Description": "A platform for tracking cryptocurrencies, tokens, and exchanges with analytical tools.",
+        "": ""
+    }
+]

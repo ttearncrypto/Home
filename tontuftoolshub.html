@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MonoChrome ToolHub - Advanced UI</title>
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        .tt-app-container *,
+        .tt-app-container *::before,
+        .tt-app-container *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        .tt-app-container {
+            --tt-color-primary: #FFFFFF; /* White */
+            --tt-color-secondary: #0A0A0A; /* Near Black */
+            --tt-color-background: #F9F9F9; /* Very light off-white */
+            --tt-color-card-bg: var(--tt-color-primary);
+            --tt-color-text-primary: var(--tt-color-secondary); /* Black text on light bg */
+            --tt-color-text-on-dark: var(--tt-color-primary); /* White text on dark bg */
+            --tt-color-border: #EAEAEA; /* Lighter border */
+            --tt-color-border-medium: #D0D0D0;
+            --tt-color-muted-text: #666666;
+            --tt-color-hover-bg-light: #F0F0F0;
+            --tt-color-active-bg-dark: var(--tt-color-secondary);
+            
+            --tt-shadow-depth-1: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.08);
+            --tt-shadow-depth-2: 0 4px 6px rgba(0,0,0,0.05), 0 2px 4px rgba(0,0,0,0.1);
+            --tt-shadow-depth-3: 0 10px 15px rgba(0,0,0,0.06), 0 4px 6px rgba(0,0,0,0.12);
+            --tt-shadow-depth-3d: 0px 5px 10px rgba(0,0,0,0.05), 0px 15px 30px rgba(0,0,0,0.1);
+            --tt-shadow-depth-3d-hover: 0px 8px 15px rgba(0,0,0,0.07), 0px 20px 40px rgba(0,0,0,0.15);
+
+            --tt-border-radius-sm: 4px;
+            --tt-border-radius-md: 6px;
+            --tt-border-radius-lg: 10px;
+            --tt-spacing-unit: 8px;
+            --tt-transition-fast: 0.2s ease-out;
+            --tt-transition-medium: 0.3s ease-out;
+
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+            background-color: var(--tt-color-background);
+            color: var(--tt-color-text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden; /* Prevent horizontal scroll from 3D effects */
+        }
+        
+        /* Header Section */
+        .tt-hero-section {
+            background: linear-gradient(135deg, var(--tt-color-secondary) 0%, #1c1c1c 100%);
+            color: var(--tt-color-text-on-dark);
+            padding: calc(var(--tt-spacing-unit) * 4) calc(var(--tt-spacing-unit) * 3) calc(var(--tt-spacing-unit) * 2);
+            text-align: center;
+        }
+        .tt-main-header-title {
+            font-size: 2.4rem;
+            font-weight: 800; /* Bolder */
+            letter-spacing: -0.5px;
+            margin-bottom: var(--tt-spacing-unit);
+            text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+        .tt-main-header-subtitle {
+            font-size: 1.1rem;
+            font-weight: 300;
+            opacity: 0.85;
+            max-width: 750px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Controls Wrapper */
+        .tt-controls-wrapper {
+            padding: calc(var(--tt-spacing-unit) * 3) calc(var(--tt-spacing-unit) * 3);
+            background-color: var(--tt-color-primary); /* White background for controls area */
+            border-bottom: 1px solid var(--tt-color-border);
+            position: sticky; /* Make controls sticky */
+            top: 0;
+            z-index: 999;
+            box-shadow: var(--tt-shadow-depth-1);
+        }
+
+          /* Controls Wrapper */
+        .tt-controls-wrapper {
+            padding: calc(var(--tt-spacing-unit) * 2.5) calc(var(--tt-spacing-unit) * 3); /* Reduced top/bottom padding slightly */
+            background-color: var(--tt-color-primary);
+            border-bottom: 1px solid var(--tt-color-border);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            box-shadow: var(--tt-shadow-depth-1);
+        }
+
+        /* Search Bar Improved & Highlighted */
+        .tt-search-container {
+            max-width: 900px; /* << INCREASED max-width */
+            margin: 0 auto calc(var(--tt-spacing-unit) * 3); /* << INCREASED bottom margin */
+            display: flex;
+            align-items: center;
+            background-color: var(--tt-color-primary); /* << KEPT IT WHITE, relying on shadow */
+            border: 1px solid var(--tt-color-border-medium); /* << Slightly stronger base border */
+            border-radius: var(--tt-border-radius-lg);
+            padding: calc(var(--tt-spacing-unit) * 0.75) calc(var(--tt-spacing-unit) * 2); /* << INCREASED vertical padding slightly */
+            box-shadow: var(--tt-shadow-depth-2); /* << ADDED more prominent base shadow */
+            transition: border-color var(--tt-transition-fast), box-shadow var(--tt-transition-medium); /* << Medium transition for shadow */
+        }
+        .tt-search-container:focus-within {
+            border-color: var(--tt-color-secondary);
+            box-shadow: 0 0 0 4px rgba(10,10,10,0.07), var(--tt-shadow-depth-3); /* << Enhanced focus shadow */
+        }
+        .tt-search-container .fas.fa-search {
+            font-size: 1.3rem; /* << INCREASED icon size */
+            color: var(--tt-color-muted-text);
+            margin-right: calc(var(--tt-spacing-unit) * 1.5); /* << INCREASED margin */
+            transition: color var(--tt-transition-fast);
+        }
+        .tt-search-container:focus-within .fas.fa-search {
+            color: var(--tt-color-secondary); /* << Change icon color on focus */
+        }
+        .tt-search-input {
+            flex-grow: 1;
+            padding: calc(var(--tt-spacing-unit) * 1.5) 0; /* << INCREASED internal padding for height */
+            border: none;
+            outline: none;
+            font-size: 1.15rem; /* << INCREASED font size */
+            font-weight: 400; /* << Slightly bolder placeholder/text */
+            background-color: transparent;
+            color: var(--tt-color-text-primary);
+        }
+        .tt-search-input::placeholder {
+            color: var(--tt-color-muted-text);
+            font-weight: 300;
+        }
+        .tt-clear-search-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: var(--tt-spacing-unit) calc(var(--tt-spacing-unit) * 1.5); /* << Adjusted padding */
+            display: none;
+            color: var(--tt-color-muted-text);
+        }
+        .tt-clear-search-btn .fas.fa-times { font-size: 1.1rem; } /* << Slightly larger clear icon */
+        .tt-clear-search-btn:hover { color: var(--tt-color-text-primary); }
+
+
+        .tt-filter-sort-actions-grid {
+            display: grid;
+            grid-template-columns: 1fr auto auto; /* Filters take most space */
+            gap: calc(var(--tt-spacing-unit) * 2);
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .tt-category-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--tt-spacing-unit);
+        }
+        .tt-filter-btn {
+            padding: calc(var(--tt-spacing-unit) * 0.8) calc(var(--tt-spacing-unit) * 1.75);
+            border: 1px solid var(--tt-color-border-medium);
+            background-color: var(--tt-color-primary);
+            color: var(--tt-color-muted-text);
+            border-radius: var(--tt-border-radius-md); /* Slightly less rounded */
+            cursor: pointer;
+            font-size: 0.8rem; /* Smaller filter buttons */
+            font-weight: 500;
+            transition: all var(--tt-transition-fast);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .tt-filter-btn:hover {
+            border-color: var(--tt-color-secondary);
+            color: var(--tt-color-secondary);
+            background-color: var(--tt-color-hover-bg-light);
+        }
+        .tt-filter-btn.tt-active {
+            background-color: var(--tt-color-active-bg-dark);
+            border-color: var(--tt-color-active-bg-dark);
+            color: var(--tt-color-text-on-dark);
+        }
+        .tt-dropdown-group {
+            display: flex;
+            flex-direction: column;
+            gap: calc(var(--tt-spacing-unit) * 0.5);
+        }
+        .tt-sort-control {
+            display: flex;
+            align-items: center;
+            gap: var(--tt-spacing-unit);
+        }
+        .tt-sort-control label {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--tt-color-muted-text);
+            white-space: nowrap;
+        }
+        .tt-sort-select {
+            padding: calc(var(--tt-spacing-unit) * 0.75) var(--tt-spacing-unit);
+            border: 1px solid var(--tt-color-border-medium);
+            border-radius: var(--tt-border-radius-sm);
+            font-size: 0.8rem;
+            background-color: var(--tt-color-primary);
+            min-width: 150px; /* Give selects some width */
+        }
+        .tt-help-btn-container {
+            grid-column: 1 / -1; /* Span full width if it's alone or on small screens */
+            text-align: right; /* Align help button to the right if space allows */
+            margin-top: var(--tt-spacing-unit);
+        }
+        .tt-help-btn {
+            padding: calc(var(--tt-spacing-unit) * 0.9) calc(var(--tt-spacing-unit) * 1.75);
+            border: 1px solid var(--tt-color-border-medium);
+            background-color: transparent;
+            color: var(--tt-color-muted-text);
+            border-radius: var(--tt-border-radius-md);
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all var(--tt-transition-fast);
+        }
+        .tt-help-btn:hover {
+            border-color: var(--tt-color-secondary);
+            color: var(--tt-color-secondary);
+            background-color: var(--tt-color-hover-bg-light);
+        }
+        .tt-help-btn i { margin-right: calc(var(--tt-spacing-unit)*0.75); }
+
+        /* Main Content Area */
+        .tt-main-content-area {
+            flex-grow: 1;
+            padding: calc(var(--tt-spacing-unit) * 3) calc(var(--tt-spacing-unit) * 3) calc(var(--tt-spacing-unit) * 4);
+        }
+        .tt-tool-count-summary {
+            text-align: center;
+            margin-bottom: calc(var(--tt-spacing-unit) * 3);
+            font-size: 0.9rem;
+            color: var(--tt-color-muted-text);
+        }
+        .tt-category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+            gap: calc(var(--tt-spacing-unit) * 3);
+        }
+        .tt-category-card {
+            background-color: var(--tt-color-card-bg);
+            border: 1px solid var(--tt-color-border);
+            border-radius: var(--tt-border-radius-lg);
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--tt-shadow-depth-3d);
+            transform: perspective(1000px); /* Enable 3D transforms */
+            transition: transform var(--tt-transition-medium), box-shadow var(--tt-transition-medium);
+            opacity: 0; /* For load-in animation */
+            animation: tt-fadeInUp 0.5s var(--tt-transition-medium) forwards;
+        }
+        .tt-category-card:hover {
+            box-shadow: var(--tt-shadow-depth-3d-hover);
+            transform: perspective(1000px) translateY(-5px) translateZ(10px) rotateX(1deg);
+        }
+        .tt-category-card.tt-hidden { display: none; }
+
+        @keyframes tt-fadeInUp {
+            from { opacity: 0; transform: translateY(20px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .tt-category-card-header {
+            padding: calc(var(--tt-spacing-unit) * 1.5) calc(var(--tt-spacing-unit) * 2);
+            border-bottom: 1px solid var(--tt-color-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            background-color: var(--tt-color-primary); /* Ensure header bg is distinct if card body changes */
+            border-top-left-radius: var(--tt-border-radius-lg);
+            border-top-right-radius: var(--tt-border-radius-lg);
+        }
+        .tt-category-card-title-link {
+            font-size: 1.05rem; /* Slightly smaller card titles */
+            font-weight: 700;
+            color: var(--tt-color-text-primary);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+        }
+        .tt-category-card-title-link:hover { text-decoration: underline; }
+        .tt-category-card-title-link .fas.fa-external-link-alt { /* Font Awesome */
+            font-size: 0.75em;
+            margin-left: var(--tt-spacing-unit);
+            opacity: 0.5;
+        }
+        .tt-collapse-icon {
+            font-size: 1rem;
+            color: var(--tt-color-muted-text);
+            transition: transform var(--tt-transition-medium);
+        }
+        .tt-category-card.tt-collapsed .tt-collapse-icon { transform: rotate(-90deg); }
+
+        .tt-category-card-body {
+            padding: 0;
+            max-height: 500px; /* Adjust if needed */
+            overflow: hidden;
+            transition: max-height 0.35s cubic-bezier(0.25, 0.1, 0.25, 1), padding 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+        .tt-category-card.tt-collapsed .tt-category-card-body {
+            max-height: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            border-top: none; /* Avoid double border when collapsed */
+        }
+        .tt-tool-list { list-style: none; }
+        .tt-tool-item-link {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: calc(var(--tt-spacing-unit) * 1.25) calc(var(--tt-spacing-unit) * 2);
+            text-decoration: none;
+            color: var(--tt-color-text-primary);
+            border-bottom: 1px solid var(--tt-color-border);
+            font-size: 0.9rem;
+            transition: background-color var(--tt-transition-fast), padding-left var(--tt-transition-fast);
+        }
+        .tt-tool-item-link:last-child { border-bottom: none; }
+        .tt-tool-item-link:hover {
+            background-color: var(--tt-color-hover-bg-light);
+            padding-left: calc(var(--tt-spacing-unit) * 2.5); /* Indent on hover */
+        }
+        .tt-tool-name { flex-grow: 1; margin-right: var(--tt-spacing-unit); }
+        .tt-tool-item-link .fas.fa-arrow-right { /* Font Awesome */
+            font-size: 0.8em;
+            color: var(--tt-color-muted-text);
+            transition: transform var(--tt-transition-fast), color var(--tt-transition-fast);
+        }
+         .tt-tool-item-link:hover .fas.fa-arrow-right {
+            color: var(--tt-color-text-primary);
+            transform: translateX(3px);
+        }
+        
+        .tt-no-results {
+            text-align: center;
+            padding: calc(var(--tt-spacing-unit) * 5) 0;
+            color: var(--tt-color-muted-text);
+            font-size: 1.1rem;
+        }
+        .tt-no-results .fas.fa-ghost { /* Font Awesome */
+            font-size: 2.8rem;
+            display: block;
+            margin-bottom: var(--tt-spacing-unit);
+            color: var(--tt-color-border-medium);
+        }
+        
+        /* User Guide Modal */
+        .tt-modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.7); display: none; justify-content: center;
+            align-items: center; z-index: 2000; animation: tt-modalFadeIn 0.3s ease-out forwards;
+        }
+        .tt-modal-overlay.tt-active { display: flex; }
+        @keyframes tt-modalFadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .tt-modal-content {
+            background-color: var(--tt-color-card-bg); padding: calc(var(--tt-spacing-unit) * 3);
+            border-radius: var(--tt-border-radius-lg); box-shadow: var(--tt-shadow-depth-3);
+            max-width: 650px; width: 90%; max-height: 85vh; overflow-y: auto;
+            position: relative; transform: scale(0.95); animation: tt-modalScaleUp 0.3s 0.1s ease-out forwards;
+        }
+        @keyframes tt-modalScaleUp { from { opacity:0; transform: scale(0.9); } to { opacity:1; transform: scale(1); } }
+        .tt-modal-close-btn {
+            position: absolute; top: var(--tt-spacing-unit); right: var(--tt-spacing-unit);
+            background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--tt-color-muted-text);
+            width: 36px; height: 36px; display:flex; align-items:center; justify-content:center;
+            border-radius: 50%; transition: background-color var(--tt-transition-fast);
+        }
+        .tt-modal-close-btn:hover { background-color: var(--tt-color-hover-bg-light); }
+        .tt-modal-title {
+            font-size: 1.4rem; font-weight: 700; color: var(--tt-color-text-primary);
+            margin-bottom: calc(var(--tt-spacing-unit) * 2); display: flex; align-items: center;
+        }
+        .tt-modal-title i { margin-right: var(--tt-spacing-unit); font-size: 1.2em; }
+        .tt-modal-content h4 {
+            font-size: 1.05rem; margin-top: calc(var(--tt-spacing-unit) * 2);
+            margin-bottom: var(--tt-spacing-unit); color: var(--tt-color-text-primary);
+            display: flex; align-items: center; font-weight: 600;
+        }
+        .tt-modal-content h4 i { margin-right: calc(var(--tt-spacing-unit)*0.75); color: var(--tt-color-muted-text); }
+        .tt-modal-content p, .tt-modal-content li {
+            font-size: 0.9rem; line-height: 1.65; color: var(--tt-color-muted-text);
+            margin-bottom: var(--tt-spacing-unit);
+        }
+        .tt-modal-content ul { padding-left: calc(var(--tt-spacing-unit) * 2.5); }
+
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .tt-filter-sort-actions-grid {
+                grid-template-columns: 1fr; /* Stack filters and sorts */
+                gap: calc(var(--tt-spacing-unit) * 1.5);
+            }
+            .tt-dropdown-group {
+                flex-direction: row; /* Sorts side-by-side if space */
+                justify-content: space-between;
+                width: 100%;
+            }
+             .tt-sort-control { flex-grow: 1; }
+             .tt-sort-select { width: 100%; }
+             .tt-help-btn-container { text-align: center; }
+        }
+        @media (max-width: 768px) {
+            .tt-main-header-title { font-size: 2rem; }
+            .tt-main-header-subtitle { font-size: 1rem; }
+            .tt-category-grid { grid-template-columns: 1fr; }
+            .tt-dropdown-group { flex-direction: column; }
+        }
+         @media (max-width: 480px) {
+            .tt-filter-btn { width: calc(50% - calc(var(--tt-spacing-unit)/2)); }
+            .tt-filter-btn.tt-active:first-of-type { width: 100%; } /* All tools full width */
+         }
+
+    </style>
+</head>
+<body>
+    <div class="tt-app-container" itemscope itemtype="http://schema.org/WebPage">
+        <div class="tt-hero-section">
+            <header class="tt-main-header">
+                <h1 class="tt-main-header-title">TONTUFTools Hub</h1>
+                <p class="tt-main-header-subtitle">Your Centralized Center for all Essential Tools & Utilities. Sleek, Fast, and Efficient.</p>
+            </header>
+        </div>
+
+        <div class="tt-controls-wrapper">
+            <div class="tt-search-container">
+                <i class="fas fa-search"></i>
+                <input type="text" id="tt-search-input" class="tt-search-input" placeholder="Find a tool by name...">
+                <button class="tt-clear-search-btn" id="tt-clear-search-btn" aria-label="Clear search">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div><br>
+            
+            <div class="tt-filter-sort-actions-grid">
+                <div class="tt-category-filters" id="tt-category-filters-container">
+                    <!-- Category filter buttons -->
+                </div>
+                <div class="tt-dropdown-group">
+                    <div class="tt-sort-control">
+                        <label for="tt-sort-categories-select">Sort Categories:</label>
+                        <select id="tt-sort-categories-select" class="tt-sort-select">
+                            <option value="name-asc">Name (A-Z)</option>
+                            <option value="name-desc">Name (Z-A)</option>
+                            <option value="tools-desc">Tools (Most First)</option>
+                            <option value="tools-asc">Tools (Fewest First)</option>
+                        </select>
+                    </div>
+                    <div class="tt-sort-control">
+                        <label for="tt-sort-tools-select">Sort Tools:</label>
+                        <select id="tt-sort-tools-select" class="tt-sort-select">
+                            <option value="title-asc">Title (A-Z)</option>
+                            <option value="title-desc">Title (Z-A)</option>
+                        </select>
+                    </div>
+                </div>
+                 <div class="tt-help-btn-container">
+                    <button class="tt-help-btn" id="tt-help-btn"><i class="fas fa-question-circle"></i> Guide</button>
+                </div>
+            </div>
+        </div>
+        
+        <main class="tt-main-content-area" itemprop="mainContentOfPage">
+            <div class="tt-tool-count-summary" id="tt-tool-count-summary">Loading...</div>
+            <div class="tt-category-grid" id="tt-category-grid-container" itemscope itemtype="http://schema.org/ItemList">
+                <!-- Categorized tool cards -->
+            </div>
+            <div id="tt-no-results" class="tt-no-results" style="display: none;">
+                <i class="fas fa-ghost"></i>
+                No tools found. Try different search terms or filters.
+            </div>
+        </main>
+
+        <div class="tt-modal-overlay" id="tt-user-guide-modal">
+            <div class="tt-modal-content">
+                <button class="tt-modal-close-btn" id="tt-modal-close-btn" aria-label="Close modal"><i class="fas fa-times"></i></button>
+                <h3 class="tt-modal-title"><i class="fas fa-book-open"></i> ToolHub Guide</h3>
+                
+                <h4><i class="fas fa-search"></i> Searching</h4>
+                <p>Use the search bar to quickly find tools by their name. The results update live. Click '×' to clear.</p>
+
+                <h4><i class="fas fa-filter"></i> Category Filters</h4>
+                <p>Select category buttons to narrow down tools. 'All Tools' shows everything. Tools can appear in multiple relevant categories if applicable to your filter.</p>
+
+                <h4><i class="fas fa-sort-amount-down"></i> Sorting Options</h4>
+                <p>You can sort the main Category Cards (by name or tool count) and the Tools listed within each card (by title A-Z or Z-A) using the dropdowns.</p>
+                
+                <h4><i class="fas fa-chevron-circle-down"></i> Collapsible Categories</h4>
+                <p>Click on a category card's header to expand or collapse its tool list, helping you focus.</p>
+
+                <h4><i class="fas fa-external-link-alt"></i> External Category Links</h4>
+                <p>Each category title links to its main page on our blog for more details (opens in new tab).</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const toolData = [
+            // ... (Your JSON data remains unchanged here) ...
+            {
+                "Title": "Amortization Calculator",
+                "Link": "https://tontuftools.blogspot.com/2025/04/amortization-calculator.html",
+                "Category": "Finance, Calculator",
+                "": ""
+            },
+            {
+                "Title": "XSGames's Random Profile Picture Generator",
+                "Link": "https://tontuftools.blogspot.com/2025/04/xsgamess-random-profile-picture.html",
+                "Category": "Image, Generator, Random",
+                "": ""
+            },
+            {
+                "Title": "Find and Replace Tool",
+                "Link": "https://tontuftools.blogspot.com/2025/04/find-and-replace-tool.html",
+                "Category": "Text",
+                "": ""
+            },
+            {
+                "Title": "Hourly Rate Calculator",
+                "Link": "https://tontuftools.blogspot.com/2025/04/hourly-rate-calculator.html",
+                "Category": "Finance, Calculator",
+                "": ""
+            },
+            {
+                "Title": "All Document's Converter",
+                "Link": "https://tontuftools.blogspot.com/2025/04/all-documents-converter.html",
+                "Category": "Document",
+                "": ""
+            },
+            {
+                "Title": "Your Notes Taking App",
+                "Link": "https://tontuftools.blogspot.com/2025/04/your-notes-taking-app.html",
+                "Category": "Text",
+                "": ""
+            },
+            {
+                "Title": "Decimal to Binary Converter",
+                "Link": "https://tontuftools.blogspot.com/2025/04/binary-converter.html",
+                "Category": "Number, Converter",
+                "": ""
+            },
+            {
+                "Title": "Simple JSON Tree Viewer",
+                "Link": "https://tontuftools.blogspot.com/2025/03/simple-json-tree-viewer.html",
+                "Category": "JSON",
+                "": ""
+            },
+            {
+                "Title": "Loan/EMI Calculator",
+                "Link": "https://tontuftools.blogspot.com/2025/03/loanemi-calculator.html",
+                "Category": "Finance, Calculator",
+                "": ""
+            },
+            {
+                "Title": "Emoji Explorer Tool",
+                "Link": "https://tontuftools.blogspot.com/2025/03/emoji-explorer-tool.html",
+                "Category": "Emoji",
+                "": ""
+            },
+            {
+                "Title": "External YouTube Video Player",
+                "Link": "https://tontuftools.blogspot.com/2025/03/external-youtube-video-player.html",
+                "Category": "Video, Player, YouTube",
+                "": ""
+            },
+            {
+                "Title": "Anchor to Link Converter Tool",
+                "Link": "https://tontuftools.blogspot.com/2025/03/anchor-to-link-converter-tool.html",
+                "Category": "URL",
+                "": ""
+            },
+            {
+                "Title": "Simple Image to PDF Converter FREE Tool",
+                "Link": "https://tontuftools.blogspot.com/2025/03/online-image-to-pdf-converter-free-tool.html",
+                "Category": "PDF, Converter",
+                "": ""
+            },
+            {
+                "Title": "Simple HTML Popup Generator Tool",
+                "Link": "https://tontuftools.blogspot.com/2025/03/simple-html-popup-generator-tool.html",
+                "Category": "HTML, Coding",
+                "": ""
+            },
+            {
+                "Title": "Online Simple Image Cropper Tool",
+                "Link": "https://tontuftools.blogspot.com/2025/03/online-image-calculator-tool.html",
+                "Category": "Image, ",
+                "": ""
+            },
+            {
+                "Title": "Simple Curve Calculator Tool",
+                "Link": "https://tontuftools.blogspot.com/2025/03/simple-curve-calculator-tool.html",
+                "Category": "Math, Calculator",
+                "": ""
+            },
+            {
+                "Title": "Image & Signature Joiner",
+                "Link": "https://tontuftools.blogspot.com/2025/03/image-signature-joiner.html",
+                "Category": "Image, ",
+                "": ""
+            },
+            {
+                "Title": "Front & Back Image Joiner Tool",
+                "Link": "https://tontuftools.blogspot.com/2025/03/front-back-image-joiner-tool.html",
+                "Category": "Image, ",
+                "": ""
+            },
+            {
+                "Title": "Online Name & Date Joiner in Photo Tool",
+                "Link": "https://tontuftools.blogspot.com/2025/03/online-name-date-joiner-in-photo-tool.html",
+                "Category": "Image, ",
+                "": ""
+            },
+            {
+                "Title": "URL List Cleaner Tool",
+                "Link": "https://tontuftools.blogspot.com/2025/03/url-list-cleaner-tool.html",
+                "Category": "URL",
+                "": ""
+            },
+            {
+                "Title": "THIRUKKURAL Generator",
+                "Link": "https://tontuftools.blogspot.com/2025/03/thirukkural-generator.html",
+                "Category": "Book",
+                "": ""
+            },
+            {
+                "Title": "CSV to JSON Converter",
+                "Link": "https://tontuftools.blogspot.com/free-online-csv-to-json-converter-tool",
+                "Category": "CSV, JSON",
+                "": ""
+            },
+            {
+                "Title": "Mexican RFC Calculator ",
+                "Link": "https://tontuftools.blogspot.com/2025/05/free-online-mexican-rfc-calculator-tool.html",
+                "Category": "Calculator",
+                "": ""
+            },
+            {
+                "Title": "Email Extractor from Text",
+                "Link": "https://tontuftools.blogspot.com/2024/04/email-extractor-from-text.html",
+                "Category": "Email, Text",
+                "": ""
+            },
+            {
+                "Title": "Gmail Dot Trick Generator",
+                "Link": "https://tontuftools.blogspot.com/2023/07/gmail-dot-trick-generator-tool.html",
+                "Category": "Email, Text",
+                "": ""
+            },
+            {
+                "Title": "NPV Calculator",
+                "Link": "https://tontuftools.blogspot.com/2025/05/net-present-value-calculator.html",
+                "Category": "Finance, Calculator",
+                "": ""
+            },
+            {
+                "Title": "Random Website Generator",
+                "Link": "https://tontuftools.blogspot.com/2025/02/random-website-generator.html",
+                "Category": "Random",
+                "": ""
+            },
+            {
+                "Title": "Random WAIFU Generator",
+                "Link": "https://tontuftools.blogspot.com/2025/02/random-waifu-images-generator.html",
+                "Category": "Random",
+                "": ""
+            },
+            {
+                "Title": "Random Fox Image Generator",
+                "Link": "https://tontuftools.blogspot.com/2025/02/foxygenerator-random-fox-image-generator.html",
+                "Category": "Random",
+                "": ""
+            },
+            {
+                "Title": "Joke Generator",
+                "Link": "https://tontuftools.blogspot.com/2023/08/random-joke-generator-with-audio-voice.html",
+                "Category": "Fun, Random",
+                "": ""
+            },
+            {
+                "Title": "Password Generator",
+                "Link": "https://tontuftools.blogspot.com/2023/07/advance-password-generator-tool.html",
+                "Category": "Text",
+                "": ""
+            },
+            {
+                "Title": "Fake Profile Generator",
+                "Link": "https://tontuftools.blogspot.com/2023/07/random-fake-profile-generator-app.html",
+                "Category": "Random,",
+                "": ""
+            },
+            {
+                "Title": "Python Single Line Converter",
+                "Link": "https://tontuftools.blogspot.com/2023/07/python-single-line-converter-tool.html",
+                "Category": "Code, Python",
+                "": ""
+            },
+            {
+                "Title": "Recipe Finder",
+                "Link": "https://tontuftools.blogspot.com/2025/05/recipe-finder.html",
+                "Category": "Random,",
+                "": ""
+            },
+            {
+                "Title": "Miller-Orr Model Calculator",
+                "Link": "https://tontuftools.blogspot.com/2025/05/miller-orr-model-calculator-find.html",
+                "Category": "Finance, Calculator",
+                "": ""
+            },
+            {
+                "Title": "Cocktail Finder ",
+                "Link": "https://tontuftools.blogspot.com/2025/05/cocktail-finder.html",
+                "Category": "Random,",
+                "": ""
+            },
+            {
+                "Title": "Custom robots.txt Code Generator for Blogger",
+                "Link": "https://tontuftools.blogspot.com/2023/08/custom-robotstxt-code-generator-for.html",
+                "Category": "Blogger",
+                "": ""
+            },
+            {
+                "Title": "robots.txt Code Generator",
+                "Link": "https://tontuftools.blogspot.com/2024/01/simple-online-robottxt-generator-tool.html",
+                "Category": "SEO,",
+                "": ""
+            },
+            {
+                "Title": "Fake Credit Card Generator",
+                "Link": "https://tontuftools.blogspot.com/2025/05/online-random-fake-credit-card.html",
+                "Category": "Fake, Random",
+                "": ""
+            },
+            {
+                "Title": "UNIX & Discord Timestamp Generator",
+                "Link": "https://tontuftools.blogspot.com/2024/12/discord-timestamp-generator.html",
+                "Category": "Discord",
+                "": ""
+            },
+            {
+                "Title": "Pin Compressor",
+                "Link": "https://tontuftools.blogspot.com/2023/07/discord-pin-compressor-tool.html",
+                "Category": "Discord",
+                "": "OFF"
+            },
+            {
+                "Title": "Colored Text Generator",
+                "Link": "https://tontuftools.blogspot.com/2023/07/discord-discord-colored-text-generator.html",
+                "Category": "Discord",
+                "": "OFF"
+            },
+            {
+                "Title": "Role Divider Generator",
+                "Link": "https://tontuftools.blogspot.com/2023/07/discord-role-divider-generator-tool.html",
+                "Category": "Discord",
+                "": ""
+            },
+            {
+                "Title": "Solid & Gradient CSS Background Colour Code Generator",
+                "Link": "https://tontuftools.blogspot.com/2023/08/css-background-color-generator-tool.html",
+                "Category": "CSS, Colour, Code",
+                "": ""
+            },
+            {
+                "Title": "HTML Color Picker",
+                "Link": "https://tontuftools.blogspot.com/2023/08/rgba-html-color-palette-color-code.html",
+                "Category": "CSS, Colour, Code",
+                "": ""
+            },
+            {
+                "Title": "Border Radius Generator",
+                "Link": "https://tontuftools.blogspot.com/2023/07/border-radius-generator-tool.html",
+                "Category": "CSS, Colour",
+                "": ""
+            },
+            {
+                "Title": "Text & URL Encoder/Decoder",
+                "Link": "https://tontuftools.blogspot.com/2024/12/simple-online-url-or-text.html",
+                "Category": "Webmaster",
+                "": ""
+            },
+            {
+                "Title": "HTML Popup Code Generator",
+                "Link": "https://tontuftools.blogspot.com/2025/03/simple-html-popup-generator-tool.html",
+                "Category": "HTML, Code",
+                "": "OFF"
+            },
+            {
+                "Title": "JSON Data Generator",
+                "Link": "https://tontuftools.blogspot.com/2025/05/online-random-json-data-generator-tool.html#container-tool",
+                "Category": "JSON",
+                "": ""
+            },
+            {
+                "Title": "Simple Salary Hike Calculator",
+                "Link": "https://tontuftools.blogspot.com/2025/05/onine-simple-salary-hike-calculator-tool.html",
+                "Category": "Finance, Calculator",
+                "": ""
+            },
+            {
+                "Title": "Affiliate Link Disclosure Page Generator",
+                "Link": "https://tontuftools.blogspot.com/2023/07/affiliate-link-disclosure-page.html",
+                "Category": "Webmaster",
+                "": ""
+            },
+            {
+                "Title": "Backlink Redirect Link Generator",
+                "Link": "https://tontuftools.blogspot.com/2025/02/free-backlink-redirect-link-generator.html",
+                "Category": "SEO,",
+                "": ""
+            },
+            {
+                "Title": "Facebook DP Extractor",
+                "Link": "https://tontuftools.blogspot.com/2023/07/facebook-profile-picture-extractor-by.html",
+                "Category": "", 
+                "": ""
+            },
+            {
+                "Title": "Your Location Finder",
+                "Link": "https://tontuftools.blogspot.com/2023/07/your-location-finder-tool-find-your.html",
+                "Category": "", 
+                "": "OFF"
+            },
+            {
+                "Title": "Budget Tracker Tool",
+                "Link": "https://tontuftools.blogspot.com/2025/01/simple-budget-tracker-tool.html",
+                "Category": "Finance,",
+                "": ""
+            },
+            {
+                "Title": "Finance Expense Calculator",
+                "Link": "https://tontuftools.blogspot.com/2024/11/advanced-expense-calculator.html",
+                "Category": "Finance,",
+                "": ""
+            },
+            {
+                "Title": "Fancy Font Generator",
+                "Link": "https://tontuftools.blogspot.com/2023/12/fancy-front-generator-tool.html",
+                "Category": "Text",
+                "": ""
+            },
+            {
+                "Title": "Simple Text Case Converter",
+                "Link": "https://tontuftools.blogspot.com/2023/08/simple-text-case-converter-tool.html",
+                "Category": "Text",
+                "": ""
+            },
+            {
+                "Title": "Online Stopwatch",
+                "Link": "https://tontuftools.blogspot.com/2025/05/simple-online-automatic-stopwatch-tool.html",
+                "Category": "Time",
+                "": ""
+            },
+            {
+                "Title": "Prime Number Checker",
+                "Link": "https://tontuftools.blogspot.com/2025/05/online-prime-numbers-check-table.html",
+                "Category": "Math",
+                "": ""
+            },
+            {
+                "Title": "Percentage Calculator",
+                "Link": "https://tontuftools.blogspot.com/2025/05/online-percentage-calculator-tool.html",
+                "Category": "Calculator, Math",
+                "": ""
+            },
+            {
+                "Title": "Discounted Cash Flow (DCF) Calculator",
+                "Link": "https://tontuftools.blogspot.com/2025/05/online-discounted-cash-flow-dcf.html",
+                "Category": "Finance,",
+                "": ""
+            },
+            {
+                "Title": "Hindi Joke Generator",
+                "Link": "https://tontuftools.blogspot.com/2023/08/random-hindi-joke-generator-with-audio.html",
+                "Category": "Random, Fun",
+                "": ""
+            },
+            {
+                "Title": "Image Format Converter",
+                "Link": "https://tontuftools.blogspot.com/2024/01/simple-online-image-converter-tool.html",
+                "Category": "Image",
+                "": ""
+            },
+            {
+                "Title": "Image to WebP Converter",
+                "Link": "https://tontuftools.blogspot.com/2024/01/img-to-webp-converter-tool.html",
+                "Category": "Image",
+                "": ""
+            },
+            {
+                "Title": "Random Text Generators",
+                "Link": "https://tontuftools.blogspot.com/2025/05/random-text-generators.html",
+                "Category": "Text",
+                "": ""
+            },
+            {
+                "Title": "HTML Compressor & Decompressor Tool",
+                "Link": "https://tontuftools.blogspot.com/2025/05/html-compressor-decompressor-tool.html",
+                "Category": "HTML",
+                "": "OFF"
+            },
+            {
+                "Title": "Zalgo Text Converter",
+                "Link": "https://tontuftools.blogspot.com/2025/05/zalgo-text-generator.html",
+                "Category": "Text",
+                "": ""
+            },
+            {
+                "Title": "AI YouTube Content",
+                "Link": "https://tontuftools.blogspot.com/2025/05/ai-powered-youtube-content-generator.html",
+                "Category": "AI, YouTube",
+                "": ""
+            },
+            {
+                "Title": "Scoreboard Tracker",
+                "Link": "https://tontuftools.blogspot.com/2025/05/online-scoreboard-tracker-tool.html",
+                "Category": "Utilities, Time,",
+                "": ""
+            },
+            {
+                "Title": "Percentage Calculator",
+                "Link": "https://tontuftools.blogspot.com/2025/05/online-percentage-calculator-tool.html",
+                "Category": "Calculator, Math",
+                "": ""
+            },
+            {
+                "Title": "AI Financial Statement Summary Generator",
+                "Link": "https://tontuftools.blogspot.com/2025/05/ai-financial-statement-summary.html",
+                "Category": "AI, Finance",
+                "": ""
+            }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const categoryGridContainer = document.getElementById('tt-category-grid-container');
+            const searchInput = document.getElementById('tt-search-input');
+            const clearSearchBtn = document.getElementById('tt-clear-search-btn');
+            const categoryFiltersContainer = document.getElementById('tt-category-filters-container');
+            const toolCountSummaryDisplay = document.getElementById('tt-tool-count-summary');
+            const noResultsDisplay = document.getElementById('tt-no-results');
+            const sortCategoriesSelect = document.getElementById('tt-sort-categories-select');
+            const sortToolsSelect = document.getElementById('tt-sort-tools-select');
+            const helpBtn = document.getElementById('tt-help-btn');
+            const userGuideModal = document.getElementById('tt-user-guide-modal');
+            const modalCloseBtn = document.getElementById('tt-modal-close-btn');
+
+            let allToolsRaw = [];
+            let toolsByPrimaryCategory = {}; 
+            let allUniqueCategoriesForFiltering = []; 
+            
+            let currentSearchTerm = '';
+            let currentSelectedCategoryFilter = 'All';
+            let currentSortCategoriesMethod = 'name-asc';
+            let currentSortToolsMethod = 'title-asc';
+            let collapsedCategoryStates = {};
+
+            const UNCATEGORIZED_NAME = "Uncategorized";
+
+            function parseToolCategories(categoryString) {
+                if (!categoryString || typeof categoryString !== 'string' || categoryString.trim() === '') {
+                    return [UNCATEGORIZED_NAME];
+                }
+                return categoryString.split(',').map(cat => cat.trim()).filter(cat => cat !== '');
+            }
+
+            function processToolsData() {
+                toolsByPrimaryCategory = {};
+                const categorySetForFilterButtons = new Set();
+                
+                allToolsRaw.forEach(tool => {
+                    // Check if the tool is marked as "OFF"
+                    if (tool.hasOwnProperty("") && tool[""] === "OFF") { // Note: tool[""] to access empty string key
+                        return; // Skip this tool, do not process it further
+                    }
+
+                    const toolIndividualCategories = parseToolCategories(tool.Category);
+                    const primaryCatName = toolIndividualCategories[0]; 
+                    
+                    toolIndividualCategories.forEach(c => categorySetForFilterButtons.add(c));
+
+                    if (!toolsByPrimaryCategory[primaryCatName]) {
+                        toolsByPrimaryCategory[primaryCatName] = [];
+                    }
+                    toolsByPrimaryCategory[primaryCatName].push(tool);
+                });
+                
+                allUniqueCategoriesForFiltering = Array.from(categorySetForFilterButtons).sort((a, b) => {
+                    if (a === UNCATEGORIZED_NAME) return 1; 
+                    if (b === UNCATEGORIZED_NAME) return -1;
+                    return a.localeCompare(b);
+                });
+            }
+            
+            function populateCategoryFilterButtons() {
+                categoryFiltersContainer.innerHTML = '';
+                const allBtn = document.createElement('button');
+                allBtn.classList.add('tt-filter-btn'); allBtn.textContent = 'All Tools';
+                allBtn.dataset.category = 'All';
+                if (currentSelectedCategoryFilter === 'All') allBtn.classList.add('tt-active');
+                categoryFiltersContainer.appendChild(allBtn);
+
+                allUniqueCategoriesForFiltering.forEach(catName => {
+                    const btn = document.createElement('button');
+                    btn.classList.add('tt-filter-btn'); btn.textContent = catName;
+                    btn.dataset.category = catName;
+                    if (currentSelectedCategoryFilter === catName) btn.classList.add('tt-active');
+                    categoryFiltersContainer.appendChild(btn);
+                });
+            }
+            
+            function getSortedPrimaryCategoryKeys() {
+                let keys = Object.keys(toolsByPrimaryCategory);
+                keys.sort((a, b) => {
+                    switch (currentSortCategoriesMethod) {
+                        case 'name-desc': return b.localeCompare(a);
+                        case 'tools-desc': return (toolsByPrimaryCategory[b]?.length || 0) - (toolsByPrimaryCategory[a]?.length || 0);
+                        case 'tools-asc': return (toolsByPrimaryCategory[a]?.length || 0) - (toolsByPrimaryCategory[b]?.length || 0);
+                        case 'name-asc': default:
+                            if (a === UNCATEGORIZED_NAME) return 1; if (b === UNCATEGORIZED_NAME) return -1;
+                            return a.localeCompare(b);
+                    }
+                });
+                return keys;
+            }
+
+            function renderToolCards() {
+                categoryGridContainer.innerHTML = '';
+                let totalVisibleToolsOverall = 0;
+                let hasAnyVisibleContent = false;
+                
+                const sortedPrimaryCategories = getSortedPrimaryCategoryKeys();
+
+                sortedPrimaryCategories.forEach((primaryCatName, index) => {
+                    let toolsInThisPrimaryGroup = toolsByPrimaryCategory[primaryCatName];
+                    let toolsToDisplayInThisCard = toolsInThisPrimaryGroup.filter(tool => {
+                        const toolIndividualCats = parseToolCategories(tool.Category);
+                        const searchMatch = !currentSearchTerm || tool.Title.toLowerCase().includes(currentSearchTerm);
+                        const categoryFilterMatch = (currentSelectedCategoryFilter === 'All') || toolIndividualCats.includes(currentSelectedCategoryFilter);
+                        return searchMatch && categoryFilterMatch;
+                    });
+
+                    toolsToDisplayInThisCard.sort((a, b) => {
+                        if (currentSortToolsMethod === 'title-desc') return b.Title.localeCompare(a.Title);
+                        return a.Title.localeCompare(b.Title);
+                    });
+
+                    if (toolsToDisplayInThisCard.length > 0) {
+                        hasAnyVisibleContent = true;
+                        const categoryCard = document.createElement('div');
+                        categoryCard.classList.add('tt-category-card');
+                        categoryCard.style.animationDelay = `${index * 0.05}s`; // Stagger animation
+                        if (collapsedCategoryStates[primaryCatName]) categoryCard.classList.add('tt-collapsed');
+                        
+                        const cardHeader = document.createElement('div');
+                        cardHeader.classList.add('tt-category-card-header');
+                        cardHeader.dataset.categoryName = primaryCatName;
+
+                        const categoryLink = document.createElement('a');
+                        categoryLink.classList.add('tt-category-card-title-link');
+                        categoryLink.href = `https://tontuftools.blogspot.com/search/label/${encodeURIComponent(primaryCatName)}`;
+                        categoryLink.target = "_blank";
+                        categoryLink.innerHTML = `${primaryCatName} <i class="fas fa-external-link-alt"></i>`;
+                        
+                        const collapseIcon = document.createElement('i');
+                        collapseIcon.classList.add('fas', 'fa-chevron-down', 'tt-collapse-icon');
+
+                        cardHeader.appendChild(categoryLink); cardHeader.appendChild(collapseIcon);
+                        categoryCard.appendChild(cardHeader);
+
+                        const cardBody = document.createElement('div');
+                        cardBody.classList.add('tt-category-card-body');
+                        const toolListUl = document.createElement('ul');
+                        toolListUl.classList.add('tt-tool-list');
+
+                        toolsToDisplayInThisCard.forEach(tool => {
+                            totalVisibleToolsOverall++;
+                            const toolLi = document.createElement('li');
+                            toolLi.classList.add('tt-tool-item');
+                            toolLi.innerHTML = `
+                                <a href="${tool.Link}" target="_blank" class="tt-tool-item-link">
+                                    <span class="tt-tool-name">${tool.Title}</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>`;
+                            toolListUl.appendChild(toolLi);
+                        });
+                        cardBody.appendChild(toolListUl); categoryCard.appendChild(cardBody);
+                        categoryGridContainer.appendChild(categoryCard);
+                    }
+                });
+                noResultsDisplay.style.display = hasAnyVisibleContent ? 'none' : 'block';
+                updateToolCountSummary(totalVisibleToolsOverall);
+            }
+            
+            function updateToolCountSummary(visibleCount) {
+                const totalToolsInSource = allToolsRaw.length;
+                 if (currentSelectedCategoryFilter === 'All' && !currentSearchTerm) {
+                    toolCountSummaryDisplay.textContent = `Displaying ${totalToolsInSource} tools.`;
+                } else {
+                    let baseText = `Found ${visibleCount} tool(s)`;
+                    if (currentSelectedCategoryFilter !== 'All') baseText += ` in "${currentSelectedCategoryFilter}"`;
+                    if (currentSearchTerm) baseText += ` matching "${currentSearchTerm}"`;
+                    toolCountSummaryDisplay.textContent = baseText + `.`;
+                }
+            }
+
+            searchInput.addEventListener('input', (e) => {
+                currentSearchTerm = e.target.value.trim().toLowerCase();
+                clearSearchBtn.style.display = currentSearchTerm ? 'inline-block' : 'none';
+                renderToolCards();
+            });
+            clearSearchBtn.addEventListener('click', () => {
+                searchInput.value = ''; currentSearchTerm = '';
+                clearSearchBtn.style.display = 'none'; renderToolCards(); searchInput.focus();
+            });
+            categoryFiltersContainer.addEventListener('click', (e) => {
+                if (e.target.classList.contains('tt-filter-btn')) {
+                    document.querySelectorAll('.tt-filter-btn.tt-active').forEach(item => item.classList.remove('tt-active'));
+                    e.target.classList.add('tt-active');
+                    currentSelectedCategoryFilter = e.target.dataset.category; renderToolCards();
+                }
+            });
+            sortCategoriesSelect.addEventListener('change', (e) => { currentSortCategoriesMethod = e.target.value; renderToolCards(); });
+            sortToolsSelect.addEventListener('change', (e) => { currentSortToolsMethod = e.target.value; renderToolCards(); });
+            categoryGridContainer.addEventListener('click', (e) => {
+                const header = e.target.closest('.tt-category-card-header');
+                if (header) {
+                    const card = header.closest('.tt-category-card');
+                    const categoryName = header.dataset.categoryName;
+                    card.classList.toggle('tt-collapsed');
+                    collapsedCategoryStates[categoryName] = card.classList.contains('tt-collapsed');
+                }
+            });
+            helpBtn.addEventListener('click', () => userGuideModal.classList.add('tt-active'));
+            modalCloseBtn.addEventListener('click', () => userGuideModal.classList.remove('tt-active'));
+            userGuideModal.addEventListener('click', (e) => { if (e.target === userGuideModal) userGuideModal.classList.remove('tt-active'); });
+
+            function init() {
+                allToolsRaw = toolData.map(tool => ({...tool})); 
+                processToolsData(); populateCategoryFilterButtons(); renderToolCards(); 
+            }
+            init();
+        });
+    </script>
+</body>
+</html>

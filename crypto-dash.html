@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoVision | Modern Cryptocurrency Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+        .card-glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .price-up {
+            color: #10b981;
+        }
+        .price-down {
+            color: #ef4444;
+        }
+        .coin-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .animated-gradient {
+            background: linear-gradient(-45deg, #1a1a2e, #16213e, #0f3460, #533483);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body class="gradient-bg text-white min-h-screen font-sans">
+    <div class="container mx-auto px-4 py-6">
+        <!-- Header -->
+        <header class="flex justify-between items-center mb-8">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-coins text-2xl text-yellow-400"></i>
+                <h1 class="text-2xl font-bold">Crypto<span class="text-yellow-400">Vision</span></h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <div class="relative">
+                    <input type="text" placeholder="Search coins..." class="bg-gray-800 bg-opacity-50 rounded-full py-2 px-4 pl-10 focus:outline-none focus:ring-2 focus:ring-yellow-400">
+                    <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                </div>
+                <button class="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-medium py-2 px-4 rounded-full transition duration-300">
+                    Connect Wallet
+                </button>
+                <div class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center cursor-pointer">
+                    <i class="fas fa-user"></i>
+                </div>
+            </div>
+        </header>
+
+        <!-- Market Overview -->
+        <div class="mb-8">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-semibold">Market Overview</h2>
+                <div class="flex space-x-2">
+                    <button class="bg-gray-800 bg-opacity-50 hover:bg-gray-700 py-1 px-3 rounded-full text-sm">24h</button>
+                    <button class="bg-gray-800 bg-opacity-50 hover:bg-gray-700 py-1 px-3 rounded-full text-sm">7d</button>
+                    <button class="bg-yellow-400 hover:bg-yellow-500 text-gray-900 py-1 px-3 rounded-full text-sm font-medium">30d</button>
+                    <button class="bg-gray-800 bg-opacity-50 hover:bg-gray-700 py-1 px-3 rounded-full text-sm">1y</button>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="card-glass rounded-xl p-6">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-gray-400 text-sm">Total Market Cap</p>
+                            <p class="text-2xl font-bold">$1.28T</p>
+                            <p class="text-green-400 text-sm flex items-center">
+                                <i class="fas fa-caret-up mr-1"></i> 2.34%
+                            </p>
+                        </div>
+                        <div class="w-12 h-12 rounded-full bg-blue-500 bg-opacity-20 flex items-center justify-center">
+                            <i class="fas fa-chart-line text-blue-400"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-glass rounded-xl p-6">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-gray-400 text-sm">24h Volume</p>
+                            <p class="text-2xl font-bold">$48.7B</p>
+                            <p class="text-green-400 text-sm flex items-center">
+                                <i class="fas fa-caret-up mr-1"></i> 5.67%
+                            </p>
+                        </div>
+                        <div class="w-12 h-12 rounded-full bg-purple-500 bg-opacity-20 flex items-center justify-center">
+                            <i class="fas fa-exchange-alt text-purple-400"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-glass rounded-xl p-6">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-gray-400 text-sm">BTC Dominance</p>
+                            <p class="text-2xl font-bold">48.3%</p>
+                            <p class="text-red-400 text-sm flex items-center">
+                                <i class="fas fa-caret-down mr-1"></i> 0.89%
+                            </p>
+                        </div>
+                        <div class="w-12 h-12 rounded-full bg-yellow-500 bg-opacity-20 flex items-center justify-center">
+                            <i class="fab fa-bitcoin text-yellow-400"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-glass rounded-xl p-6">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-gray-400 text-sm">Active Cryptos</p>
+                            <p class="text-2xl font-bold">10,234</p>
+                            <p class="text-green-400 text-sm flex items-center">
+                                <i class="fas fa-caret-up mr-1"></i> 1.12%
+                            </p>
+                        </div>
+                        <div class="w-12 h-12 rounded-full bg-green-500 bg-opacity-20 flex items-center justify-center">
+                            <i class="fas fa-coins text-green-400"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Left Column -->
+            <div class="lg:col-span-2 space-y-6">
+                <!-- Price Chart -->
+                <div class="card-glass rounded-xl p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="flex items-center space-x-3">
+                            <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="Bitcoin" class="coin-icon">
+                            <div>
+                                <h3 class="font-semibold">Bitcoin (BTC)</h3>
+                                <p class="text-gray-400 text-sm">$42,876.34</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div>
+                                <p class="text-gray-400 text-sm">24h Change</p>
+                                <p class="text-green-400 font-medium">+2.45%</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-400 text-sm">24h High/Low</p>
+                                <p class="font-medium">$43,210 / $41,890</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="h-64">
+                        <canvas id="priceChart"></canvas>
+                    </div>
+                    <div class="flex justify-between mt-4">
+                        <button class="bg-gray-800 bg-opacity-50 hover:bg-gray-700 py-1 px-3 rounded-full text-sm">1h</button>
+                        <button class="bg-gray-800 bg-opacity-50 hover:bg-gray-700 py-1 px-3 rounded-full text-sm">4h</button>
+                        <button class="bg-yellow-400 hover:bg-yellow-500 text-gray-900 py-1 px-3 rounded-full text-sm font-medium">1d</button>
+                        <button class="bg-gray-800 bg-opacity-50 hover:bg-gray-700 py-1 px-3 rounded-full text-sm">1w</button>
+                        <button class="bg-gray-800 bg-opacity-50 hover:bg-gray-700 py-1 px-3 rounded-full text-sm">1m</button>
+                    </div>
+                </div>
+
+                <!-- Top Gainers & Losers -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="card-glass rounded-xl p-4">
+                        <div class="flex justify-between items-center mb-3">
+                            <h3 class="font-semibold">Top Gainers</h3>
+                            <span class="text-xs text-gray-400">24h</span>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-2">
+                                    <img src="https://cryptologos.cc/logos/solana-sol-logo.png" alt="Solana" class="coin-icon">
+                                    <span class="font-medium">SOL</span>
+                                </div>
+                                <span class="font-medium">$102.45</span>
+                                <span class="text-green-400 text-sm font-medium">+12.3%</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-2">
+                                    <img src="https://cryptologos.cc/logos/avalanche-avax-logo.png" alt="Avalanche" class="coin-icon">
+                                    <span class="font-medium">AVAX</span>
+                                </div>
+                                <span class="font-medium">$38.76</span>
+                                <span class="text-green-400 text-sm font-medium">+8.9%</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-2">
+                                    <img src="https://cryptologos.cc/logos/polygon-matic-logo.png" alt="Polygon" class="coin-icon">
+                                    <span class="font-medium">MATIC</span>
+                                </div>
+                                <span class="font-medium">$0.87</span>
+                                <span class="text-green-400 text-sm font-medium">+6.4%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-glass rounded-xl p-4">
+                        <div class="flex justify-between items-center mb-3">
+                            <h3 class="font-semibold">Top Losers</h3>
+                            <span class="text-xs text-gray-400">24h</span>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-2">
+                                    <img src="https://cryptologos.cc/logos/ripple-xrp-logo.png" alt="XRP" class="coin-icon">
+                                    <span class="font-medium">XRP</span>
+                                </div>
+                                <span class="font-medium">$0.54</span>
+                                <span class="text-red-400 text-sm font-medium">-3.2%</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-2">
+                                    <img src="https://cryptologos.cc/logos/cardano-ada-logo.png" alt="Cardano" class="coin-icon">
+                                    <span class="font-medium">ADA</span>
+                                </div>
+                                <span class="font-medium">$0.51</span>
+                                <span class="text-red-400 text-sm font-medium">-2.8%</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-2">
+                                    <img src="https://cryptologos.cc/logos/dogecoin-doge-logo.png" alt="Dogecoin" class="coin-icon">
+                                    <span class="font-medium">DOGE</span>
+                                </div>
+                                <span class="font-medium">$0.082</span>
+                                <span class="text-red-400 text-sm font-medium">-2.1%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="space-y-6">
+                <!-- Portfolio Summary -->
+                <div class="card-glass rounded-xl p-6">
+                    <h3 class="font-semibold mb-4">Portfolio Summary</h3>
+                    <div class="flex justify-between items-center mb-6">
+                        <div>
+                            <p class="text-gray-400 text-sm">Total Balance</p>
+                            <p class="text-2xl font-bold">$12,456.78</p>
+                            <p class="text-green-400 text-sm flex items-center">
+                                <i class="fas fa-caret-up mr-1"></i> 8.34% (24h)
+                            </p>
+                        </div>
+                        <div class="w-12 h-12 rounded-full bg-yellow-500 bg-opacity-20 flex items-center justify-center">
+                            <i class="fas fa-wallet text-yellow-400"></i>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="Bitcoin" class="coin-icon">
+                                <span>BTC</span>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-medium">0.42 BTC</p>
+                                <p class="text-gray-400 text-sm">$18,008.12</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="Ethereum" class="coin-icon">
+                                <span>ETH</span>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-medium">3.2 ETH</p>
+                                <p class="text-gray-400 text-sm">$8,432.64</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <img src="https://cryptologos.cc/logos/solana-sol-logo.png" alt="Solana" class="coin-icon">
+                                <span>SOL</span>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-medium">24 SOL</p>
+                                <p class="text-gray-400 text-sm">$2,458.80</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="w-full mt-6 bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-medium py-2 px-4 rounded-lg transition duration-300">
+                        Trade Assets
+                    </button>
+                </div>
+
+                <!-- Market News -->
+                <div class="card-glass rounded-xl p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="font-semibold">Market News</h3>
+                        <i class="fas fa-newspaper text-gray-400"></i>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="border-b border-gray-700 pb-4">
+                            <p class="text-sm text-gray-400 mb-1">2 hours ago</p>
+                            <h4 class="font-medium mb-1">Bitcoin ETF Approval Expected This Week</h4>
+                            <p class="text-gray-400 text-sm">Analysts predict a 75% chance of approval for spot Bitcoin ETFs by the SEC this week, which could trigger a major rally.</p>
+                        </div>
+                        <div class="border-b border-gray-700 pb-4">
+                            <p class="text-sm text-gray-400 mb-1">5 hours ago</p>
+                            <h4 class="font-medium mb-1">Ethereum Layer 2 Solutions See Record Growth</h4>
+                            <p class="text-gray-400 text-sm">Total value locked in Ethereum L2s surpasses $15B as Arbitrum and Optimism lead the charge.</p>
+                        </div>
+                        <div class="pb-2">
+                            <p class="text-sm text-gray-400 mb-1">8 hours ago</p>
+                            <h4 class="font-medium mb-1">Solana Outage Raises Concerns</h4>
+                            <p class="text-gray-400 text-sm">Network experiences 4-hour downtime, SOL price drops 5% before recovering.</p>
+                        </div>
+                    </div>
+                    <button class="w-full mt-4 bg-gray-800 hover:bg-gray-700 text-white font-medium py-2 px-4 rounded-lg transition duration-300">
+                        View All News
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Trending Coins -->
+        <div class="mt-8">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-semibold">Trending Coins</h2>
+                <a href="#" class="text-yellow-400 text-sm hover:underline">View All</a>
+            </div>
+            <div class="card-glass rounded-xl p-4 overflow-x-auto scrollbar-hide">
+                <div class="flex space-x-6 min-w-max">
+                    <!-- Coin 1 -->
+                    <div class="flex flex-col items-center">
+                        <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="Bitcoin" class="w-12 h-12 mb-2">
+                        <span class="font-medium">BTC</span>
+                        <span class="text-green-400 text-sm">+2.45%</span>
+                    </div>
+                    <!-- Coin 2 -->
+                    <div class="flex flex-col items-center">
+                        <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="Ethereum" class="w-12 h-12 mb-2">
+                        <span class="font-medium">ETH</span>
+                        <span class="text-green-400 text-sm">+3.12%</span>
+                    </div>
+                    <!-- Coin 3 -->
+                    <div class="flex flex-col items-center">
+                        <img src="https://cryptologos.cc/logos/solana-sol-logo.png" alt="Solana" class="w-12 h-12 mb-2">
+                        <span class="font-medium">SOL</span>
+                        <span class="text-green-400 text-sm">+12.3%</span>
+                    </div>
+                    <!-- Coin 4 -->
+                    <div class="flex flex-col items-center">
+                        <img src="https://cryptologos.cc/logos/avalanche-avax-logo.png" alt="Avalanche" class="w-12 h-12 mb-2">
+                        <span class="font-medium">AVAX</span>
+                        <span class="text-green-400 text-sm">+8.9%</span>
+                    </div>
+                    <!-- Coin 5 -->
+                    <div class="flex flex-col items-center">
+                        <img src="https://cryptologos.cc/logos/polygon-matic-logo.png" alt="Polygon" class="w-12 h-12 mb-2">
+                        <span class="font-medium">MATIC</span>
+                        <span class="text-green-400 text-sm">+6.4%</span>
+                    </div>
+                    <!-- Coin 6 -->
+                    <div class="flex flex-col items-center">
+                        <img src="https://cryptologos.cc/logos/cardano-ada-logo.png" alt="Cardano" class="w-12 h-12 mb-2">
+                        <span class="font-medium">ADA</span>
+                        <span class="text-red-400 text-sm">-2.8%</span>
+                    </div>
+                    <!-- Coin 7 -->
+                    <div class="flex flex-col items-center">
+                        <img src="https://cryptologos.cc/logos/dogecoin-doge-logo.png" alt="Dogecoin" class="w-12 h-12 mb-2">
+                        <span class="font-medium">DOGE</span>
+                        <span class="text-red-400 text-sm">-2.1%</span>
+                    </div>
+                    <!-- Coin 8 -->
+                    <div class="flex flex-col items-center">
+                        <img src="https://cryptologos.cc/logos/polkadot-new-dot-logo.png" alt="Polkadot" class="w-12 h-12 mb-2">
+                        <span class="font-medium">DOT</span>
+                        <span class="text-green-400 text-sm">+1.7%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Price Chart
+        const priceCtx = document.getElementById('priceChart').getContext('2d');
+        const priceChart = new Chart(priceCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                datasets: [{
+                    label: 'BTC Price',
+                    data: [28000, 29500, 31000, 29000, 27000, 25000, 30000, 32000, 35000, 38000, 40000, 42876],
+                    borderColor: '#f59e0b',
+                    backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                    borderWidth: 2,
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            display: false,
+                            drawBorder: false
+                        },
+                        ticks: {
+                            color: 'rgba(255, 255, 255, 0.5)'
+                        }
+                    },
+                    y: {
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)',
+                            drawBorder: false
+                        },
+                        ticks: {
+                            color: 'rgba(255, 255, 255, 0.5)'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Simulate real-time updates
+        setInterval(() => {
+            const lastValue = priceChart.data.datasets[0].data[priceChart.data.datasets[0].data.length - 1];
+            const randomChange = (Math.random() * 1000) - 500;
+            const newValue = Math.max(25000, lastValue + randomChange);
+            
+            // Remove first element and add new one
+            priceChart.data.datasets[0].data.shift();
+            priceChart.data.datasets[0].data.push(newValue);
+            
+            priceChart.update();
+        }, 3000);
+    </script>
+</body>
+</html>

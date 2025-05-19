@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recipe Finder</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+<style>
+:root {
+  --light-bg: #f8f9fa;
+  --text-dark: #343a40;
+  --primary-color: #4caf50;
+  --primary-dark: #45a049;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  line-height: 1.7;
+  padding: 30px 15px;
+  background-color: var(--light-bg);
+  color: var(--text-dark);
+}
+
+.recipe-finder-container {
+  max-width: 1200px;
+  padding: 0 15px;
+  text-align: center;
+  margin-inline: auto;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+  letter-spacing: -1px;
+}
+
+.search-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 28px;
+  margin-inline: auto;
+  max-width: 600px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+}
+
+#search-input {
+  padding: 15px 20px;
+  font-size: 1rem;
+  flex-grow: 1;
+  border: 1px solid #e9ecef;
+  border-radius: 8px 0 0 8px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+#search-input:focus {
+  border-color: var(--primary-color);
+}
+
+#search-button {
+  padding: 13px 25px;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: 0 8px 8px 0;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#search-button:hover {
+  background-color: var(--primary-dark);
+}
+
+.random-button {
+  padding: 10px 25px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+  background-color: #ff9800;
+  border: none;
+  color: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.random-button:hover {
+  background-color: #f57c00;
+  transform: translateY(-2px);
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 25px;
+  margin-top: 30px;
+}
+
+.recipe-item img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.recipe-item {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.25s ease-in-out;
+}
+
+.recipe-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.recipe-item h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  padding: 15px;
+  margin: 0;
+}
+
+.modal-container {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 1;
+  visibility: visible;
+  backdrop-filter: blur(3px);
+  padding: 20px;
+  transition: opacity 0.3s ease, visibility 0s ease 0s;
+}
+
+.modal-container.hidden {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0s ease 0.3s,
+    backdrop-filter 0.3s ease;
+  backdrop-filter: blur(0px);
+}
+
+.modal-content {
+  background-color: #fff;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  padding: 35px 40px;
+  position: relative;
+  transform: scale(1);
+  transition: transform 0.3s ease;
+}
+
+.modal-container.hidden .modal-content {
+  transform: scale(0.95);
+}
+
+.modal-content .modal-close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: var(--light-bg);
+  border: 1px solid #e9ecef;
+  border-radius: 50%;
+  height: 35px;
+  width: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #6c757d;
+  transform: rotate(45deg);
+  transition: all 0.2s ease;
+}
+
+.modal-content .modal-close-btn:hover {
+  transform: rotate(135deg);
+  color: var(--text-dark);
+  background-color: #e2e6ea;
+}
+
+#recipe-details-content h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: var(--primary-color);
+}
+
+#recipe-details-content img {
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#recipe-details-content h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-top: 25px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid var(--primary-color);
+  padding-bottom: 8px;
+}
+
+#recipe-details-content ul {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 25px;
+}
+
+#recipe-details-content ul li {
+  padding: 8px 0;
+  border-bottom: 1px dashed #e9ecef;
+  font-size: 0.95rem;
+}
+
+#recipe-details-content ul li:last-child {
+  border-bottom: none;
+}
+
+#recipe-details-content p {
+  line-height: 1.8;
+  font-size: 1rem;
+}
+
+#recipe-details-content a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+#recipe-details-content a:hover {
+  color: var(--primary-dark);
+  text-decoration: underline;
+}
+
+#recipe-details-content .video-wrapper {
+  margin-top: 15px;
+  margin-bottom: 8px;
+}
+
+.message {
+  margin: 25px auto;
+  padding: 10px;
+  max-width: 600px;
+  font-size: 1rem;
+  border-radius: 8px;
+}
+
+.message.error {
+  color: #dc3545;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+}
+
+.message.info,
+.message.loading {
+  color: #17a2b8;
+  background-color: #d1ecf1;
+  border: 1px solid #bee5eb;
+}
+</style>
+
+</head>
+  <body>
+    <div class="recipe-finder-container">
+      <h1>Recipe Finder</h1>
+
+      <form id="search-form" class="search-box">
+        <input
+          type="text"
+          id="search-input"
+          placeholder="Search by name (eg. 'carrot')"
+        />
+
+        <button type="submit" id="search-button">Search</button>
+      </form>
+
+      <div class="random-button-container">
+        <button id="random-button" class="random-button">
+          Get Random Recipe
+        </button>
+      </div>
+
+      <div class="message" id="message-area">
+        Search for a recipe or get a random one!
+      </div>
+
+      <div class="results-grid" id="results-grid"></div>
+    </div>
+
+    <div class="modal-container hidden" id="recipe-modal">
+      <div class="modal-content">
+        <button id="modal-close-btn" class="modal-close-btn">+</button>
+        <div id="recipe-details-content"></div>
+      </div>
+    </div>
+    <script>
+    
+    
+    const SEARCH_API_URL = "https://www.themealdb.com/api/json/v1/1/search.php?s=";
+const RANDOM_API_URL = "https://www.themealdb.com/api/json/v1/1/random.php";
+const LOOKUP_API_URL = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=";
+
+const searchForm = document.getElementById("search-form");
+const searchInput = document.getElementById("search-input");
+const resultsGrid = document.getElementById("results-grid");
+const messageArea = document.getElementById("message-area");
+const randomButton = document.getElementById("random-button");
+const modal = document.getElementById("recipe-modal");
+const modalContent = document.getElementById("recipe-details-content");
+const modalCloseBtn = document.getElementById("modal-close-btn");
+
+searchForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const searchTerm = searchInput.value.trim();
+
+  if (searchTerm) {
+    searchRecipes(searchTerm);
+  } else {
+    showMessage("Please enter a search term", true);
+  }
+});
+
+async function searchRecipes(query) {
+  showMessage(`Searching for "${query}"...`, false, true);
+  resultsGrid.innerHTML = "";
+
+  try {
+    const response = await fetch(`${SEARCH_API_URL}${query}`);
+    if (!response.ok) throw new Error("Network error");
+
+    const data = await response.json();
+    clearMessage();
+    console.log("data: ", data);
+
+    if (data.meals) {
+      displayRecipes(data.meals);
+    } else {
+      showMessage(`No recipes found for "${query}",`);
+    }
+  } catch (error) {
+    showMessage("Something went wrong, Please try again.", true);
+  }
+}
+
+function showMessage(message, isError = false, isLoading = false) {
+  messageArea.textContent = message;
+  if (isError) messageArea.classList.add("error");
+  if (isLoading) messageArea.classList.add("loading");
+}
+
+function clearMessage() {
+  messageArea.textContent = "";
+  messageArea.className = "message";
+}
+
+function displayRecipes(recipes) {
+  if (!recipes || recipes.length === 0) {
+    showMessage("No recipes to display");
+    return;
+  }
+
+  recipes.forEach((recipe) => {
+    const recipeDiv = document.createElement("div");
+    recipeDiv.classList.add("recipe-item");
+    recipeDiv.dataset.id = recipe.idMeal;
+
+    recipeDiv.innerHTML = `
+        <img src="${recipe.strMealThumb}" alt="${recipe.strMeal}" loading="lazy">
+        <h3>${recipe.strMeal}</h3>
+    `;
+
+    resultsGrid.appendChild(recipeDiv);
+  });
+}
+
+randomButton.addEventListener("click", getRandomRecipe);
+
+async function getRandomRecipe() {
+  showMessage("Fetching a random recipe...", false, true);
+  resultsGrid.innerHTML = "";
+
+  try {
+    const response = await fetch(RANDOM_API_URL);
+    if (!response.ok) throw new Error("Something went wrong.");
+    const data = await response.json();
+
+    clearMessage();
+
+    if (data.meals && data.meals.length > 0) {
+      displayRecipes(data.meals);
+    } else {
+      showMessage("Could not fetch a random recipe. Please try again.", true);
+    }
+  } catch (error) {
+    showMessage(
+      "Failed to fetch a random recipe. Please check your connection and try again.",
+      true
+    );
+  }
+}
+
+function showModal() {
+  modal.classList.remove("hidden");
+  document.body.style.overflow = "hidden";
+}
+
+function closeModal() {
+  modal.classList.add("hidden");
+  document.body.style.overflow = "";
+}
+
+resultsGrid.addEventListener("click", (e) => {
+  const card = e.target.closest(".recipe-item");
+
+  if (card) {
+    const recipeId = card.dataset.id;
+    getRecipeDetails(recipeId);
+  }
+});
+
+async function getRecipeDetails(id) {
+  modalContent.innerHTML = '<p class="message loading">Loading details...</p>';
+  showModal();
+
+  try {
+    const response = await fetch(`${LOOKUP_API_URL}${id}`);
+    if (!response.ok) throw new Error("Failed to fetch recipe details.");
+    const data = await response.json();
+
+    console.log("details: ", data);
+    if (data.meals && data.meals.length > 0) {
+      displayRecipeDetails(data.meals[0]);
+    } else {
+      modalContent.innerHTML =
+        '<p class="message error">Could not load recipe details.</p>';
+    }
+  } catch (error) {
+    modalContent.innerHTML =
+      '<p class="message error">Failed to load recipe details. Check your connection or try again.</p>';
+  }
+}
+
+modalCloseBtn.addEventListener("click", closeModal);
+
+modal.addEventListener("click", (e) => {
+  if (e.target === modal) {
+    closeModal();
+  }
+});
+
+function displayRecipeDetails(recipe) {
+  const ingredients = [];
+
+  for (let i = 1; i <= 20; i++) {
+    const ingredient = recipe[`strIngredient${i}`]?.trim();
+    const measure = recipe[`strMeasure${i}`]?.trim();
+
+    if (ingredient) {
+      ingredients.push(`<li>${measure ? `${measure} ` : ""}${ingredient}</li>`);
+    } else {
+      break;
+    }
+  }
+
+  const categoryHTML = recipe.strCategory
+    ? `<h3>Category: ${recipe.strCategory}</h3>`
+    : "";
+  const areaHTML = recipe.strArea ? `<h3>Area: ${recipe.strArea}</h3>` : "";
+  const ingredientsHTML = ingredients.length
+    ? `<h3>Ingredients</h3><ul>${ingredients.join("")}</ul>`
+    : "";
+  const instructionsHTML = `<h3>Instructions</h3><p>${
+    recipe.strInstructions
+      ? recipe.strInstructions.replace(/\r?\n/g, "<br>")
+      : "Instructions not available."
+  }</p>`;
+  const youtubeHTML = recipe.strYoutube
+    ? `<h3>Video Recipe</h3><div class="video-wrapper"><a href="${recipe.strYoutube}" target="_blank">Watch on YouTube</a><div>`
+    : "";
+  const sourcHTML = recipe.strSource
+    ? `<div class="source-wrapper"><a href="${recipe.strSource}" target="_blank">View Original Source</a></div>`
+    : "";
+
+  modalContent.innerHTML = `
+  <h2>${recipe.strMeal}</h2>
+  <img src="${recipe.strMealThumb}" alt="${recipe.strMeal}">
+  ${categoryHTML}
+  ${areaHTML}
+  ${ingredientsHTML}
+  ${instructionsHTML}
+  ${youtubeHTML}
+  ${sourcHTML}
+  `;
+}
+
+</script>
