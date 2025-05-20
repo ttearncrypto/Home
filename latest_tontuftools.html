@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SRE Tools Directory - Mobile Optimized</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style type="text/css">
+        /* --- Encapsulated Styles for SRE Tools Directory --- */
+        /* This CSS is designed to be mobile-first and responsive. */
+        /* It's scoped to .sre-tools-page-wrapper to prevent conflicts when embedded. */
+
+        .sre-tools-page-wrapper {
+            --sre-primary-bg: #FFFFFF;
+            --sre-secondary-text: #1A1A1A;
+            --sre-page-bg: #F7F8FC;
+            --sre-border-color: #E0E5EB;
+            --sre-light-gray-bg: #F0F2F5;
+            --sre-text-muted: #555E68;
+            --sre-link-color: #007AFF;
+            --sre-accent-purple: #7F00FF;
+            --sre-global-padding-base: 20px; /* Base for larger screens, adjusted in media queries */
+            --sre-border-radius: 10px;
+            --sre-shadow-sm: 0 2px 5px rgba(0,0,0,0.04);
+            --sre-shadow-md: 0 5px 12px rgba(0,0,0,0.06);
+            --sre-shadow-lg: 0 8px 20px rgba(0,0,0,0.07);
+
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+            background-color: var(--sre-page-bg);
+            color: var(--sre-secondary-text);
+            padding: 15px; /* Default padding for smaller screens */
+            box-sizing: border-box;
+            line-height: 1.5; /* Base line-height for readability */
+        }
+
+        .sre-tools-page-wrapper *,
+        .sre-tools-page-wrapper *::before,
+        .sre-tools-page-wrapper *::after {
+            box-sizing: inherit;
+        }
+
+        .sre-tools-page-wrapper .sre-main-content-area {
+            max-width: 1280px;
+            margin: 0 auto;
+            background-color: var(--sre-primary-bg);
+            padding: 18px; /* Padding for smaller screens */
+            border-radius: var(--sre-border-radius);
+            box-shadow: var(--sre-shadow-lg);
+        }
+
+        .sre-tools-page-wrapper hr.sre-divider {
+            border: 0;
+            height: 1px;
+            background-color: var(--sre-border-color);
+            margin: 25px 0; /* Adjusted margin */
+        }
+
+        .sre-tools-page-wrapper .sre-top-controls-container {
+            display: flex; /* Allow flex for larger screens */
+            flex-direction: column; /* Default stack for mobile */
+            gap: 15px; /* Gap between search and sort on mobile */
+            margin-bottom: 20px;
+        }
+        .sre-tools-page-wrapper .sre-global-search-group {
+            display: flex;
+            align-items: center;
+            background-color: var(--sre-primary-bg);
+            border: 1.5px solid var(--sre-border-color);
+            border-radius: var(--sre-border-radius);
+            padding: 10px 15px; /* Mobile padding */
+            box-shadow: var(--sre-shadow-sm);
+            transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .sre-tools-page-wrapper .sre-global-search-group:focus-within {
+            border-color: var(--sre-accent-purple);
+            box-shadow: 0 0 0 3.5px rgba(127, 0, 255, 0.2);
+        }
+        .sre-tools-page-wrapper .sre-global-search-group i.fa-search {
+            color: var(--sre-text-muted);
+            margin-right: 12px; /* Mobile margin */
+            font-size: 1.1em;
+        }
+        .sre-tools-page-wrapper #sre-globalToolSearchInput {
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 1em; /* Mobile font size */
+            padding: 6px 0; /* Mobile padding */
+            background-color: transparent;
+            color: var(--sre-secondary-text);
+            font-family: inherit;
+        }
+        .sre-tools-page-wrapper #sre-globalToolSearchInput::placeholder {
+            color: #A0A6AD;
+        }
+
+        .sre-tools-page-wrapper .sre-sort-control-group {
+            display: flex;
+            align-items: center;
+            background-color: var(--sre-primary-bg);
+            border: 1px solid var(--sre-border-color);
+            border-radius: var(--sre-border-radius);
+            padding-left: 15px; /* Mobile padding */
+            /* max-width: 100%; Implicitly full width in column layout */
+            font-size: 0.9em; /* Mobile font size */
+            box-shadow: var(--sre-shadow-sm);
+        }
+        .sre-tools-page-wrapper .sre-sort-control-group i {
+            margin-right: 10px;
+            color: var(--sre-text-muted);
+        }
+        .sre-tools-page-wrapper #sre-toolSortSelect {
+            border: none;
+            outline: none;
+            padding: 10px 8px; /* Mobile padding */
+            background-color: transparent;
+            color: var(--sre-secondary-text);
+            width: 100%;
+            appearance: none;
+            cursor: pointer;
+            padding-right: 28px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23555E68'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 10px; /* Smaller arrow for mobile */
+            font-family: inherit;
+        }
+
+        .sre-tools-page-wrapper .sre-popular-tools-links {
+            font-size: 0.85em; /* Mobile font size */
+            padding-left: 0; /* No indent on mobile if stacked */
+            display: flex;
+            flex-direction: column; /* Stack links on small screens */
+            gap: 8px; /* Spacing between stacked links */
+        }
+        .sre-tools-page-wrapper .sre-popular-tools-links strong {
+            margin-right: 0; /* No right margin when stacked */
+            margin-bottom: 5px; /* Space below "Popular tools:" */
+            font-weight: 500;
+        }
+        .sre-tools-page-wrapper .sre-popular-tools-links a {
+            color: var(--sre-link-color);
+            text-decoration: none;
+            margin-right: 0; /* No right margin when stacked */
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+        .sre-tools-page-wrapper .sre-popular-tools-links a:hover {
+            color: var(--sre-accent-purple);
+            text-decoration: underline;
+        }
+
+        .sre-tools-page-wrapper .sre-category-tabs-nav-wrapper {
+            border-bottom: 1.5px solid var(--sre-border-color);
+            margin-bottom: 25px; /* Mobile margin */
+            position: relative;
+        }
+        .sre-tools-page-wrapper .sre-category-tabs-nav {
+            display: flex;
+            align-items: center;
+            gap: 5px; /* Mobile gap */
+        }
+        .sre-tools-page-wrapper .sre-category-tabs-bar {
+            display: flex;
+            overflow-x: auto;
+            gap: 0;
+            padding-bottom: 0;
+            flex-grow: 1;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .sre-tools-page-wrapper .sre-category-tabs-bar::-webkit-scrollbar { display: none; }
+
+        .sre-tools-page-wrapper .sre-category-tab-button {
+            padding: 10px 15px; /* Mobile padding */
+            border: none;
+            border-bottom: 3px solid transparent; /* Slightly thinner active indicator for mobile */
+            background-color: transparent;
+            color: var(--sre-text-muted);
+            font-size: 0.9em; /* Mobile font size */
+            font-weight: 500;
+            transition: color 0.2s ease, border-color 0.25s ease, background-color 0.2s ease;
+            white-space: nowrap;
+            cursor: pointer;
+            margin-bottom: -1.5px;
+            font-family: inherit;
+        }
+        .sre-tools-page-wrapper .sre-category-tab-button:hover {
+            color: var(--sre-secondary-text);
+            background-color: var(--sre-light-gray-bg);
+        }
+        .sre-tools-page-wrapper .sre-category-tab-button.active {
+            color: var(--sre-accent-purple);
+            border-bottom-color: var(--sre-accent-purple);
+            font-weight: 600;
+        }
+        .sre-tools-page-wrapper .sre-tab-scroll-arrow {
+            background: var(--sre-primary-bg);
+            border: 1px solid var(--sre-border-color);
+            color: var(--sre-text-muted);
+            border-radius: 50%;
+            cursor: pointer;
+            width: 32px; /* Mobile size */
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: var(--sre-shadow-sm);
+            transition: all 0.2s ease;
+        }
+        .sre-tools-page-wrapper .sre-tab-scroll-arrow:hover {
+            background-color: var(--sre-light-gray-bg);
+            color: var(--sre-accent-purple);
+            box-shadow: var(--sre-shadow-md);
+        }
+
+        .sre-tools-page-wrapper #sre-toolCategoriesArea {
+            display: grid;
+            grid-template-columns: 1fr; /* Single column by default for mobile */
+            gap: 18px; /* Mobile gap */
+        }
+
+        .sre-tools-page-wrapper .sre-category-box {
+            background-color: var(--sre-primary-bg);
+            border: 1px solid var(--sre-border-color);
+            border-radius: var(--sre-border-radius);
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--sre-shadow-md);
+            transition: transform 0.25s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .sre-tools-page-wrapper .sre-category-box:hover { /* Hover effect reduced on mobile (or could be removed via @media (hover: none)) */
+            transform: translateY(-3px);
+            box-shadow: var(--sre-shadow-lg);
+        }
+        .sre-tools-page-wrapper .sre-category-box-header {
+            padding: 12px 18px; /* Mobile padding */
+            border-bottom: 1px solid var(--sre-border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .sre-tools-page-wrapper .sre-category-box-header h3.sre-category-title {
+            font-size: 1em; /* Mobile font size */
+            font-weight: 600;
+            color: var(--sre-secondary-text);
+            margin: 0;
+            line-height: 1.3;
+        }
+        .sre-tools-page-wrapper .sre-category-title .title-accent {
+            color: var(--sre-accent-purple);
+        }
+        .sre-tools-page-wrapper .sre-category-header-icons i {
+            color: var(--sre-text-muted);
+            margin-left: 10px; /* Mobile margin */
+            font-size: 0.95em;
+            cursor: pointer;
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+        .sre-tools-page-wrapper .sre-category-header-icons i:hover {
+            color: var(--sre-accent-purple);
+            transform: scale(1.1);
+        }
+
+        .sre-tools-page-wrapper .sre-category-tool-list {
+            list-style: none;
+            padding: 3px 0; /* Reduced vertical padding */
+            margin: 0;
+            flex-grow: 1;
+        }
+        .sre-tools-page-wrapper .sre-tool-list-item {
+            padding: 10px 18px; /* Mobile padding */
+            border-bottom: 1px solid #F0F2F5;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.92em; /* Mobile font size */
+            transition: background-color 0.2s ease, transform 0.15s ease;
+        }
+        .sre-tools-page-wrapper .sre-tool-list-item:last-child {
+            border-bottom: none;
+        }
+        .sre-tools-page-wrapper .sre-tool-list-item a {
+            text-decoration: none;
+            color: var(--sre-secondary-text);
+            flex-grow: 1;
+            transition: color 0.2s ease;
+            /* Make the link itself take up more vertical space for tapping */
+            display: block; 
+            padding: 2px 0; /* Small vertical padding within the anchor */
+        }
+        .sre-tools-page-wrapper .sre-tool-list-item:hover a {
+            color: var(--sre-accent-purple);
+        }
+        .sre-tools-page-wrapper .sre-tool-list-item .fa-angle-right {
+            color: var(--sre-text-muted);
+            font-size: 0.95em;
+            transition: transform 0.2s ease, color 0.2s ease;
+            margin-left: 8px; /* Ensure space from text */
+        }
+        .sre-tools-page-wrapper .sre-tool-list-item:hover {
+            background-color: var(--sre-light-gray-bg);
+            transform: translateX(2px); /* Subtle hover */
+        }
+        .sre-tools-page-wrapper .sre-tool-list-item:hover .fa-angle-right {
+            transform: translateX(1px);
+            color: var(--sre-accent-purple);
+        }
+        .sre-tools-page-wrapper p.sre-no-tools-in-category {
+            padding: 20px 18px; /* Mobile padding */
+            text-align: center;
+            color: var(--sre-text-muted);
+            font-style: italic;
+            font-size: 0.88em;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .sre-tools-page-wrapper .sre-feedback-message {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 15px; /* Mobile padding */
+            text-align: center;
+            color: var(--sre-text-muted);
+            font-size: 1em; /* Mobile font size */
+            width: 100%;
+        }
+        .sre-tools-page-wrapper .sre-feedback-message i {
+            font-size: 2.5em; /* Mobile icon size */
+            margin-bottom: 12px;
+            color: var(--sre-text-muted);
+            opacity: 0.7;
+        }
+        
+        .sre-tools-page-wrapper .sre-user-guide {
+            margin-top: 30px; /* Mobile margin */
+            padding: 18px; /* Mobile padding */
+            background-color: var(--sre-primary-bg);
+            border-radius: var(--sre-border-radius);
+            box-shadow: var(--sre-shadow-md);
+        }
+        .sre-tools-page-wrapper .sre-user-guide h2 {
+            font-size: 1.3em; /* Mobile heading size */
+            color: var(--sre-secondary-text);
+            margin-top: 0;
+            margin-bottom: 18px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--sre-border-color);
+            font-weight: 600;
+        }
+        .sre-tools-page-wrapper .sre-user-guide details {
+            margin-bottom: 12px;
+            border: 1px solid var(--sre-border-color);
+            border-radius: calc(var(--sre-border-radius) - 4px);
+            overflow: hidden;
+        }
+        .sre-tools-page-wrapper .sre-user-guide details summary {
+            padding: 10px 15px; /* Mobile padding */
+            font-weight: 500;
+            cursor: pointer;
+            background-color: var(--sre-light-gray-bg);
+            color: var(--sre-secondary-text);
+            list-style-position: inside;
+            transition: background-color 0.2s ease;
+            outline: none;
+            font-size: 0.95em; /* Mobile font size */
+        }
+        .sre-tools-page-wrapper .sre-user-guide details summary:hover {
+            background-color: #e9ecef;
+        }
+        .sre-tools-page-wrapper .sre-user-guide details[open] summary {
+            background-color: var(--sre-accent-purple);
+            color: var(--sre-primary-bg);
+        }
+        .sre-tools-page-wrapper .sre-user-guide details .sre-guide-content {
+            padding: 12px 15px; /* Mobile padding */
+            font-size: 0.9em; /* Mobile font size */
+            line-height: 1.6;
+            color: var(--sre-text-muted);
+            background-color: var(--sre-primary-bg);
+        }
+        .sre-tools-page-wrapper .sre-user-guide details .sre-guide-content p,
+        .sre-tools-page-wrapper .sre-user-guide details .sre-guide-content ul,
+        .sre-tools-page-wrapper .sre-user-guide details .sre-guide-content li {
+            margin-top: 0;
+            margin-bottom: 8px; /* Mobile margin */
+        }
+        .sre-tools-page-wrapper .sre-user-guide details .sre-guide-content p:last-child,
+        .sre-tools-page-wrapper .sre-user-guide details .sre-guide-content ul:last-child,
+        .sre-tools-page-wrapper .sre-user-guide details .sre-guide-content li:last-child {
+            margin-bottom: 0;
+        }
+         .sre-tools-page-wrapper .sre-user-guide details .sre-guide-content ul {
+            padding-left: 20px; /* Indent list */
+        }
+
+        .sre-tools-page-wrapper .sre-user-guide details summary::-webkit-details-marker {
+            color: var(--sre-text-muted);
+        }
+        .sre-tools-page-wrapper .sre-user-guide details[open] summary::-webkit-details-marker {
+            color: var(--sre-primary-bg);
+        }
+
+        /* Larger Screen Adjustments (Tablet and up) */
+        @media (min-width: 600px) {
+            .sre-tools-page-wrapper {
+                padding: var(--sre-global-padding-base);
+            }
+            .sre-tools-page-wrapper .sre-main-content-area {
+                padding: calc(var(--sre-global-padding-base) + 5px);
+            }
+            .sre-tools-page-wrapper .sre-top-controls-container {
+                flex-direction: row; /* Search and sort side-by-side */
+                justify-content: space-between;
+                align-items: center;
+                gap: var(--sre-global-padding-base);
+            }
+            .sre-tools-page-wrapper .sre-global-search-group {
+                flex-grow: 1; /* Search takes more space */
+                margin-bottom: 0; /* No bottom margin when side-by-side */
+            }
+            .sre-tools-page-wrapper .sre-sort-control-group {
+                max-width: 280px; /* Restore max-width */
+                flex-shrink: 0; /* Prevent sort from shrinking too much */
+            }
+            .sre-tools-page-wrapper .sre-popular-tools-links {
+                flex-direction: row; /* Links in a row */
+                align-items: center;
+                flex-wrap: wrap; /* Allow wrapping if many links */
+                gap: 0; /* Reset gap, use margin-right on <a> */
+                font-size: 0.9em;
+            }
+             .sre-tools-page-wrapper .sre-popular-tools-links strong {
+                margin-bottom: 0;
+                margin-right: 8px;
+            }
+            .sre-tools-page-wrapper .sre-popular-tools-links a {
+                 margin-right: 12px;
+            }
+            .sre-tools-page-wrapper #sre-toolCategoriesArea {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: var(--sre-global-padding-base);
+            }
+             .sre-tools-page-wrapper .sre-category-tab-button { padding: 12px 20px; font-size: 0.95em; }
+
+        }
+
+        /* Desktop and Larger Screens */
+        @media (min-width: 992px) {
+            .sre-tools-page-wrapper .sre-main-content-area {
+                padding: calc(var(--sre-global-padding-base) + 10px);
+            }
+            .sre-tools-page-wrapper hr.sre-divider { margin: 30px 0; }
+            .sre-tools-page-wrapper .sre-top-controls-container { margin-bottom: 25px; }
+            .sre-tools-page-wrapper .sre-global-search-group { padding: 12px 20px; }
+            .sre-tools-page-wrapper #sre-globalToolSearchInput { font-size: 1.1em; }
+            .sre-tools-page-wrapper .sre-sort-control-group { padding-left: 18px; font-size: 0.95em; max-width: 300px; }
+            .sre-tools-page-wrapper #sre-toolSortSelect { padding: 12px 10px; }
+            .sre-tools-page-wrapper .sre-popular-tools-links { font-size: 0.9em; }
+            .sre-tools-page-wrapper .sre-popular-tools-links a { margin-right: 15px; }
+            .sre-tools-page-wrapper .sre-category-tabs-nav-wrapper { margin-bottom: 35px; }
+            .sre-tools-page-wrapper .sre-category-tab-button { padding: 14px 25px; font-size: 1em; }
+            .sre-tools-page-wrapper #sre-toolCategoriesArea {
+                grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+                gap: calc(var(--sre-global-padding-base) + 5px);
+            }
+            .sre-tools-page-wrapper .sre-category-box-header { padding: 16px 20px; }
+            .sre-tools-page-wrapper .sre-category-box-header h3.sre-category-title { font-size: 1.05em; }
+            .sre-tools-page-wrapper .sre-tool-list-item { padding: 13px 20px; font-size: 0.95em; }
+            .sre-tools-page-wrapper .sre-feedback-message { padding: 50px 20px; font-size: 1.1em; }
+            .sre-tools-page-wrapper .sre-user-guide { margin-top: 40px; padding: var(--sre-global-padding-base); }
+            .sre-tools-page-wrapper .sre-user-guide h2 { font-size: 1.6em; margin-bottom: var(--sre-global-padding-base); }
+            .sre-tools-page-wrapper .sre-user-guide details summary { padding: 12px 18px; font-size: 1em; }
+            .sre-tools-page-wrapper .sre-user-guide details .sre-guide-content { padding: 15px 20px; font-size: 0.95em; }
+
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="sre-tools-page-wrapper">
+    <div class="sre-main-content-area" id="sre-content-top">
+        <div class="sre-top-controls-container" itemscope itemtype="https://schema.org/WebSite">
+            <meta itemprop="url" content="https://tontuftools.blogspot.com"/>
+            <form itemprop="potentialAction" itemscope itemtype="https://schema.org/SearchAction">
+                <meta itemprop="target" content="https://tontuftools.blogspot.com/search?q={search_term_string}"/>
+                <div class="sre-global-search-group">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="sre-globalToolSearchInput" name="search_term_string" itemprop="query-input" required placeholder="Search tool by name...">
+                </div>
+            </form>
+            <div class="sre-sort-control-group">
+                <i class="fas fa-sort-alpha-down"></i>
+                <select id="sre-toolSortSelect">
+                    <option value="default">Default Order</option>
+                    <option value="name-asc">Name (A-Z)</option>
+                    <option value="name-desc">Name (Z-A)</option>
+                    <option value="date-desc">Newest First</option>
+                    <option value="date-asc">Oldest First</option>
+                </select>
+            </div>
+        </div>
+
+        
+
+        <hr class="sre-divider">
+
+        <div class="sre-category-tabs-nav-wrapper">
+            <div class="sre-category-tabs-nav">
+                <button class="sre-tab-scroll-arrow" id="sre-catScrollLeft" aria-label="Scroll categories left"><i class="fas fa-chevron-left"></i></button>
+                <div class="sre-category-tabs-bar" id="sre-categoryFilterContainer"></div>
+                <button class="sre-tab-scroll-arrow" id="sre-catScrollRight" aria-label="Scroll categories right"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+
+        <div id="sre-toolCategoriesArea" itemscope itemtype="https://schema.org/CollectionPage">
+            <meta itemprop="name" content="SRE Tools Directory - Mobile Optimized">
+            <meta itemprop="description" content="A mobile-optimized and encapsulated directory of tools for Site Reliability Engineers, DevOps, and Network Engineers.">
+        </div>
+
+        <div id="sre-loadingIndicator" class="sre-feedback-message" style="display: none;">
+            <i class="fas fa-spinner fa-spin"></i> Loading Tools...
+        </div>
+        <div id="sre-noResultsMessage" class="sre-feedback-message" style="display: none;">
+            <i class="fas fa-binoculars"></i> No tools found. Try a different search or filter.
+        </div>
+
+        <hr class="sre-divider"> 
+        <section class="sre-user-guide">
+            <h2>User Guide</h2>
+            <details>
+                <summary>How to Search for Tools</summary>
+                <div class="sre-guide-content">
+                    <p>Use the main search bar at the top of the page to find tools by their name. Type your keywords and the list will update automatically.</p>
+                    <p>You can also click on the "Popular tools" links to quickly search for common terms.</p>
+                </div>
+            </details>
+            <details>
+                <summary>Filtering by Category</summary>
+                <div class="sre-guide-content">
+                    <p>Above the tool listings, you'll find category tabs (e.g., "Domain Tools", "DNS Tools"). Click on a tab to view only the tools belonging to that category.</p>
+                    <p>Click "All Tools" to see tools from all categories.</p>
+                    <p>Use the arrow buttons on the sides of the tab bar to scroll if there are many categories.</p>
+                </div>
+            </details>
+            <details>
+                <summary>Sorting Tools</summary>
+                <div class="sre-guide-content">
+                    <p>Below the main search bar (or beside it on larger screens), there's a dropdown menu that allows you to sort the tools. You can sort by:</p>
+                    <ul>
+                        <li><strong>Default Order:</strong> The order in which tools are fetched from the source.</li>
+                        <li><strong>Name (A-Z or Z-A):</strong> Alphabetical or reverse alphabetical order.</li>
+                        <li><strong>Newest/Oldest First:</strong> Based on when the tool was added or published.</li>
+                    </ul>
+                    <p>Sorting applies to the tools within the currently selected category or search results.</p>
+                </div>
+            </details>
+            <details>
+                <summary>Using Category Box Icons</summary>
+                <div class="sre-guide-content">
+                    <p>Each category box (e.g., "Domain Tools") has two icons in its header:</p>
+                    <ul>
+                        <li><i class="fas fa-external-link-alt"></i> <strong>View All Icon:</strong> Clicking this will switch the main filter tabs to this specific category and scroll you to the top, effectively showing all tools under this category based on your current sort order.</li>
+                        <li><i class="fas fa-search"></i> <strong>Search Category Icon:</strong> Clicking this will pre-fill the main search bar with the category's name and focus the search bar, allowing you to quickly refine or confirm a search for tools related to that category.</li>
+                    </ul>
+                </div>
+            </details>
+        </section>
+    </div>
+</div>
+
+<script type="text/javascript">
+// JavaScript remains the same as the previous "Encapsulated & User Guide" version
+document.addEventListener('DOMContentLoaded', () => {
+    const globalToolSearchInput = document.getElementById('sre-globalToolSearchInput');
+    const toolSortSelect = document.getElementById('sre-toolSortSelect');
+    const categoryFilterContainer = document.getElementById('sre-categoryFilterContainer');
+    const toolCategoriesArea = document.getElementById('sre-toolCategoriesArea');
+    const loadingIndicator = document.getElementById('sre-loadingIndicator');
+    const noResultsMessage = document.getElementById('sre-noResultsMessage');
+    const catScrollLeftBtn = document.getElementById('sre-catScrollLeft');
+    const catScrollRightBtn = document.getElementById('sre-catScrollRight');
+    const popularToolLinks = document.querySelectorAll('.sre-popular-tools-links a');
+    const contentTopAnchor = document.getElementById('sre-content-top');
+
+    let allToolsData = [];
+    let uniqueCategoriesWithData = new Map();
+    let currentActiveTabCategory = "All";
+    let searchDebounceTimer;
+
+    function processBloggerFeed(json) {
+        allToolsData = [];
+        uniqueCategoriesWithData.clear();
+        const rawCategories = new Set();
+
+        const entries = json.feed.entry || [];
+        if (!entries.length) {
+            showFeedback(noResultsMessage, true);
+            showFeedback(loadingIndicator, false);
+            return;
+        }
+
+        entries.forEach(entry => {
+            const title = entry.title.$t;
+            const link = (entry.link.find(l => l.rel === 'alternate') || {}).href;
+            let description = (entry.summary && entry.summary.$t) ? entry.summary.$t.replace(/<[^>]+>/g, '') : 'No description provided.';
+            const publishedDate = new Date(entry.published.$t);
+            const postCategories = (entry.category || []).map(cat => cat.term.trim()).filter(Boolean);
+
+            const toolItem = {
+                id: entry.id.$t,
+                name: title,
+                url: link || '#',
+                description: description,
+                categories: postCategories.length > 0 ? postCategories : ["Uncategorized"],
+                publishedDate: publishedDate,
+            };
+            allToolsData.push(toolItem);
+            toolItem.categories.forEach(catName => rawCategories.add(catName));
+        });
+        
+        allToolsData.forEach(tool => {
+            tool.categories.forEach(catName => {
+                if (!uniqueCategoriesWithData.has(catName)) {
+                    uniqueCategoriesWithData.set(catName, []);
+                }
+                uniqueCategoriesWithData.get(catName).push(tool);
+            });
+        });
+
+        const sortedCategoryNames = ["All", ...Array.from(rawCategories).sort((a,b) => a.localeCompare(b))];
+        populateCategoryTabs(sortedCategoryNames);
+        toolSortSelect.value = 'default';
+        renderFilteredTools();
+    }
+
+    function populateCategoryTabs(categoryNames) {
+        categoryFilterContainer.innerHTML = '';
+        categoryNames.forEach(catName => {
+            const button = document.createElement('button');
+            button.className = 'sre-category-tab-button';
+            button.dataset.category = catName;
+            button.textContent = catName;
+            if (catName === "All") {
+                button.classList.add('active');
+            }
+            button.addEventListener('click', () => {
+                activateTab(catName, button);
+            });
+            categoryFilterContainer.appendChild(button);
+        });
+    }
+
+    function activateTab(categoryName, tabButtonElement) {
+        currentActiveTabCategory = categoryName;
+        document.querySelectorAll('.sre-category-tab-button').forEach(btn => btn.classList.remove('active'));
+        if (tabButtonElement) {
+            tabButtonElement.classList.add('active');
+            const containerRect = categoryFilterContainer.getBoundingClientRect();
+            const buttonRect = tabButtonElement.getBoundingClientRect();
+            if (buttonRect.left < containerRect.left) {
+                categoryFilterContainer.scrollBy({left: buttonRect.left - containerRect.left - 15, behavior: 'smooth'});
+            } else if (buttonRect.right > containerRect.right) {
+                categoryFilterContainer.scrollBy({left: buttonRect.right - containerRect.right + 15, behavior: 'smooth'});
+            }
+        }
+        renderFilteredTools();
+    }
+
+    function renderFilteredTools() {
+        showFeedback(loadingIndicator, true);
+        toolCategoriesArea.innerHTML = '';
+
+        const searchTerm = globalToolSearchInput.value.toLowerCase().trim();
+        const sortOrder = toolSortSelect.value;
+        let categoriesToDisplay = [];
+
+        if (currentActiveTabCategory === "All") {
+            categoriesToDisplay = Array.from(uniqueCategoriesWithData.keys()).sort((a,b) => a.localeCompare(b));
+        } else if (uniqueCategoriesWithData.has(currentActiveTabCategory)) {
+            categoriesToDisplay = [currentActiveTabCategory];
+        }
+
+        let totalToolsRenderedAcrossCategories = 0;
+
+        categoriesToDisplay.forEach(catName => {
+            let toolsForThisCategory = uniqueCategoriesWithData.get(catName) || [];
+
+            if (searchTerm) {
+                toolsForThisCategory = toolsForThisCategory.filter(tool =>
+                    tool.name.toLowerCase().includes(searchTerm)
+                );
+            }
+            toolsForThisCategory = sortTools(toolsForThisCategory, sortOrder);
+
+            if (currentActiveTabCategory !== "All" || toolsForThisCategory.length > 0) {
+                toolCategoriesArea.appendChild(createCategoryBox(catName, toolsForThisCategory));
+                totalToolsRenderedAcrossCategories += toolsForThisCategory.length;
+            }
+        });
+        
+        showFeedback(loadingIndicator, false);
+        if (totalToolsRenderedAcrossCategories === 0 && (searchTerm || currentActiveTabCategory !== "All")) {
+            showFeedback(noResultsMessage, true);
+        } else {
+            showFeedback(noResultsMessage, false);
+        }
+    }
+    
+    function sortTools(tools, sortOrder) {
+        let sortedTools = [...tools];
+        switch (sortOrder) {
+            case 'name-asc': sortedTools.sort((a, b) => a.name.localeCompare(b.name)); break;
+            case 'name-desc': sortedTools.sort((a, b) => b.name.localeCompare(a.name)); break;
+            case 'date-desc': sortedTools.sort((a, b) => b.publishedDate - a.publishedDate); break;
+            case 'date-asc': sortedTools.sort((a, b) => a.publishedDate - b.publishedDate); break;
+        }
+        return sortedTools;
+    }
+
+    function createCategoryBox(categoryName, tools) {
+        const box = document.createElement('div');
+        box.className = 'sre-category-box';
+        box.setAttribute('itemscope', '');
+        box.setAttribute('itemtype', 'https://schema.org/ItemList');
+        
+        const titleParts = categoryName.split(' ');
+        const firstWord = titleParts[0];
+        const restOfTitle = titleParts.slice(1).join(' ');
+
+        box.innerHTML = `
+            <meta itemprop="name" content="${categoryName} Tools List">
+            <div class="sre-category-box-header">
+                <h3 class="sre-category-title">
+                    <span class="title-accent">${firstWord}</span> ${restOfTitle}
+                </h3>
+                <div class="sre-category-header-icons">
+                    <i class="fas fa-external-link-alt icon-view-all" title="View all ${categoryName} tools"></i>
+                    <i class="fas fa-search icon-search-category" title="Search for '${categoryName}' tools"></i>
+                </div>
+            </div>
+            <ul class="sre-category-tool-list">
+                ${tools.length > 0 ? tools.map((tool, index) => `
+                    <li class="sre-tool-list-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                        <meta itemprop="position" content="${index + 1}">
+                        <div itemprop="item" itemscope itemtype="https://schema.org/SoftwareApplication">
+                             <a href="${tool.url}" target="_blank" rel="noopener noreferrer" itemprop="url">
+                                <span itemprop="name">${tool.name}</span>
+                             </a>
+                             <meta itemprop="applicationCategory" content="${categoryName}">
+                             <meta itemprop="operatingSystem" content="Web-based">
+                             <div itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                                <meta itemprop="price" content="0"><meta itemprop="priceCurrency" content="USD">
+                             </div>
+                        </div>
+                        <i class="fas fa-angle-right"></i>
+                    </li>`).join('') : '<p class="sre-no-tools-in-category">No tools found in this category.</p>'
+                }
+            </ul>
+        `;
+        
+        box.querySelector('.icon-view-all').addEventListener('click', (e) => {
+            e.stopPropagation();
+            const tabButton = document.querySelector(`.sre-category-tab-button[data-category="${categoryName}"]`);
+            if (tabButton) {
+                activateTab(categoryName, tabButton);
+                if (contentTopAnchor) contentTopAnchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+        box.querySelector('.icon-search-category').addEventListener('click', (e) => {
+            e.stopPropagation();
+            globalToolSearchInput.value = categoryName;
+            globalToolSearchInput.focus();
+            renderFilteredTools();
+            if (contentTopAnchor) contentTopAnchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+        return box;
+    }
+
+    function showFeedback(element, show = true) {
+        if (element) element.style.display = show ? 'flex' : 'none';
+    }
+
+    globalToolSearchInput.addEventListener('input', () => {
+        clearTimeout(searchDebounceTimer);
+        searchDebounceTimer = setTimeout(renderFilteredTools, 300);
+    });
+    toolSortSelect.addEventListener('change', renderFilteredTools);
+
+    popularToolLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const searchTerm = e.target.dataset.searchTerm;
+            if (searchTerm) {
+                globalToolSearchInput.value = searchTerm;
+                renderFilteredTools();
+                globalToolSearchInput.focus();
+                if (contentTopAnchor) contentTopAnchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+
+    catScrollLeftBtn.addEventListener('click', () => categoryFilterContainer.scrollBy({ left: -280, behavior: 'smooth' }));
+    catScrollRightBtn.addEventListener('click', () => categoryFilterContainer.scrollBy({ left: 280, behavior: 'smooth' }));
+
+    function init() {
+        showFeedback(loadingIndicator, true);
+        const blogURL = 'https://tontuftools.blogspot.com';
+        const script = document.createElement('script');
+        window.sreProcessBloggerFeedMobileOptimized = processBloggerFeed;
+        script.src = `${blogURL}/feeds/posts/summary?alt=json-in-script&max-results=9999&callback=sreProcessBloggerFeedMobileOptimized`;
+        script.onerror = () => {
+            showFeedback(loadingIndicator, false);
+            showFeedback(noResultsMessage, true);
+            noResultsMessage.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Failed to load tools data. Please check the source or network connection.';
+        };
+        document.body.appendChild(script);
+    }
+    init();
+});
+</script>
+
+</body>
+</html>
