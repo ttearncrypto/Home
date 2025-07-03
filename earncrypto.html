@@ -28,7 +28,7 @@
         </div>
 
         <div class="ts-settings-section">
-            <h3><i class="fas fa-keyboard"></i> Keyboard Shortcuts Guide</h3>
+            <h3><i class="fas fa-keyboard"></i> Keyboard Shortcuts Guide:</h3>
             <ul class="ts-shortcut-list">
                 <li><span>/</span> Focus the search bar</li>
                 <li><span>Esc</span> Clear search focus</li>
@@ -318,10 +318,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Configuration & State ---
     const SOURCE_CONFIG = [
         { name: "Earning Projects", icon: "fa-rocket", url: "https://ttearncrypto.blogspot.com" },
-        { name: "Investments", icon: "fa-chart-line", url: "https://freecryptoradar.blogspot.com" },
-        { name: "Casinos", icon: "fa-dice", url: "https://freecryptoshop.blogspot.com" },
-        { name: "Airdrops", icon: "fa-parachute-box", url: "https://ttairdropcentral.blogspot.com" },
-        { name: "News", icon: "fa-newspaper", url: "https://cryptoradarnews.blogspot.com" }
+        { name: "Investments Projects", icon: "fa-chart-line", url: "https://freecryptoradar.blogspot.com" },
+        { name: "Casinos Directory", icon: "fa-dice", url: "https://freecryptoshop.blogspot.com" },
+        { name: "Crypto Airdrops", icon: "fa-parachute-box", url: "https://ttairdropcentral.blogspot.com" },
+        { name: "News & Daily Codes", icon: "fa-newspaper", url: "https://cryptoradarnews.blogspot.com" }
     ];
     let dataCache = {}, currentSourceUrl = null, currentProjects = [], activeCategory = 'All';
     let searchDebounceTimer, currentPage = 1, projectsPerPage = parseInt(itemsPerPageSelect.value, 10);
