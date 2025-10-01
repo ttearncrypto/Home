@@ -23,7 +23,7 @@
     <meta property="twitter:url" content="https://ttearncrypto.github.io/Home/earncrypto.html">
     <meta property="twitter:title" content="iCryptos PC Dashboard - Free Crypto Faucets & Earning Projects">
     <meta property="twitter:description" content="The ultimate resource for free crypto, FaucetPay faucets, crypto faucet lists, and airdrops. Start earning crypto today.">
-    <meta property="twitter:image" content="https://i.ibb.co/zWTwqXxL/i-Cryptos-min.jpg">
+    <meta property="twitter:image" content="httpshttps://i.ibb.co/zWTwqXxL/i-Cryptos-min.jpg">
 
     <!-- Favicon -->
     <link rel="icon" href="https://i.ibb.co/zWTwqXxL/i-Cryptos-min.jpg" type="image/jpeg">
@@ -35,8 +35,7 @@
 
         :root {
             --ts-sidebar-bg: #1e2a53;
-            --ts-sidebar-width: 220px;
-            --ts-sidebar-width-shrunk: 80px;
+            --ts-sidebar-width: 80px;
             --ts-main-bg: #f5f6fa;
             --ts-content-bg: #ffffff;
             --ts-primary-text: #2c3e50;
@@ -61,35 +60,29 @@
             --ts-accent-light: #2c3a5c;
         }
 
-        html, body { margin: 0; padding: 0; box-sizing: border-box; background-color: var(--ts-main-bg); }
+        html { scroll-behavior: smooth; }
+        body { margin: 0; padding: 0; box-sizing: border-box; background-color: var(--ts-main-bg); }
         .ts-table-dashboard-container { display: flex; min-height: 100vh; background-color: var(--ts-main-bg); font-family: var(--ts-font-family); font-size: var(--ts-base-font-size); color: var(--ts-primary-text); transition: background-color 0.3s, color 0.3s; }
 
-        .ts-sidebar { position: fixed; top: 0; left: 0; height: 100vh; width: var(--ts-sidebar-width); background-color: var(--ts-sidebar-bg); display: flex; flex-direction: column; align-items: center; padding: 20px 0; flex-shrink: 0; transition: width 0.3s ease-in-out; overflow-y: auto; overflow-x: hidden; z-index: 100; }
+        .ts-sidebar { position: fixed; top: 0; left: 0; height: 100vh; width: var(--ts-sidebar-width); background-color: var(--ts-sidebar-bg); display: flex; flex-direction: column; align-items: center; padding: 20px 0; flex-shrink: 0; transition: width 0.3s ease-in-out, padding 0.3s ease-in-out; overflow-y: auto; overflow-x: hidden; z-index: 100; }
         .ts-sidebar-logo { width: 50px; height: 50px; margin-bottom: 40px; flex-shrink: 0; }
         .ts-sidebar-logo img { width: 100%; border-radius: 50%; }
-        .ts-sidebar-nav { display: flex; flex-direction: column; gap: 10px; width: 100%; }
-        .ts-sidebar-link { display: flex; align-items: center; justify-content: flex-start; width: 90%; height: 50px; color: #a0aed4; text-decoration: none; position: relative; transition: color 0.2s ease, background-color 0.2s ease; border-radius: var(--ts-radius); margin: 0 auto; padding: 0 25px; gap: 20px; }
-        .ts-sidebar-link .ts-link-text { opacity: 1; visibility: visible; transition: opacity 0.2s ease, visibility 0.2s ease; white-space: nowrap; }
-        .ts-sidebar-link i { font-size: 1.2em; min-width: 30px; text-align: center; }
+        .ts-sidebar-nav { display: flex; flex-direction: column; gap: 15px; width: 100%; }
+        .ts-sidebar-link { display: flex; align-items: center; justify-content: center; width: 100%; height: 50px; color: #a0aed4; font-size: 1.4em; text-decoration: none; position: relative; transition: color 0.2s ease, background-color 0.2s ease; }
         .ts-sidebar-link:hover { color: #fff; background-color: rgba(74, 105, 255, 0.2); }
-        .ts-sidebar-link.ts-active { color: #fff; background-color: var(--ts-accent-color); }
-        .ts-sidebar-footer { margin-top: auto; padding-top: 20px; display: flex; flex-direction: column; gap: 10px; align-items: center; width: 100%; }
+        .ts-sidebar-link.ts-active { color: #fff; background-color: rgba(74, 105, 255, 0.1); }
+        .ts-sidebar-link.ts-active::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); height: 80%; width: 4px; background-color: var(--ts-accent-color); border-radius: 0 4px 4px 0; }
+        .ts-sidebar-footer { margin-top: auto; padding-top: 20px; display: flex; flex-direction: column; gap: 10px; align-items: center; }
         .ts-sidebar-footer-btn { font-size: 1.4em; color: #a0aed4; cursor: pointer; transition: all 0.2s ease; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border-radius: var(--ts-radius); background: none; border: none; }
         .ts-sidebar-footer-btn:hover { color: #fff; background-color: rgba(74, 105, 255, 0.2); transform: scale(1.1); }
         .ts-sidebar-footer-btn.ts-active { color: #fff; background-color: rgba(74, 105, 255, 0.1); }
-        .ts-follow-us-panel { position: absolute; left: calc(var(--ts-sidebar-width-shrunk) + 10px); bottom: 20px; background: var(--ts-content-bg); padding: 15px; border-radius: var(--ts-radius); box-shadow: 0 5px 15px rgba(0,0,0,0.2); display: flex; flex-direction: column; gap: 15px; opacity: 0; visibility: hidden; transition: opacity 0.2s, visibility 0.2s, transform 0.2s; z-index: 100; transform: translateX(-10px); }
+        .ts-follow-us-panel { position: absolute; left: calc(var(--ts-sidebar-width) + 10px); bottom: 20px; background: var(--ts-content-bg); padding: 15px; border-radius: var(--ts-radius); box-shadow: 0 5px 15px rgba(0,0,0,0.2); display: flex; flex-direction: column; gap: 15px; opacity: 0; visibility: hidden; transition: opacity 0.2s, visibility 0.2s, transform 0.2s; z-index: 100; transform: translateX(-10px); }
         .ts-follow-us-panel.ts-visible { opacity: 1; visibility: visible; transform: translateX(0); }
-        .ts-follow-us-panel a { color: var(--ts-primary-text); font-size: 1.5em; text-decoration: none; }
-        .ts-follow-us-panel a:hover { color: var(--ts-accent-color); }
-
+        
         .ts-main-content { flex-grow: 1; padding: 0 30px 25px 30px; margin-left: var(--ts-sidebar-width); overflow-x: hidden; display: flex; flex-direction: column; transition: margin-left 0.3s ease-in-out; }
         
-        /* Sidebar Shrunk State */
-        .ts-table-dashboard-container.ts-sidebar-shrunk .ts-sidebar { width: var(--ts-sidebar-width-shrunk); }
-        .ts-table-dashboard-container.ts-sidebar-shrunk .ts-sidebar-link { justify-content: center; padding: 0; }
-        .ts-table-dashboard-container.ts-sidebar-shrunk .ts-link-text { opacity: 0; visibility: hidden; position: absolute; }
-        .ts-table-dashboard-container.ts-sidebar-shrunk .ts-main-content { margin-left: var(--ts-sidebar-width-shrunk); }
-        .ts-table-dashboard-container.ts-sidebar-shrunk .ts-follow-us-panel { left: calc(var(--ts-sidebar-width-shrunk) + 10px); }
+        .ts-table-dashboard-container.ts-sidebar-shrunk .ts-sidebar { width: 0; padding: 20px 0; }
+        .ts-table-dashboard-container.ts-sidebar-shrunk .ts-main-content { margin-left: 0; }
 
         .ts-main-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 30px; margin: 0 -30px 20px -30px; border-bottom: 1px solid var(--ts-border-color); background-color: var(--ts-content-bg); }
         .ts-header-left, .ts-header-right { display: flex; align-items: center; gap: 16px; }
@@ -106,7 +99,7 @@
         .ts-search-wrapper i { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--ts-secondary-text); font-size: 1.1em; }
         #ts-search-input { width: 100%; padding: 14px 20px 14px 50px; border-radius: var(--ts-radius); border: 1px solid var(--ts-border-color); background-color: var(--ts-content-bg); color: var(--ts-primary-text); font-size: 1.1em; transition: all 0.2s ease; }
         #ts-search-input:focus { outline: none; border-color: var(--ts-accent-color); box-shadow: 0 0 0 4px var(--ts-accent-light); }
-        .ts-filter-actions { display: flex; align-items: center; gap: 15px; flex-shrink: 0; /* Prevents shrinking */ }
+        .ts-filter-actions { display: flex; align-items: center; gap: 15px; flex-shrink: 0; }
         .ts-sort-wrapper { display: flex; align-items: center; border: 1px solid var(--ts-border-color); border-radius: var(--ts-radius); padding: 0 10px; background-color: var(--ts-content-bg); }
         .ts-sort-wrapper i { color: var(--ts-secondary-text); margin-right: 8px; }
         #ts-sort-select { height: 50px; border: none; background: none; outline: none; cursor: pointer; color: var(--ts-primary-text); font-size: 1em; }
@@ -117,9 +110,9 @@
         .ts-loader { border: 5px solid var(--ts-accent-light); border-top: 5px solid var(--ts-accent-color); border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         
-        .ts-list-header, .ts-list-item { display: grid; grid-template-columns: 3fr 2.5fr 2fr; align-items: center; padding: 15px 20px; gap: 15px; }
+        .ts-list-header, .ts-list-item { display: grid; grid-template-columns: 3fr 2.5fr 2.5fr; align-items: center; padding: 15px 20px; gap: 15px; }
         .ts-list-header { font-size: 0.8em; font-weight: 600; text-transform: uppercase; color: var(--ts-secondary-text); border-bottom: 1px solid var(--ts-border-color); }
-        .ts-list-body { flex-grow: 1; overflow-y: auto; }
+        .ts-list-body { flex-grow: 1; }
         .ts-list-item { border-bottom: 1px solid var(--ts-border-color); transition: background-color 0.2s ease; outline: none; }
         .ts-list-item:hover { background-color: var(--ts-accent-light); }
         .ts-list-item:last-child { border-bottom: none; }
@@ -129,15 +122,12 @@
         .ts-tag { font-size: 0.75em; font-weight: 500; padding: 3px 8px; background-color: var(--ts-main-bg); color: var(--ts-secondary-text); border-radius: 4px; cursor: pointer; transition: background-color 0.2s, color 0.2s; }
         .ts-tag:hover { background-color: var(--ts-accent-light); color: var(--ts-accent-color); }
         .ts-col-action { display: flex; gap: 8px; align-items: center; justify-content: flex-start; }
-        .ts-action-btn { background: none; border: 1px solid var(--ts-border-color); color: var(--ts-secondary-text); width: 38px; height: 38px; border-radius: var(--ts-radius); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1em; transition: all 0.2s ease; text-decoration: none; position: relative; }
+        .ts-action-btn { background: none; border: 1px solid var(--ts-border-color); color: var(--ts-secondary-text); width: 38px; height: 38px; border-radius: var(--ts-radius); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1em; transition: all 0.2s ease; text-decoration: none; }
         .ts-action-btn:hover { background-color: var(--ts-accent-light); color: var(--ts-accent-color); border-color: var(--ts-accent-color); }
+        .ts-action-btn.ts-view-btn { background-color: var(--ts-accent-color); color: white; border-color: var(--ts-accent-color); }
+        .ts-action-btn.ts-view-btn:hover { opacity: 0.8; }
         .ts-action-btn.ts-saved { background-color: var(--ts-success-color); color: #fff; border-color: var(--ts-success-color); }
         .ts-action-btn.ts-saved:hover { opacity: 0.8; }
-        
-        /* Tooltip for copy button */
-        .ts-action-btn .ts-tooltip { visibility: hidden; width: 120px; background-color: #555; color: #fff; text-align: center; border-radius: 6px; padding: 5px 0; position: absolute; z-index: 1; bottom: 125%; left: 50%; margin-left: -60px; opacity: 0; transition: opacity 0.3s; font-size: 0.8em; }
-        .ts-action-btn .ts-tooltip::after { content: ""; position: absolute; top: 100%; left: 50%; margin-left: -5px; border-width: 5px; border-style: solid; border-color: #555 transparent transparent transparent; }
-        .ts-action-btn:hover .ts-tooltip { visibility: visible; opacity: 1; }
         
         .ts-claim-list-container { display: none; flex-direction: column; gap: 15px; background: var(--ts-content-bg); border-radius: var(--ts-radius); box-shadow: var(--ts-shadow); }
         .ts-claim-list-header { display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid var(--ts-border-color); }
@@ -162,6 +152,11 @@
         .ts-cat-tab { padding: 5px; font-size: 0.9em; font-weight: 500; cursor: pointer; border: none; background: none; color: var(--ts-secondary-text); position: relative; transition: color 0.2s ease; border-bottom: 2px solid transparent; }
         .ts-cat-tab:hover { color: var(--ts-primary-text); }
         .ts-cat-tab.ts-active { color: var(--ts-accent-color); font-weight: 600; border-bottom-color: var(--ts-accent-color); }
+        
+        .ts-load-more-container { padding: 20px; text-align: center; }
+        #ts-load-more-btn { background-color: var(--ts-accent-color); color: #fff; border: none; padding: 12px 30px; font-size: 1em; font-weight: 600; border-radius: var(--ts-radius); cursor: pointer; transition: all 0.2s ease; }
+        #ts-load-more-btn:hover { opacity: 0.9; box-shadow: 0 2px 8px rgba(74, 105, 255, 0.3); }
+        #ts-load-more-btn:disabled { background-color: var(--ts-secondary-text); cursor: not-allowed; }
 
         .ts-chat-section { margin-top: 25px; }
         .ad-placeholder { background: #e0e0e0; min-height: 90px; display: flex; align-items: center; justify-content: center; color: #888; font-size: 0.9em; border-radius: var(--ts-radius); margin: 20px 0; }
@@ -176,23 +171,21 @@
         .ts-settings-modal-header h2 { margin: 0; }
         #ts-settings-close-btn { background: none; border: none; font-size: 1.5em; cursor: pointer; color: var(--ts-secondary-text); transition: color 0.2s; }
         #ts-settings-close-btn:hover { color: var(--ts-primary-text); }
+        
+        #ts-back-to-top-btn { position: fixed; bottom: 20px; right: 20px; background: var(--ts-accent-color); color: white; width: 50px; height: 50px; border-radius: 50%; border: none; cursor: pointer; font-size: 1.5em; display: flex; align-items: center; justify-content: center; z-index: 999; opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0.3s, transform 0.3s; transform: translateY(20px); }
+        #ts-back-to-top-btn.ts-visible { opacity: 1; visibility: visible; transform: translateY(0); }
+        #ts-back-to-top-btn:hover { opacity: 0.9; }
+
         .ts-hidden { display: none !important; }
 
-        /* Responsive adjustments */
         @media (max-width: 768px) {
-            .ts-main-content { margin-left: var(--ts-sidebar-width-shrunk); padding: 0 15px 15px 15px; }
-            .ts-sidebar { width: var(--ts-sidebar-width-shrunk); }
-            .ts-sidebar-link { justify-content: center; padding: 0; }
-            .ts-link-text { display: none; }
-            .ts-table-dashboard-container.ts-sidebar-shrunk .ts-main-content { margin-left: 0; }
-            .ts-table-dashboard-container.ts-sidebar-shrunk .ts-sidebar { width: 0; padding: 20px 0; }
-            .ts-main-header { padding: 15px; margin: 0 -15px 15px -15px; flex-direction: column; align-items: flex-start; gap: 15px; }
-            .ts-header-left, .ts-header-right { width: 100%; justify-content: space-between; }
             .ts-controls-bar { flex-direction: column; align-items: stretch; }
+            .ts-main-content { margin-left: 0; padding: 0 15px 15px 15px; }
+            .ts-sidebar { width: 0; padding: 0; }
+            .ts-table-dashboard-container:not(.ts-sidebar-shrunk) .ts-sidebar { width: var(--ts-sidebar-width); padding: 20px 0; }
+            .ts-main-header { padding: 15px; margin: 0 -15px 15px -15px; }
             .ts-list-header { display: none; }
             .ts-list-item { grid-template-columns: 1fr; padding: 15px; gap: 12px; }
-            .ts-col-name, .ts-col-tags, .ts-col-action { grid-column: 1 / -1; }
-            .ts-project-name { font-size: 1.1em; }
             .ts-col-action { justify-content: flex-start; }
         }
     </style>
@@ -288,7 +281,9 @@
                     <div class="ts-loader"></div>
                     <p>Loading projects...</p>
                 </div>
-                 <div id="ts-auto-scroll-trigger"></div> <!-- Trigger for infinite scroll -->
+                <div id="ts-load-more-container" class="ts-load-more-container ts-hidden">
+                    <button id="ts-load-more-btn">Load More</button>
+                </div>
             </div>
 
             <div id="ts-claim-list-container" class="ts-claim-list-container">
@@ -321,6 +316,8 @@
             </footer>
         </main>
     </div>
+    
+    <button id="ts-back-to-top-btn" title="Back to Top" class="ts-hidden"><i class="fas fa-arrow-up"></i></button>
 
     <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -343,12 +340,14 @@
         const listBody = document.getElementById('ts-list-body');
         const feedbackMessage = document.getElementById('ts-feedback-message');
         const loadingIndicator = document.getElementById('ts-loading-indicator');
-        const autoScrollTrigger = document.getElementById('ts-auto-scroll-trigger');
+        const loadMoreContainer = document.getElementById('ts-load-more-container');
+        const loadMoreBtn = document.getElementById('ts-load-more-btn');
         const dataControls = document.getElementById('ts-data-controls');
         const claimListBtn = document.getElementById('ts-claim-list-btn');
         const claimListContainer = document.getElementById('ts-claim-list-container');
         const followUsBtn = document.getElementById('ts-follow-us-btn');
         const followUsPanel = document.getElementById('ts-follow-us-panel');
+        const backToTopBtn = document.getElementById('ts-back-to-top-btn');
 
         // --- Configuration & State ---
         const SOURCE_CONFIG = [
@@ -359,9 +358,8 @@
             { name: "News & Daily Codes", icon: "fa-newspaper", url: "https://cryptoradarnews.blogspot.com" }
         ];
         let dataCache = {}, currentSourceUrl = null, currentProjects = [], filteredProjects = [];
-        let activeCategory = 'All', itemsPerLoad = 20, itemsLoaded = 0;
+        let activeCategory = 'All', itemsPerLoad = 15, itemsLoaded = 0;
         let claimList = [];
-        let isLoadingMore = false;
 
         // --- CORE LOGIC ---
         const fetchJsonp = (url, callbackName) => new Promise((resolve, reject) => {
@@ -382,6 +380,7 @@
 
         const showFeedback = (message, iconClass = 'fa-info-circle') => {
             listBody.innerHTML = '';
+            loadMoreContainer.classList.add('ts-hidden');
             feedbackMessage.innerHTML = `<i class="fas ${iconClass}" style="font-size: 2em; margin-bottom: 10px; display: block;"></i><p>${message}</p>`;
             feedbackMessage.classList.remove('ts-hidden');
         };
@@ -419,7 +418,7 @@
         };
         
         // --- RENDER FUNCTIONS ---
-        const renderSidebar = () => { sidebarNav.innerHTML = SOURCE_CONFIG.map(source => `<a href="#" class="ts-sidebar-link" data-url="${source.url}" data-name="${source.name}" title="${source.name}"><i class="fas ${source.icon}"></i><span class="ts-link-text">${source.name}</span></a>`).join(''); };
+        const renderSidebar = () => { sidebarNav.innerHTML = SOURCE_CONFIG.map(source => `<a href="#" class="ts-sidebar-link" data-url="${source.url}" data-name="${source.name}" title="${source.name}"><i class="fas ${source.icon}"></i></a>`).join(''); };
         
         const renderListItems = (projects, append = false) => {
             if (!append) listBody.innerHTML = '';
@@ -443,7 +442,7 @@
                         <div class="ts-project-tags">${project.tags.map(tag => `<span class="ts-tag" data-tag="${tag}">${tag}</span>`).join('')}</div>
                     </div>
                     <div class="ts-col-action">
-                        <button class="ts-action-btn ts-copy-btn" title="Copy Link" data-url="${project.url}"><i class="fas fa-copy"></i></button>
+                        <a href="${project.url}" target="_blank" rel="noopener noreferrer" class="ts-action-btn ts-view-btn" title="View Project"><i class="fas fa-external-link-alt"></i></a>
                         <button class="ts-action-btn ts-share-project-btn" title="Share Project" data-name="${project.name}" data-url="${project.url}"><i class="fas fa-share-alt"></i></button>
                         <button class="ts-action-btn ts-save-btn ${isInClaimList ? 'ts-saved' : ''}" data-id="${project.id}" title="${isInClaimList ? 'Remove from Claim List' : 'Save to Claim List'}"><i class="fas ${isInClaimList ? 'fa-check' : 'fa-save'}"></i></button>
                     </div>
@@ -502,24 +501,25 @@
         };
 
         const loadMoreItems = () => {
-            if (isLoadingMore || itemsLoaded >= filteredProjects.length) return;
-            isLoadingMore = true;
             const nextItems = filteredProjects.slice(itemsLoaded, itemsLoaded + itemsPerLoad);
             renderListItems(nextItems, true);
             itemsLoaded += nextItems.length;
-            isLoadingMore = false;
+
+            if (itemsLoaded >= filteredProjects.length) {
+                loadMoreContainer.classList.add('ts-hidden');
+            } else {
+                loadMoreContainer.classList.remove('ts-hidden');
+            }
         };
         
         const applyFiltersAndSort = () => {
             if (!currentProjects) return;
-            // 1. Filter
             const searchTerm = searchInput.value.toLowerCase().trim();
             filteredProjects = [...currentProjects].filter(p => 
                 (activeCategory === 'All' || p.tags.includes(activeCategory)) && 
                 (searchTerm === '' || p.name.toLowerCase().includes(searchTerm) || p.tags.some(tag => tag.toLowerCase().includes(searchTerm)))
             );
 
-            // 2. Sort
             const sortOrder = sortSelect.value;
             switch (sortOrder) {
                 case 'date-desc': filteredProjects.sort((a, b) => b.publishedDate - a.publishedDate); break;
@@ -528,9 +528,8 @@
                 case 'name-desc': filteredProjects.sort((a, b) => b.name.localeCompare(a.name)); break;
             }
 
-            // 3. Render
             itemsLoaded = 0;
-            listBody.innerHTML = ''; // Clear previous items
+            listBody.innerHTML = ''; 
             if (filteredProjects.length === 0) {
                  showFeedback('No projects found matching your criteria.', 'fa-search-minus');
             } else {
@@ -569,21 +568,12 @@
                 showLoading(false);
             }
         };
-        
-        // --- AUTO SCROLL ---
-        const autoScrollObserver = new IntersectionObserver((entries) => {
-            if (entries[0].isIntersecting) {
-                loadMoreItems();
-            }
-        }, { root: null, rootMargin: '0px', threshold: 0.1 });
-
 
         // --- INITIALIZATION ---
         function init() {
             document.title = "iCryptos PC Dashboard | Free Crypto Faucets & Earning";
             loadClaimList();
             renderSidebar();
-            autoScrollObserver.observe(autoScrollTrigger);
 
             // Event Listeners
             sidebarToggleBtn.addEventListener('click', () => { 
@@ -625,13 +615,14 @@
                 document.querySelector('.ts-cat-tab.ts-active').classList.remove('ts-active'); 
                 tab.classList.add('ts-active'); 
                 activeCategory = tab.dataset.category; 
-                applyFiltersAndSort(); 
+                applyFiltersAndSort();
+                // Auto-scroll to top of list
+                listContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
             
             listBody.addEventListener('click', async (e) => {
                 const tagEl = e.target.closest('.ts-tag');
                 const saveBtn = e.target.closest('.ts-save-btn');
-                const copyBtn = e.target.closest('.ts-copy-btn');
                 const shareProjBtn = e.target.closest('.ts-share-project-btn');
 
                 if (tagEl) { 
@@ -642,26 +633,13 @@
                     const project = currentProjects.find(p => p.id === projectId); 
                     if (!project) return; 
                     isProjectInClaimList(projectId) ? removeFromClaimList(projectId) : addToClaimList(project);
-                } else if (copyBtn) {
-                    try {
-                        await navigator.clipboard.writeText(copyBtn.dataset.url);
-                        const icon = copyBtn.querySelector('i');
-                        icon.className = 'fas fa-check';
-                        copyBtn.title = 'Copied!';
-                        setTimeout(() => { 
-                            icon.className = 'fas fa-copy';
-                            copyBtn.title = 'Copy Link';
-                        }, 2000);
-                    } catch (err) { alert('Failed to copy link.'); }
                 } else if (shareProjBtn) {
                     const name = shareProjBtn.dataset.name;
                     const url = shareProjBtn.dataset.url;
                     try {
                         if (navigator.share) {
                             await navigator.share({ title: name, text: `Check out this project: ${name}`, url: url });
-                        } else {
-                            throw new Error('Web Share API not supported');
-                        }
+                        } else { throw new Error('Web Share API not supported'); }
                     } catch (err) {
                         await navigator.clipboard.writeText(url);
                         alert(`Project URL copied to clipboard!\n${url}`);
@@ -681,12 +659,11 @@
             });
             claimListContainer.addEventListener('click', (e) => { 
                 const removeBtn = e.target.closest('.ts-remove-claim-btn'); 
-                if (removeBtn) { 
-                    removeFromClaimList(removeBtn.closest('.ts-claim-item').dataset.id); 
-                } 
+                if (removeBtn) { removeFromClaimList(removeBtn.closest('.ts-claim-item').dataset.id); } 
             });
 
             sortSelect.addEventListener('change', applyFiltersAndSort);
+            loadMoreBtn.addEventListener('click', loadMoreItems);
             
             let searchDebounceTimer;
             searchInput.addEventListener('input', () => { 
@@ -694,6 +671,17 @@
                 searchDebounceTimer = setTimeout(applyFiltersAndSort, 300); 
             });
             
+            // Back to Top Button Logic
+            window.addEventListener('scroll', () => {
+                if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                    backToTopBtn.classList.add('ts-visible');
+                } else {
+                    backToTopBtn.classList.remove('ts-visible');
+                }
+            });
+            backToTopBtn.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+            // Auto-load the first source
             if(document.querySelector('.ts-sidebar-link')) {
                 document.querySelector('.ts-sidebar-link').click();
             }
