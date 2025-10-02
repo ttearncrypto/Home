@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoVerse Hub - Dashboards</title>
+    <link rel="icon" type="image/x-icon" href="https://static.photos/technology/32x32/42">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: #f5f6fa;
+        }
+        
+        .dashboard-card {
+            transition: all 0.3s ease;
+        }
+        
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <img class="h-8 w-auto" src="https://static.photos/technology/64x64/42" alt="Logo">
+                        <span class="ml-2 text-xl font-bold text-indigo-600">CryptoVerse Hub</span>
+                    </div>
+                    <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                        <a href="index.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Home</a>
+                        <a href="#" class="border-indigo-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Dashboards</a>
+                        <a href="#" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Resources</a>
+                    </div>
+                </div>
+                <div class="hidden sm:ml-6 sm:flex sm:items-center">
+                    <button class="bg-indigo-600 px-4 py-2 rounded-md text-white font-medium hover:bg-indigo-700 transition duration-300">Connect Wallet</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+        <div class="px-4 py-6 sm:px-0">
+            <div class="text-center mb-12">
+                <h1 class="text-3xl font-bold text-gray-900 sm:text-4xl">Choose Your Dashboard</h1>
+                <p class="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
+                    Access your crypto earnings through our powerful dashboards designed for different devices and use cases.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+                <!-- Mobile Dashboard -->
+                <div class="dashboard-card bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="flex-shrink-0 bg-indigo-100 p-3 rounded-lg">
+                                <i class="fas fa-mobile-alt text-indigo-600 text-2xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-gray-900">Mobile Dashboard</h3>
+                                <p class="text-sm text-gray-500">Optimized for smartphones</p>
+                            </div>
+                        </div>
+                        <img class="w-full h-auto rounded-lg mb-4" src="https://static.photos/technology/640x360/6" alt="Mobile Dashboard">
+                        <p class="text-gray-600 mb-4">
+                            Access your earnings, tasks, and rewards on the go with our mobile-optimized dashboard.
+                        </p>
+                        <a href="https://ttearncrypto.github.io/dashboards/m-index.html" target="_blank" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700">
+                            Open Mobile Dashboard
+                            <i class="fas fa-external-link-alt ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Desktop Dashboard V2 -->
+                <div class="dashboard-card bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="flex-shrink-0 bg-indigo-100 p-3 rounded-lg">
+                                <i class="fas fa-desktop text-indigo-600 text-2xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-gray-900">Desktop Dashboard V2</h3>
+                                <p class="text-sm text-gray-500">Full-featured experience</p>
+                            </div>
+                        </div>
+                        <img class="w-full h-auto rounded-lg mb-4" src="https://static.photos/technology/640x360/7" alt="Desktop Dashboard V2">
+                        <p class="text-gray-600 mb-4">
+                            The most advanced dashboard with comprehensive tools for managing your crypto portfolio.
+                        </p>
+                        <a href="https://ttearncrypto.github.io/Home/earncrypto.html" target="_blank" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700">
+                            Open Desktop V2
+                            <i class="fas fa-external-link-alt ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Desktop Dashboard V1 -->
+                <div class="dashboard-card bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="flex-shrink-0 bg-indigo-100 p-3 rounded-lg">
+                                <i class="fas fa-laptop text-indigo-600 text-2xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-gray-900">Desktop Dashboard V1</h3>
+                                <p class="text-sm text-gray-500">Classic interface</p>
+                            </div>
+                        </div>
+                        <img class="w-full h-auto rounded-lg mb-4" src="https://static.photos/technology/640x360/8" alt="Desktop Dashboard V1">
+                        <p class="text-gray-600 mb-4">
+                            The original dashboard with all the essential features for crypto earning and management.
+                        </p>
+                        <a href="https://ttearncrypto.github.io/dashboards/" target="_blank" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700">
+                            Open Desktop V1
+                            <i class="fas fa-external-link-alt ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- F9XR Dashboard -->
+                <div class="dashboard-card bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="flex-shrink-0 bg-indigo-100 p-3 rounded-lg">
+                                <i class="fas fa-chart-pie text-indigo-600 text-2xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-gray-900">F9XR Dashboard</h3>
+                                <p class="text-sm text-gray-500">Advanced analytics</p>
+                            </div>
+                        </div>
+                        <img class="w-full h-auto rounded-lg mb-4" src="https://static.photos/technology/640x360/9" alt="F9XR Dashboard">
+                        <p class="text-gray-600 mb-4">
+                            Specialized dashboard with in-depth analytics and tracking for advanced users.
+                        </p>
+                        <a href="https://f9xrdashboard.blogspot.com/" target="_blank" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700">
+                            Open F9XR Dashboard
+                            <i class="fas fa-external-link-alt ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Social Hub -->
+                <div class="dashboard-card bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="flex-shrink-0 bg-indigo-100 p-3 rounded-lg">
+                                <i class="fas fa-share-alt text-indigo-600 text-2xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-gray-900">Social Hub</h3>
+                                <p class="text-sm text-gray-500">Connect with community</p>
+                            </div>
+                        </div>
+                        <img class="w-full h-auto rounded-lg mb-4" src="https://static.photos/technology/640x360/10" alt="Social Hub">
+                        <p class="text-gray-600 mb-4">
+                            Access all our social media channels and community platforms in one place.
+                        </p>
+                        <a href="https://bento.me/ttearncrypto" target="_blank" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700">
+                            Open Social Hub
+                            <i class="fas fa-external-link-alt ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Blog Directory -->
+                <div class="dashboard-card bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="flex-shrink-0 bg-indigo-100 p-3 rounded-lg">
+                                <i class="fas fa-book-open text-indigo-600 text-2xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-gray-900">Blog Directory</h3>
+                                <p class="text-sm text-gray-500">All resources in one place</p>
+                            </div>
+                        </div>
+                        <img class="w-full h-auto rounded-lg mb-4" src="https://static.photos/technology/640x360/11" alt="Blog Directory">
+                        <p class="text-gray-600 mb-4">
+                            Comprehensive directory of all our blogs and educational resources about cryptocurrency.
+                        </p>
+                        <a href="https://ttearncrypto.blogspot.com/" target="_blank" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700">
+                            Open Blog Directory
+                            <i class="fas fa-external-link-alt ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 mt-12">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="md:flex md:items-center md:justify-between">
+                <div class="flex justify-center md:order-2 space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-gray-500">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-gray-500">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-gray-500">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-gray-500">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+                <div class="mt-8 md:mt-0 md:order-1">
+                    <p class="text-center text-base text-gray-400">
+                        &copy; 2023 CryptoVerse Hub. All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
